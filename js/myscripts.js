@@ -14,9 +14,9 @@ function getMenu(url) {
 
 
 $(document).ready(function () {
-    
+    $("#wrapper").addClass("toggled");
     getMenu(domain + "getMenu");
-    
+
     $("#menu-toggle").click(function (e) {
         e.preventDefault();
         $("#wrapper").toggleClass("toggled");
