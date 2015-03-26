@@ -1,21 +1,37 @@
-var domain = "http://pluck-infini.cruxservers.in/";
+var domain = "http://www.pluckk.com/";
 
-function getMenu(url) {
-    $.ajax({
-        url: url,
-        type: "POST",
-        success: function (data) {
-            $("sidebar-nav").html(data);
-        }
+var app = angular.module('pluckk', ['ngResource','ngSanitize']);
+
+
+app.controller('productList', function ($scope, $http) {
+    var res;
+    var url = domain + "m/get-category-products/shop";
+
+    $.ajaxSetup({
+        scriptCharset: "utf-8", //maybe "ISO-8859-1"
+        contentType: "application/json; charset=utf-8"
     });
-}
+
+    $.getJSON('http://whateverorigin.org/get?url=' +
+            encodeURIComponent(url) + '&callback=?',
+            function (data) {
+
+                $scope.$apply(function () {
+                    
+                    
+                    $scope.products = data.contents;
+                });
+            });
+
+});
+
+
 
 
 
 
 $(document).ready(function () {
-    $("#wrapper").addClass("toggled");
-    getMenu(domain + "getMenu");
+
 
     $("#menu-toggle").click(function (e) {
         e.preventDefault();
