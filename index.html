@@ -12,7 +12,7 @@
         <div id="wrapper" >
             <div id="sidebar-wrapper">
                 <ul class="sidebar-nav" ng-controller="getMenu" ng-bind-html="menu | unsafe">
-                    
+
                 </ul>
             </div>
             <!-- /#sidebar-wrapper -->
@@ -24,7 +24,10 @@
                             <a class="navbar-brand" href="index.html">
                                 <img class="logo" alt="Pluckk" src="images/logo.png">
                             </a>
-                        </div>
+                            
+                           </div>      
+                        <a href="cart.html" class="pull-right shake-cart"><i class="glyphicon-shopping-cart"></i> <span class="shopping_cart"></span></a>
+                  
                     </div>
                 </nav>
 
@@ -38,16 +41,24 @@
 
                         <div class="col-md-12" id="pList" ng-controller="productList">
                             <div class="col-sm-12" ng-repeat="product in products">
-                                <div class="col-md-4">
-                                    <img ng-src="{{ product.image}}" class="img-responsive center-block" />
-                                </div>
-                                <div class="col-md-8">
-                                    <h4>{{ product.product}}</h4>
-                                    <p>{{ product.short_desc}}</p>  
-                                    <p ng-bind-html="product.options | unsafe"></p>
-                                    <p class="info" ng-bind-html="product.price | unsafe">Rs. </p>
-                                </div>
+                                <form id="prdForm-{{ product.id}}" class="atcForm" method="POST"  >
+                                    <input type="hidden" name="prod_id" value="{{ product.id}}" />
+                                    <input type="hidden" name="prod_type" value="{{ product.prod_type}}" />
 
+                                    <div class="col-md-4">
+                                        <img ng-src="{{ product.image}}" class="img-responsive center-block" />
+                                    </div>
+                                    <div class="col-md-8">
+                                        <h4>{{ product.product}}</h4>
+                                        <p>{{ product.short_desc}}</p>  
+                                        <p ng-bind-html="product.options | unsafe"></p>
+                                        <p class="info" ng-bind-html="product.price | unsafe">Rs. </p>
+                                        <p>              
+                                            <input type="text" name="quantity"  value="1" class="form-control col-md-2" />
+                                            <button form-id="prdForm-{{ product.id}}" form-action="{{ product.add | unsafe }}" class="addToCart btn btn-info">Add to Cart</button>
+                                        </p>   
+                                    </div>
+                                </form>
                             </div>
                         </div>
                     </div>
