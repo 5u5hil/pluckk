@@ -50,8 +50,8 @@
 
                 <div class="container-fluid">
                     <div class="row">
-                        <div class="col-lg-12">
-                            <h1>{{ "Welcome"}}</h1>
+                        <div class="col-md-12">
+                            <img src="images/banner.jpg" class="img-responsive center-block" />
                         </div>
 
 
@@ -62,8 +62,8 @@
                                     <img ng-src="{{ product.image}}" class="img-responsive" />
                                 </div>
                                 <div class="col-md-8">
-                                    <h4>{{ product.product }}</h4>
-                                    <p>{{ product.short_desc }}</p>  
+                                    <h4>{{ product.product}}</h4>
+                                    <p>{{ product.short_desc}}</p>  
                                     <p ng-bind-html="product.options | unsafe"></p>
                                     <p class="info" ng-bind-html="product.price | unsafe">Rs. </p>
                                 </div>
