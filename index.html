@@ -11,28 +11,8 @@
     <body>
         <div id="wrapper" >
             <div id="sidebar-wrapper">
-                <ul class="sidebar-nav">
-                    <li>
-                        <a href="#">Dashboard</a>
-                    </li>
-                    <li>
-                        <a href="#">Shortcuts</a>
-                    </li>
-                    <li>
-                        <a href="#">Overview</a>
-                    </li>
-                    <li>
-                        <a href="#">Events</a>
-                    </li>
-                    <li>
-                        <a href="#">About</a>
-                    </li>
-                    <li>
-                        <a href="#">Services</a>
-                    </li>
-                    <li>
-                        <a href="#">Contact</a>
-                    </li>
+                <ul class="sidebar-nav" ng-controller="getMenu" ng-bind-html="menu | unsafe">
+                    
                 </ul>
             </div>
             <!-- /#sidebar-wrapper -->
@@ -56,7 +36,7 @@
 
 
 
-                        <div class="col-md-12" ng-controller="productList">
+                        <div class="col-md-12" id="pList" ng-controller="productList">
                             <div class="col-sm-12" ng-repeat="product in products">
                                 <div class="col-md-4">
                                     <img ng-src="{{ product.image}}" class="img-responsive center-block" />
