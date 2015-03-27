@@ -12,6 +12,10 @@ app.controller('productList', function ($scope, $http) {
         contentType: "application/json; charset=utf-8"
     });
 
+
+
+
+
     $.getJSON('http://whateverorigin.org/get?url=' +
             encodeURIComponent(url) + '&callback=?',
             function (data) {
@@ -23,6 +27,12 @@ app.controller('productList', function ($scope, $http) {
                 });
             });
 
+});
+
+app.filter('unsafe', function($sce) {
+    return function(val) {
+        return $sce.trustAsHtml(val);
+    };
 });
 
 
