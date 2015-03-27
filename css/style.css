@@ -2,14 +2,25 @@
     width:100px;
 }
 
+body{
+    background-image: url('../images/fruits.png');
+}
+
 #menu-toggle{
     margin-right: 10px;
     margin-left: 10px;
-    	
+
+}
+.col-sm-12.ng-scope {
+    background-color: #3fab3c;
+    padding: 10px;
+    color: white;
+    border-radius: 10px;
+    margin: 10px 0;
 }
 
 button#menu-toggle {
-  outline: none;
+    outline: none;
 }
 
 
@@ -121,7 +132,7 @@ button#menu-toggle {
     }
 
     #page-content-wrapper {
-        
+
         position: relative;
     }
 
