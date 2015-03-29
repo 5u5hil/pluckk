@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html ng-app="pluckk">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Pluckk</title>
+        <link href="css/bootstrap.min.css" rel="stylesheet">
+        <link href="css/owl.carousel.css">
+        <link href="css/style.css" rel="stylesheet">
+    </head>
+    <body>
+        <div id="wrapper" >
+            <div id="sidebar-wrapper">
+                <ul class="sidebar-nav" ng-controller="getMenu" ng-bind-html="menu | unsafe">
+
+                </ul>
+            </div>
+            <!-- /#sidebar-wrapper -->
+            <div id="page-content-wrapper">
+                <nav class="navbar navbar-default navbar-static-top">
+                    <div class="container-fluid">
+                        <div class="navbar-header">
+                            <button type="button" id="menu-toggle" class="glyphicon glyphicon-menu-hamburger pull-left btn btn-success navbar-btn"></button>
+                            <a class="navbar-brand" href="index.html">
+                                <img class="logo" alt="Pluckk" src="images/logo.png">
+                            </a>
+
+                        </div>      
+
+                    </div>
+                </nav>
+
+                <div class="container-fluid" ng-controller="productDetails">
+                    <div class="row">
+                        <div class="">
+                            <img ng-src="{{ product.image}}" class="img-responsive" />
+                        </div>
+                        <div class="">
+                            <h5>{{ product.product}}</h5>
+                            <p ng-bind-html="product.options | unsafe"></p>
+                              <p class="info" ng-bind-html="product.price | unsafe">Rs. </p>
+                            <p><input name="quantity" /></p>
+                            <p><button class="btn btn-info glyphicon glyphicon-shopping-cart">Add</button></p>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <ul class="nav nav-tabs" role="tablist">
+                            <li class="active"><a href="#desc" data-toggle="tab">Description</a></li>
+                            <li><a href="#ben" data-toggle="tab">Benefits</a></li>
+                            <li><a href="#res" data-toggle="tab">Recipe</a></li>
+                        </ul>
+
+                        <div id="myTabContent" class="tab-content">
+                            <div class="tab-pane fade in active" id="desc" ng-bind-html="product.desc | unsafe">
+                              
+                            </div>
+                            <div class="tab-pane fade in " id="ben" ng-bind-html="product.ben | unsafe">
+                               
+                            </div>
+                            <div class="tab-pane fade in " id="res" ng-bind-html="product.res | unsafe">
+                               
+                            </div>
+                        </div>
+                    </div>
+
+
+
+
+                </div>
+            </div>
+        </div>
+
+
+        <script src="phonegap.js"></script>
+        <script src="js/jquery.min.js"></script>
+        <script src="js/bootstrap.min.js"></script>
+        <script src="js/angular.min.js"></script>
+        <script src="js/angular-resource.min.js"></script>
+        <script src='js/angular-sanitize.min.js'></script>
+        <script src="js/owl.carousel.min.js"></script>
+        <script src="js/myscripts.js"></script>
+    </body>
+</html>

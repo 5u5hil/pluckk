@@ -6,6 +6,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>Pluckk</title>
         <link href="css/bootstrap.min.css" rel="stylesheet">
+        <link href="css/owl.carousel.css">
         <link href="css/style.css" rel="stylesheet">
     </head>
     <body>
@@ -33,45 +34,48 @@
                     <img src="images/banner.jpg" class="img-responsive center-block" />
                 </div>
                 <div class="container-fluid">
-                    <div class="row">
+                    <div class="row" ng-controller="homeList" >
+                        <div class="" ng-repeat="cat in categories">
+                            <h2>{{ cat.name}}</h2>
 
-
-
-
-                        <div class="col-md-12" id="pList" ng-controller="productList">
-                            <div class="col-sm-12" ng-repeat="product in products">
-                                <form id="prdForm-{{ product.id}}" class="atcForm" method="POST"  >
-                                    <input type="hidden" name="prod_id" value="{{ product.id}}" />
-                                    <input type="hidden" name="prod_type" value="{{ product.prod_type}}" />
-
-                                    <div class="col-md-4">
-                                        <img ng-src="{{ product.image}}" class="img-responsive center-block" />
-                                    </div>
-                                    <div class="col-md-8">
-                                        <h4>{{ product.product}}</h4>
-                                        <p>{{ product.short_desc}}</p>  
+                            <div class="owl-carousel col-xs-12 col-sm-12 col-md-12" >
+                                <div class="item col-xs-6 col-sm-6 col-md-6" ng-repeat="product in cat.products"> 
+                                    <form id="prdForm-{{ product.id}}" class="atcForm" method="POST"  >
+                                        <input type="hidden" name="prod_id" value="{{ product.id}}" />
+                                        <input type="hidden" name="prod_type" value="{{ product.prod_type}}" />
+                                        <a href="product.html?id={{ product.id}}">
+                                            <img ng-src="{{ product.image}}" class="img-responsive center-block" />
+                                            <h6 class="success">{{ product.product}}</h6>
+                                        </a>
                                         <p ng-bind-html="product.options | unsafe"></p>
-                                        <p class="info" ng-bind-html="product.price | unsafe">Rs. </p>
-                                        <p>              
-                                            <input type="text" name="quantity"  value="1" class="form-control col-md-2" />
-                                            <button form-id="prdForm-{{ product.id}}" form-action="{{ product.add | unsafe }}" class="addToCart btn btn-info">Add to Cart</button>
-                                        </p>   
-                                    </div>
-                                </form>
+                                        <p class="info" ng-bind-html="product.price | unsafe"> </p>
+                                        <div class="col-xs-6 col-sm-6 col-md-6">              
+                                            <input type="text" name="quantity"  value="1" class="form-control" />
+                                        </div>
+                                        <div class="col-xs-6 col-sm-6 col-md-6"> 
+                                            <button form-id="prdForm-{{ product.id}}" form-action="{{ product.add | unsafe }}" class="addToCart btn btn-info">Add</button>
+                                        </div>   
+                                    </form>
+                                </div>
                             </div>
                         </div>
                     </div>
+
+
+
+
                 </div>
             </div>
-
-
         </div>
 
+
+        <script src="phonegap.js"></script>
         <script src="js/jquery.min.js"></script>
         <script src="js/bootstrap.min.js"></script>
         <script src="js/angular.min.js"></script>
         <script src="js/angular-resource.min.js"></script>
         <script src='js/angular-sanitize.min.js'></script>
+        <script src="js/owl.carousel.min.js"></script>
         <script src="js/myscripts.js"></script>
     </body>
 </html>
