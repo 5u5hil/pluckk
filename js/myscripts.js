@@ -39,6 +39,8 @@ app.controller('homeList', function ($scope, $http) {
                 $scope.$apply(function () {
                     $scope.categories = data.contents;
                 });
+                $('#dvLoading').fadeOut(2000);
+
             });
 
 });
@@ -62,6 +64,7 @@ app.controller('productList', function ($scope, $http) {
                     $scope.pagination = decoded;
 
                 });
+                       $('#dvLoading').fadeOut(2000);
             });
 
     $scope.getProds = function (url) {
@@ -101,6 +104,7 @@ app.controller('productDetails', function ($scope, $http, $location) {
                     $scope.product = data.contents;
 
                 });
+                       $('#dvLoading').fadeOut(2000);
             });
 
 });

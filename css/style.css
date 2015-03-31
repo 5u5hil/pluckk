@@ -2,6 +2,25 @@
     width:100px;
 }
 
+#dvLoading {
+    background:url(../images/spiral.gif) no-repeat center center;
+    height: 100px;
+    width: 100px;
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    margin: -25px 0 0 -25px;
+    z-index: 1000;
+}
+
+div#myTabContent {
+    border: 1px solid #ccc;
+    border-top: none;
+    padding: 8px;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+}
+
 nav.navbar.navbar-default.navbar-static-top {
     margin-bottom: 0;
 }

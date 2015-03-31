@@ -10,7 +10,9 @@
         <link href="css/style.css" rel="stylesheet">
     </head>
     <body>
-        <div id="wrapper" >
+        <div id="dvLoading"></div>
+
+        <div id="wrapper" ng-cloak >
             <div id="sidebar-wrapper">
                 <ul class="sidebar-nav" ng-controller="getMenu" ng-bind-html="menu | unsafe">
 
@@ -18,7 +20,7 @@
             </div>
             <!-- /#sidebar-wrapper -->
             <div id="page-content-wrapper">
-                <nav class="navbar navbar-default navbar-static-top">
+                <nav class="navbar navbar-default navbar-static-top navbar-fixed-top">
                     <div class="container-fluid">
                         <div class="navbar-header">
                             <button type="button" id="menu-toggle" class="glyphicon glyphicon-menu-hamburger pull-left btn btn-success navbar-btn"></button>
@@ -29,13 +31,12 @@
                         </div>      
 
                     </div>
-                </nav>
-                <div class="col-md-12">
-                    <img src="images/banner.jpg" class="img-responsive center-block" />
-                </div>
-                <div class="container-fluid">
-                    <div class="row" ng-controller="homeList" >
-                        <div class="" ng-repeat="cat in categories">
+                </nav> 
+                <img src="images/banner.jpg" class="img-responsive center-block" />
+               
+                <div class="container-fluid" ng-controller="homeList">
+                    <div class="row col-md-12"  ng-repeat="cat in categories">
+                        <div class="" >
                             <h2>{{ cat.name}}</h2>
 
                             <div class="owl-carousel col-xs-12 col-sm-12 col-md-12" >
@@ -69,7 +70,6 @@
         </div>
 
 
-        <script src="phonegap.js"></script>
         <script src="js/jquery.min.js"></script>
         <script src="js/bootstrap.min.js"></script>
         <script src="js/angular.min.js"></script>
@@ -77,5 +77,6 @@
         <script src='js/angular-sanitize.min.js'></script>
         <script src="js/owl.carousel.min.js"></script>
         <script src="js/myscripts.js"></script>
+        
     </body>
 </html>

@@ -10,6 +10,8 @@
         <link href="css/style.css" rel="stylesheet">
     </head>
     <body>
+        <div id="dvLoading"></div>
+
         <div id="wrapper" >
             <div id="sidebar-wrapper">
                 <ul class="sidebar-nav" ng-controller="getMenu" ng-bind-html="menu | unsafe">
@@ -32,20 +34,22 @@
                 </nav>
 
                 <div class="container-fluid" ng-controller="productDetails">
-                    <div class="row">
-                        <div class="">
-                            <img ng-src="{{ product.image}}" class="img-responsive" />
-                        </div>
-                        <div class="">
-                            <h5>{{ product.product}}</h5>
-                            <p ng-bind-html="product.options | unsafe"></p>
-                              <p class="info" ng-bind-html="product.price | unsafe">Rs. </p>
-                            <p><input name="quantity" /></p>
-                            <p><button class="btn btn-info glyphicon glyphicon-shopping-cart">Add</button></p>
-                        </div>
+                    <div class="row col-md-12 col-xs-12 col-sm-12">
+                        <img ng-src="{{ product.image}}" class="img-responsive" />
                     </div>
+                    <div class="row col-md-12 col-xs-12 col-sm-12">
+                        <h5>{{ product.product}}</h5>
+                        <p ng-bind-html="product.options | unsafe"></p>
 
+                        <p class="info" ng-bind-html="product.price | unsafe">Rs. </p>
+
+                    </div>
                     <div class="row">
+                    <div class=" col-md-6 col-xs-6 col-sm-6"><input type="number" placeholder="Quantity" class="input-sm form-control" name="quantity" /></div>
+                    <div class=" col-md-6 col-xs-6 col-sm-6"><button class="btn btn-info input-sm glyphicon glyphicon-shopping-cart">Add</button></div>
+                    </div>
+                    <br />
+                    <div class="row col-md-12 col-xs-12 col-sm-12">
                         <ul class="nav nav-tabs" role="tablist">
                             <li class="active"><a href="#desc" data-toggle="tab">Description</a></li>
                             <li><a href="#ben" data-toggle="tab">Benefits</a></li>
@@ -54,13 +58,13 @@
 
                         <div id="myTabContent" class="tab-content">
                             <div class="tab-pane fade in active" id="desc" ng-bind-html="product.desc | unsafe">
-                              
+
                             </div>
                             <div class="tab-pane fade in " id="ben" ng-bind-html="product.ben | unsafe">
-                               
+
                             </div>
                             <div class="tab-pane fade in " id="res" ng-bind-html="product.res | unsafe">
-                               
+
                             </div>
                         </div>
                     </div>
