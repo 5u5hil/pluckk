@@ -108,6 +108,25 @@ app.controller('productDetails', function ($scope, $http, $location) {
 
 });
 
+app.controller('cartList', function ($scope, $http) {
+
+    url = domain + 'm/cart';
+
+    $.ajaxSetup({
+        scriptCharset: "utf-8", //maybe "ISO-8859-1"
+        contentType: "application/json; charset=utf-8"
+    });
+
+    $.getJSON(url + '&callback=?',
+            function (data) {
+                $scope.$apply(function () {
+                    $scope.products = data.contents;
+                });
+                $('#dvLoading').fadeOut(200);
+
+            });
+
+});
 
 app.filter('unsafe', function ($sce) {
     return function (val) {
