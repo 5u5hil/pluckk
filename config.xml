@@ -23,8 +23,8 @@
     <icon src="icon.png" />
 
 
-    <gap:splash src="images/320x480.jpg" gap:platform="android" gap:qualifier="ldpi" />
-    <gap:splash src="images/480x800.jpg" gap:platform="android" gap:qualifier="mdpi" />
-    <gap:splash src="images/720x1280.jpg" gap:platform="android" gap:qualifier="hdpi" />
-    <gap:splash src="images/1080x1920.jpg" gap:platform="android" gap:qualifier="xhdpi" />
+    <gap:splash src="320x480.jpg" gap:platform="android" gap:qualifier="ldpi" />
+    <gap:splash src="480x800.jpg" gap:platform="android" gap:qualifier="mdpi" />
+    <gap:splash src="720x1280.jpg" gap:platform="android" gap:qualifier="hdpi" />
+    <gap:splash src="1080x1920.jpg" gap:platform="android" gap:qualifier="xhdpi" />
 </widget>
