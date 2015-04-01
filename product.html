@@ -44,12 +44,17 @@
                         <p class="info" ng-bind-html="product.price | unsafe">Rs. </p>
 
                     </div>
-                    <div class="row">
-                    <div class=" col-md-6 col-xs-6 col-sm-6"><input type="number" placeholder="Quantity" class="input-sm form-control" name="quantity" /></div>
-                    <div class=" col-md-6 col-xs-6 col-sm-6"><button class="btn btn-info input-sm glyphicon glyphicon-shopping-cart">Add</button></div>
-                    </div>
-                    <br />
                     <div class="row col-md-12 col-xs-12 col-sm-12">
+                        <div class="input-group col-md-5 col-xs-5 col-sm-5 pull-left">
+                            <div class="input-group-addon pQty">+</div>
+                            <input type="number" name="quantity" value="1" min="1" class="quantity  center-block form-control input-sm"  placeholder="Quantity">
+                            <div class="input-group-addon mQty">-</div>
+                        </div>
+                        <div class="col-md-4 col-xs-4 col-sm-4">              
+                            <button form-id="prdForm-{{ product.id}}" form-action="{{ product.add | unsafe }}" class="addToCart btn btn-info btn-sm"><i class="glyphicon glyphicon-shopping-cart"></i>Add</button>
+                        </div> 
+                    </div>
+                    <div style="margin-top: 19px;" class="row col-md-12 col-xs-12 col-sm-12">
                         <ul class="nav nav-tabs" role="tablist">
                             <li class="active"><a href="#desc" data-toggle="tab">Description</a></li>
                             <li><a href="#ben" data-toggle="tab">Benefits</a></li>

@@ -64,7 +64,7 @@ app.controller('productList', function ($scope, $http) {
                     $scope.pagination = decoded;
 
                 });
-                       $('#dvLoading').fadeOut(2000);
+                $('#dvLoading').fadeOut(2000);
             });
 
     $scope.getProds = function (url) {
@@ -74,8 +74,7 @@ app.controller('productList', function ($scope, $http) {
             contentType: "application/json; charset=utf-8"
         });
 
-        $.getJSON('http://whateverorigin.org/get?url=' +
-                encodeURIComponent(url) + '&callback=?',
+        $.get(url,
                 function (data) {
                     $scope.$apply(function () {
                         $scope.products = data.contents.prods;
@@ -104,7 +103,7 @@ app.controller('productDetails', function ($scope, $http, $location) {
                     $scope.product = data.contents;
 
                 });
-                       $('#dvLoading').fadeOut(2000);
+                $('#dvLoading').fadeOut(2000);
             });
 
 });
@@ -144,46 +143,7 @@ $(document).ready(function () {
                 function (result) {
                     var cart_cont = result.split("||||||");
 
-                    var cart = $('.shake-cart');
-                    var imgtodrag = $("form#" + formId).find("img").eq(0);
-                    if (imgtodrag) {
-                        var imgclone = imgtodrag.clone()
-                                .offset({
-                                    top: imgtodrag.offset().top,
-                                    left: imgtodrag.offset().left
-                                })
-                                .css({
-                                    'opacity': '0.5',
-                                    'position': 'absolute',
-                                    'height': '150px',
-                                    'width': '150px',
-                                    'z-index': '100'
-                                })
-                                .appendTo($('body'))
-                                .animate({
-                                    'top': cart.offset().top + 10,
-                                    'left': cart.offset().left + 10,
-                                    'width': 75,
-                                    'height': 75
-                                });
-
-
-
-
-
-                        imgclone.animate({
-                            'width': 0,
-                            'height': 0
-                        }, function () {
-
-                            $(this).detach();
-                            cart.effect("shake", {
-                                times: 2
-                            }, 200);
-
-                            $(".shopping_cart").html(cart_cont[0]);
-                        });
-                    }
+                    alert("Product Added Successfully");
                 });
 
 
@@ -191,6 +151,19 @@ $(document).ready(function () {
 
     });
 
+    $("#wrapper").on('click', '.pQty', function (e) {
+        var val = parseInt($(this).siblings(".quantity").val());
+        val++;
+        $(this).siblings(".quantity").val(val);
+    });
+
+    $("#wrapper").on('click', '.mQty', function (e) {
+        var val = parseInt($(this).siblings(".quantity").val());
+        if (val > 1) {
+            val--;
+            $(this).siblings(".quantity").val(val);
+        }
+    });
 });
 
 
