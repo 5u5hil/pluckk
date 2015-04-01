@@ -142,7 +142,7 @@ $(document).ready(function () {
         $.get((url),
                 function (result) {
                     var cart_cont = result.split("||||||");
-
+                    $(".navcart badge").text(cart_cont[0]);
                     alert("Product Added Successfully");
                 });
 
