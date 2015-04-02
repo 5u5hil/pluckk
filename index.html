@@ -27,43 +27,49 @@
                             <a class="navbar-brand" href="index.html">
                                 <img class="logo" alt="Pluckk" src="images/logo.png">
                             </a>
-                            <a href="cart.html" class="btn btn-sm btn-info pull-right navcart "><i class="glyphicon glyphicon-shopping-cart"></i> Cart <span class="badge">0</span></a>
+                            <a href="cart.html" class="btn btn-sm btn-success pull-right navcart h30 "><i class="glyphicon glyphicon-shopping-cart"></i> Cart <span class="badge">0</span></a>
 
                         </div>      
 
                     </div>
                 </nav> 
-                <img src="images/banner.jpg" class="img-responsive center-block" />
+                <img src="images/banner.jpg" class="img-responsive center-block mt50" />
 
-                <div class="container-fluid" ng-controller="homeList">
-                    <div class="row col-md-12"  ng-repeat="cat in categories">
+                <div class="container-fluid " ng-controller="homeList">
+                    <div class="row col-md-12 mb20"  ng-repeat="cat in categories">
                         <div class="" >
                             <h2>{{ cat.name}}</h2>
 
                             <div class="owl-carousel col-xs-12 col-sm-12 col-md-12" >
                                 <div class="item col-xs-6 col-sm-6 col-md-6" ng-repeat="product in cat.products"> 
+                                    <div class="product-block">
                                     <form id="prdForm-{{ product.id}}" class="atcForm" method="POST"  >
                                         <input type="hidden" name="prod_id" value="{{ product.id}}" />
                                         <input type="hidden" name="prod_type" value="{{ product.prod_type}}" />
                                         <a href="product.html?id={{ product.id}}">
-                                            <img ng-src="{{ product.image}}" class="img-responsive center-block" />
-                                            <h6 class="success">{{ product.product}}</h6>
+                                            <img ng-src="{{ product.image}}" class="img-responsive center-block img-thumbnail" />
+                                            <h6 class="success text-center">{{ product.product}}</h6>
                                         </a>
                                         <p ng-bind-html="product.options | unsafe"></p>
-                                        <p class="info" ng-bind-html="product.price | unsafe"> </p>
+                                        <p class="info text-center" ng-bind-html="product.price | unsafe">  </p>
+                                        <div class="row">
                                         <div class="col-xs-6 col-sm-6 col-md-6">              
                                             <input type="text" name="quantity"  value="1" class="form-control" />
                                         </div>
                                         <div class="col-xs-6 col-sm-6 col-md-6"> 
-                                            <button form-id="prdForm-{{ product.id}}" form-action="{{ product.add | unsafe }}" class="addToCart btn btn-info">Add</button>
-                                        </div>   
+                                            <button form-id="prdForm-{{ product.id}}" form-action="{{ product.add | unsafe }}" class="addToCart btn btn-block btn-success">Add</button>
+                                        </div> 
+                                        </div>
                                     </form>
+                                    </div>
                                 </div>
                             </div>
+                             
                         </div>
+                        
                     </div>
 
-
+                  
 
 
                 </div>

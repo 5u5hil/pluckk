@@ -27,35 +27,36 @@
                             <a class="navbar-brand" href="index.html">
                                 <img class="logo" alt="Pluckk" src="images/logo.png">
                             </a>
-                            <a href="cart.html" class="btn btn-sm btn-info pull-right navcart "><i class="glyphicon glyphicon-shopping-cart"></i> Cart <span class="badge">0</span></a>
+                            <a href="cart.html" class="btn btn-sm btn-success pull-right navcart h30 "><i class="glyphicon glyphicon-shopping-cart"></i> Cart <span class="badge">0</span></a>
 
                         </div>      
 
                     </div>
                 </nav>
 
-                <div class="container-fluid" ng-controller="productDetails">
-                    <div class="row col-md-12 col-xs-12 col-sm-12">
-                        <img ng-src="{{ product.image}}" class="img-responsive" />
+                <div class="container-fluid mt60" ng-controller="productDetails">
+                    <div class="row">
+                    <div class="col-md-12 col-xs-12 col-sm-12">
+                        <img ng-src="{{ product.image}}" class="img-responsive img-thumbnail" />
                     </div>
-                    <div class="row col-md-12 col-xs-12 col-sm-12">
-                        <h5>{{ product.product}}</h5>
+                    <div class=" col-md-10 col-xs-10 col-sm-10 col-xs-offset-1">
+                        <h2 class="text-center">{{ product.product}}</h2>
                         <p ng-bind-html="product.options | unsafe"></p>
 
-                        <p class="info" ng-bind-html="product.price | unsafe">Rs. </p>
+                        <p class="info text-center" ng-bind-html="product.price | unsafe">Rs. </p>
 
                     </div>
-                    <div class="row col-md-12 col-xs-12 col-sm-12">
-                        <div class="input-group col-md-5 col-xs-5 col-sm-5 pull-left">
+                    <div class=" col-md-12 col-xs-12 col-sm-12">
+                        <div class="input-group col-md-5 col-xs-5 col-sm-5 col-xs-offset-1 pull-left">
                             <div class="input-group-addon pQty">+</div>
-                            <input type="number" name="quantity" value="1" min="1" class="quantity  center-block form-control input-sm"  placeholder="Quantity">
+                            <input type="number" name="quantity" value="1" min="1" class="quantity  center-block form-control qtyinput input-sm"  placeholder="Quantity">
                             <div class="input-group-addon mQty">-</div>
                         </div>
-                        <div class="col-md-4 col-xs-4 col-sm-4">              
-                            <button form-id="prdForm-{{ product.id}}" form-action="{{ product.add | unsafe }}" class="addToCart btn btn-info btn-sm"><i class="glyphicon glyphicon-shopping-cart"></i>Add</button>
+                        <div class="col-md-5 col-xs-5 col-sm-5">              
+                            <button form-id="prdForm-{{ product.id}}" form-action="{{ product.add | unsafe }}" class="h30 addToCart btn btn-success btn-block btn-sm"><i class="glyphicon glyphicon-shopping-cart"></i>Add</button>
                         </div> 
                     </div>
-                    <div style="margin-top: 19px;" class="row col-md-12 col-xs-12 col-sm-12">
+                    <div style="margin-top: 19px;" class=" col-md-12 col-xs-12 col-sm-12">
                         <ul class="nav nav-tabs" role="tablist">
                             <li class="active"><a href="#desc" data-toggle="tab">Description</a></li>
                             <li><a href="#ben" data-toggle="tab">Benefits</a></li>
@@ -76,7 +77,7 @@
                     </div>
 
 
-
+                    </div>
 
                 </div>
             </div>

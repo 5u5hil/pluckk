@@ -11,7 +11,9 @@
     <preference name="phonegap-version" value="3.7.0" />
     <preference name="orientation" value="portrait" />
     <preference name="fullscreen" value="true" />
- 
+    <preference name="SplashScreenDelay" value="3000" />
+    <preference name="permissions" value="none"/>
+
 
     <description>
         Want it? Pluckk it! Your one stop shop for all your groceries need! 
@@ -22,6 +24,7 @@
     </author>
     <icon src="icon.png" />
     <gap:splash src="splash.png" />
+    <gap:plugin name="org.apache.cordova.splashscreen" version="0.3.4" />
 
 
 </widget>

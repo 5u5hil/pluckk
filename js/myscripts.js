@@ -39,7 +39,8 @@ app.controller('homeList', function ($scope, $http) {
                 $scope.$apply(function () {
                     $scope.categories = data.contents;
                 });
-                $('#dvLoading').fadeOut(200);
+                navigator.splashscreen.hide();
+                //$('#dvLoading').fadeOut(200);
 
             });
 

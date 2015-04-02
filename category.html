@@ -27,14 +27,14 @@
                             <a class="navbar-brand" href="index.html">
                                 <img class="logo" alt="Pluckk" src="images/logo.png">
                             </a>
-  <a href="cart.html" class="btn btn-sm btn-info pull-right navcart "><i class="glyphicon glyphicon-shopping-cart"></i> Cart <span class="badge">0</span></a>
+  <a href="cart.html" class="btn btn-sm btn-success pull-right navcart h30 "><i class="glyphicon glyphicon-shopping-cart"></i> Cart <span class="badge">0</span></a>
 
                         </div>      
 
                     </div>
                 </nav>
 
-                <div class="container-fluid">
+                <div class="container-fluid mt60">
                     <div class="row" id="pList" ng-controller="productList">
                         <div class="col-sm-12 col-md-12 col-xs-12" ng-repeat="product in products">
                             <form id="prdForm-{{ product.id}}" class="atcForm" method="POST"  >
@@ -43,20 +43,20 @@
 
                                 <div class="col-md-4 col-xs-4 col-sm-4">
                                     <a href="product.html?id={{ product.id}}">
-                                        <img ng-src="{{ product.image}}" class="img-thumbnail center-block" />
+                                        <img ng-src="{{ product.image}}" class="img-thumbnail center-block mt30 h84" />
                                     </a>
                                 </div>
                                 <div class="col-md-8 col-xs-8 col-sm-8">
                                     <h4>{{ product.product}}</h4>
                                     <p ng-bind-html="product.options | unsafe"></p>
-                                    <p class="info" ng-bind-html="product.price | unsafe">Rs. </p>
-                                    <div class="input-group col-md-8 col-xs-8 col-sm-6 pull-left">
+                                    <p class="info text-center" ng-bind-html="product.price | unsafe">Rs. </p>
+                                    <div class="input-group col-md-7 col-xs-7 col-sm-7 pull-left">
                                         <div class="input-group-addon pQty">+</div>
-                                        <input type="number" name="quantity" value="1" min="1" class="quantity  center-block form-control input-sm"  placeholder="Quantity">
+                                        <input type="number" name="quantity" value="1" min="1" class="qtyinput quantity  center-block form-control input-sm"  placeholder="Quantity">
                                         <div class="input-group-addon mQty">-</div>
                                     </div>
-                                    <div class="col-md-4 col-xs-4 col-sm-4">              
-                                        <button form-id="prdForm-{{ product.id}}" form-action="{{ product.add | unsafe }}" class="addToCart btn btn-info btn-sm"><i class="glyphicon glyphicon-shopping-cart"></i>Add</button>
+                                    <div class="col-md-5 col-xs-5 col-sm-5">              
+                                        <button form-id="prdForm-{{ product.id}}" form-action="{{ product.add | unsafe }}" class="addToCart h30 btn btn-success btn-block btn-sm"><i class="glyphicon glyphicon-shopping-cart"></i>Add</button>
                                     </div>   
                                 </div>
                             </form>
