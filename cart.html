@@ -6,7 +6,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>Pluckk</title>
         <link href="css/bootstrap.min.css" rel="stylesheet">
-        <link href="css/owl.carousel.css">
+        <link href="css/font-awesome.min.css" rel="stylesheet" />
         <link href="css/style.css" rel="stylesheet">
     </head>
     <body>
@@ -34,19 +34,15 @@
                     </div>
                 </nav>
 
-                <div class="container-fluid">
+                <div class="container-fluid mt60">
                     <div class="row" id="pList" ng-controller="cartList">
 
 
-                        <table class="table_type_4 responsive_table full_width r_corners wraper shadow t_align_l t_xs_align_c m_bottom_30" id="cartable">
+                        <table class="table table-condensed" id="cartable">
                             <thead>
                                 <tr class="f_size_large"> 
-                                    <!--titles for td-->
-                                    <!--th style="width:30px;"> Favourites </th-->
                                     <th class="t_align_c">Product </th>
-
                                     <th class="t_align_c">Remove</th>
-                                    <th class="t_align_c">MRP</th>
                                     <th class="t_align_c">Price</th>
                                     <th class="t_align_c">Quantity</th>
                                     <th class="t_align_c">Savings</th>
@@ -55,10 +51,8 @@
                             </thead>
                             <tbody>
                                 <tr ng-repeat="product in cart"> 
-                                    <!--Product name and image-->
-                                    <!--td  style="width:30px !important;"> <li class="relative"><span class="tooltip tr_all_hover r_corners color_dark f_size_small"> Remove from Favourites </span><a href="#"> <i class="fa fa-heart-o"></i> </a></li> </td-->
                                     <td data-title="Product Image &amp; name" class="t_md_align_c"> 
-                                        <img ng-src="http://pluck-infini.cruxservers.in/public/admin/uploads/catalog/product/{{ product.image }}" width="70" class="f_left m_right_10 border_1" alt="Baby Corn">
+                                        <img ng-src="http://pluck-infini.cruxservers.in/public/admin/uploads/catalog/product/{{ product.options.image }}" class="img-thumbnail pull-left" width="100" alt="Baby Corn">
                                         <h5 class="crt_h"> <strong>{{ product.name }}</strong>
 
                                             <small> </small>
@@ -66,8 +60,7 @@
                                         </h5>
 
 
-                                        <p><span>{{ product.options }}</span></p>
-
+                                       
 
 
                                     </td>
@@ -78,7 +71,7 @@
 
                           
                                     <!--product price-->
-                                    <td data-title="Price" style="vertical-align: middle;"><p class="f_size_large color_dark t_align_r">{{ product.price }}</p></td>
+                                    <td data-title="Price" style="vertical-align: middle;">Rs <p class="f_size_large color_dark t_align_r">{{ product.price }}</p></td>
                                     <!--quanity-->
                                     <td data-title="Quantity" style="vertical-align: middle;">
 
@@ -177,7 +170,6 @@
         <script src="js/angular.min.js"></script>
         <script src="js/angular-resource.min.js"></script>
         <script src='js/angular-sanitize.min.js'></script>
-        <script src="js/owl.carousel.min.js"></script>
         <script src="js/myscripts.js"></script>
     </body>
 </html>

@@ -38,9 +38,11 @@ app.controller('homeList', function ($scope, $http) {
             function (data) {
                 $scope.$apply(function () {
                     $scope.categories = data.contents;
-                });
+                });    
+                
+                $('#dvLoading').fadeOut(200);
                 navigator.splashscreen.hide();
-                //$('#dvLoading').fadeOut(200);
+       
 
             });
 
@@ -109,6 +111,7 @@ app.controller('productDetails', function ($scope, $http, $location) {
 
 });
 
+
 app.controller('cartList', function ($scope, $http) {
 
     url = domain + 'm/cart';
@@ -118,16 +121,20 @@ app.controller('cartList', function ($scope, $http) {
         contentType: "application/json; charset=utf-8"
     });
 
-    $.getJSON(url + '&callback=?',
+    $.get(url ,
             function (data) {
+                console.log(data);
                 $scope.$apply(function () {
-                    $scope.products = data.contents;
+                   // data = jQuery.parseJSON(data);
+                    
+                    $scope.cart = data;
                 });
                 $('#dvLoading').fadeOut(200);
 
             });
 
 });
+
 
 app.filter('unsafe', function ($sce) {
     return function (val) {
