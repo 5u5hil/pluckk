@@ -194,4 +194,195 @@ function getUrlParameter(sParam) {
             return sParameterName[1];
         }
     }
-}  
+}
+
+
+
+
+
+
+$(document).ready(function () {
+    var ordertlt = $(".grandTotal").text();
+
+
+    if (ordertlt < 250)
+    {
+        // alert(ordertlt);
+        var total_pay_ship = parseInt(ordertlt) + 30;
+        $(".orderAmt").val(total_pay_ship);
+    }
+
+
+    $("body").on('input', ".qty", function () {
+        var qty = $(this).val();
+        var rowid = $(this).attr("prod-id");
+        var productId = $(this).attr("product-id");
+
+
+
+        if (qty !== "" && qty > 0) {
+            $(".savQty").text(qty);
+            $.ajax({
+                url: domain + "cart/edit-cart",
+                type: "POST",
+                data: {rowid: rowid, qty: qty, productId: productId},
+                success: function (data) {
+                    if (data != "Specified quantity is not available") {
+                        var totals = data.split("||||||||||");
+                        $("." + rowid).html(totals[0]);
+                        $(".ysave[ysave-id='" + rowid + "']").text(parseInt(parseInt($(".ysave[ysave-id='" + rowid + "']").attr("data-y")) * parseInt($(".qty[prod-id='" + rowid + "']").val())));
+                        $(".grandTotal").html(totals[1]);
+                        $(".TotalCartAmt").text(totals[1]);
+                        $(".orderAmt").val(totals[1]);
+                        // alert(totals[1]);
+                        var REQamt = parseInt(250);
+                        if (totals[1] < REQamt) {
+                            if ($(".shippingValue").text() == 0) {
+                                //  alert($(".shippingValue").text());
+                                $(".shippingValue").text(30);
+                                var ship = '30';
+                                $(".TotalCartAmt").text(parseInt(totals[1]) + parseInt(ship));
+                                $(".orderAmt").val(parseInt(totals[1]) + parseInt(ship));
+                            } else {
+                                var ship = '30';
+                                $(".TotalCartAmt").text(parseInt(totals[1]) + parseInt(ship));
+                                $(".orderAmt").val(parseInt(totals[1]) + parseInt(ship));
+                            }
+                        } else if (totals[1] >= REQamt && $(".shippingValue").text() == 30) {
+                            $(".shippingValue").text(0);
+                        }
+                        if ($(".userCouponCode").val() !== "") {
+                            $("#couponApply").click();
+                        }
+                    } else {
+                        alert("Specified quantity is not available");
+                    }
+
+                }
+            });
+        }
+    });
+    $("body").on("click", ".clearCoup", function () {
+        var couponCode = '';
+        var CartAmt = $(".TotalCartAmt").text();
+        $.ajax({
+            url: domain + "check_coupon",
+            type: 'POST',
+            data: {couponCode: couponCode, orderAmount: $(".orderAmt").val()},
+            cache: false,
+            success: function (msg) {
+                $(".cMsg").css("display", "block");
+                var Cmsg = msg.split(":-")[0];
+                if (msg.split(":-")[1].length > 0) {
+                    //  alert(Math.round(msg.split(":-")[1]));
+                    // alert(CartAmt);
+
+                    var newCartAmt = parseInt(CartAmt) + parseInt(Math.round(msg.split(":-")[1]));
+
+                    if (newCartAmt < '250')
+                    {
+                        var aa = parseInt(newCartAmt) + 30;
+                    } else
+                    {
+                        var aa = parseInt(newCartAmt);
+                    }
+
+                    $(".TotalCartAmt").text(newCartAmt);
+                    $(".orderAmt").val(aa);
+                }
+                $(".couponUsedAmount").text("0");
+
+                $(".cMsg").html("Coupon Removed!");
+                $("#couponApply").removeAttr("disabled");
+                $(".userCouponCode").removeAttr("disabled");
+            }
+        });
+    });
+    $("#couponApply").click(function () {
+        var couponCode = $(".userCouponCode").val();
+        //  var CartAmt = $(".TotalCartAmt").text();
+
+
+
+        var CartAmt = $(".grandTotal").text();
+        if ($(".userCouponCode").val() != "") {
+            //    alert($(".grandTotal").text());
+            $.ajax({
+                url: domain + "check_coupon",
+                type: 'POST',
+                data: {couponCode: couponCode, orderAmount: CartAmt},
+                cache: false,
+                success: function (msg) {
+                    $(".cMsg").css("display", "block");
+                    $(".emptyCouponError").css("display", "none");
+
+                    var Cmsg = msg.split(":-")[0];
+                    if (msg.split(":-")[0] != "Coupon Not Valid") {
+                        $("#couponApply").attr("disabled", "disabled");
+                        $(".userCouponCode").attr("disabled", "disabled");
+                        Cmsg = "<span style='color:green;'>Coupon Applied!</span> <a href='javascript:void();' style='border-bottom: 1px dashed;' class='clearCoup'>Remove!</a>";
+                        //   alert($(".shippingValue").text());
+                        if ($(".shippingValue").text() == '30') {
+                            var CouponVal = parseInt(Math.round(msg.split(":-")[1])) + parseInt($(".shippingValue").text());
+                        } else {
+                            var CouponVal = parseInt(Math.round(msg.split(":-")[1]));
+
+                        }
+
+
+                        var usedCouponAmount = Math.round(msg.split(":-")[3]);
+
+                        //    alert(CouponVal);
+                        $(".TotalCartAmt").text(CouponVal);
+                        $(".orderAmt").val(CouponVal);
+                        $(".couponUsedAmount").text(usedCouponAmount);
+                        $(".cMsg").html(Cmsg);
+                        //  $(".userCouponCode").val("");
+                        //   $("#qtyProduc").addAttr("disabled");
+                    } else {
+
+                        if (msg.split(":-")[1].length > 0) {
+                            var newCartAmt = parseInt(CartAmt) + parseInt(Math.round(msg.split(":-")[1]));
+                            $(".TotalCartAmt").text(newCartAmt);
+                            $(".orderAmt").val(newCartAmt);
+                        }
+                        $(".couponUsedAmount").text("0");
+                        $("#couponApply").removeAttr("disabled");
+                        $(".userCouponCode").removeAttr("disabled");
+                        $(".cMsg").html("Coupon Code Invalid OR Not applicable on current cart value.");
+                    }
+
+
+                }
+            });
+        } else {
+
+            $(".emptyCouponError").show();
+            $(".cMsg").html("");
+
+            $(".emptyCouponError").html("Please enter valid coupon code.");
+        }
+
+
+        return false;
+    });
+
+
+
+
+
+
+});
+
+
+function get_checkout() {
+    var MinAmt = 100;
+
+    if ($(".grandTotal").text() < MinAmt) {
+        alert("Please place order of at least Rs. 100");
+
+    } else {
+        $("#chkoutForm").submit();
+    }
+
+}
