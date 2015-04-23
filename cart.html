@@ -41,26 +41,26 @@
                         <table class="table table-condensed" id="cartable">
                             <thead>
                                 <tr class="f_size_large"> 
-                                    <th class="t_align_c">Product </th>
+                                    <th>Product</th>
+                                    <th class="t_align_c"> </th>
                                     <th class="t_align_c">Price</th>
                                     <th class="t_align_c">Quantity</th>
-                                    <th class="t_align_c">Savings</th>
                                     <th class="t_align_r">Subtotal</th>
                                     <th class="t_align_c">Remove</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr ng-repeat="product in cart"> 
-                                    <td> 
+                                <tr ng-repeat="product in cart" ng-if="product.name">
+                                    <td>                                        
                                         <img ng-src="http://pluckk.com/public/admin/uploads/catalog/product/{{ product.options.image}}" class="img-thumbnail pull-left" width="100" alt="{{ product.name}}">
-                                        <br />
-                                        <h5><strong>{{ product.name}}</strong></h5>
+                                    </td>
+                                    <td> 
+                                        <strong>{{ product.name}}</strong>
                                     </td>
                                     <td  style="vertical-align: middle;">Rs {{ product.price}}</td>
                                     <td style="vertical-align: middle;">
                                         <input type="number" class="qty editquantity " min="1" value="1" prod-id="{{ product.rowid}}" product-id="{{ product.id}}" name="quantity{{ product.rowid}}">
                                     </td>
-                                    <td style="vertical-align: middle;">Rs. {{ data.options.ysave}}</td>
                                     <td style="vertical-align: middle;" ng-init="cart.Total = cart.Total + product.subtotal"><p class="f_size_large fw_medium scheme_color tmobalignc">Rs<span class="{{ product.rowid}}"> {{ product.subtotal}} </span></p></td>
                                     <td style="vertical-align: middle;"> 
                                         <a href="http://pluckk.com/cart/delete-cart?rowid={{ product.rowid}}"><i class="fa fa-trash-o fa-lg"></i> </a>
@@ -68,31 +68,25 @@
                                 </tr>
 
                                 <tr>
-                                    <td colspan="2"><p>Total Savings</p></td>
-                                    <td colspan="1"><p> Rs. <span id="ysave" data-saving="0">0</span></p></td>
 
-                                    <td colspan="2"><p>Subtotal</p></td>
+                                    <td colspan="5"><p>Subtotal</p></td>
                                     <td colspan="1"><p> Rs. <span class="fwb grandTotal">{{ cart.Total}}</span></p></td>
                                 </tr>
 
                                 <tr>
-                                    <td colspan="2" class="v_align_m d_ib_offset_large t_xs_align_l"><!--coupon--> 
+                                    <td colspan="3" class="v_align_m d_ib_offset_large t_xs_align_l"><!--coupon--> 
 
                                         <input class="userCouponCode r_corners f_size_medium cartinput" required="required" placeholder="Enter Coupon Code" name="user_coupon_code" type="text"> 
 
-                                        <button class="button_type_4 r_corners bg_light_color_2 m_left_5 mw_0 tr_all_hover color_dark" id="couponApply" type="button">Apply</button> <span class="col-sm-12"> <b>
+                                        <button class="button_type_4 r_corners bg_light_color_2 m_left_5 mw_0 tr_all_hover color_dark" id="couponApply" type="button">Apply</button> <span class="col-xs-12"> <b>
                                                 <p class="cMsg" style="display:none;color:red;font-size:13px;margin-top:15px"></p>
-                                            </b></span></td>
-                                    <td colspan="3"><p class="  v_align_m">Coupon(s)</p></td>
+                                            </b></span>
+                                    </td>
+                                    <td colspan="2"><p class="  v_align_m">Coupon(s)</p></td>
                                     <td colspan="1"><p class=" ">Rs. <span class="fwb couponUsedAmount"> 0</span></p></td>
                                 </tr>
                                 <tr>
-
-
-                                    <td colspan="2">
-
-                                    </td>                               
-                                    <td colspan="3"><p class=" ">Shipping Charges</p></td>
+                                    <td colspan="5"><p class=" ">Shipping Charges</p></td>
                                     <td colspan="1"><p class=" "> Rs. <span class="fwb shippingValue ">{{ cart.Total < 250 ? '30' : 0 }}</span></p></td>
                                 </tr>
                                 <!--total-->
