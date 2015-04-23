@@ -42,11 +42,11 @@
                             <thead>
                                 <tr class="f_size_large"> 
                                     <th class="t_align_c">Product </th>
-                                    <th class="t_align_c">Remove</th>
                                     <th class="t_align_c">Price</th>
                                     <th class="t_align_c">Quantity</th>
                                     <th class="t_align_c">Savings</th>
                                     <th class="t_align_r">Subtotal</th>
+                                    <th class="t_align_c">Remove</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -56,23 +56,23 @@
                                         <br />
                                         <h5><strong>{{ product.name}}</strong></h5>
                                     </td>
-                                    <td style="vertical-align: middle;"> 
-                                        <a href="http://pluckk.com/cart/delete-cart?rowid={{ product.rowid}}"><i class="fa fa-trash-o fa-lg"></i> </a>
-                                    </td>
                                     <td  style="vertical-align: middle;">Rs {{ product.price}}</td>
                                     <td style="vertical-align: middle;">
                                         <input type="number" class="qty editquantity " min="1" value="1" prod-id="{{ product.rowid}}" product-id="{{ product.id}}" name="quantity{{ product.rowid}}">
                                     </td>
                                     <td style="vertical-align: middle;">Rs. {{ data.options.ysave}}</td>
-                                    <td style="vertical-align: middle;" ng-init="controller.Total = controller.Total + product.subtotal"><p class="f_size_large fw_medium scheme_color tmobalignc">Rs<span class="{{ product.rowid}}"> {{ product.subtotal}} </span></p></td>
+                                    <td style="vertical-align: middle;" ng-init="cart.Total = cart.Total + product.subtotal"><p class="f_size_large fw_medium scheme_color tmobalignc">Rs<span class="{{ product.rowid}}"> {{ product.subtotal}} </span></p></td>
+                                    <td style="vertical-align: middle;"> 
+                                        <a href="http://pluckk.com/cart/delete-cart?rowid={{ product.rowid}}"><i class="fa fa-trash-o fa-lg"></i> </a>
+                                    </td>
                                 </tr>
 
                                 <tr>
                                     <td colspan="2"><p>Total Savings</p></td>
-                                    <td colspan="1"><p><i class="fa fa-rupee"></i> <span id="ysave" data-saving="0">0</span></p></td>
+                                    <td colspan="1"><p> Rs. <span id="ysave" data-saving="0">0</span></p></td>
 
-                                    <td colspan="3"><p>Subtotal</p></td>
-                                    <td colspan="1"><p> <i class="fa fa-rupee"></i> <span class="fwb grandTotal">{{ controller.Total }} </span></p></td>
+                                    <td colspan="2"><p>Subtotal</p></td>
+                                    <td colspan="1"><p> Rs. <span class="fwb grandTotal">{{ cart.Total}}</span></p></td>
                                 </tr>
 
                                 <tr>
@@ -83,27 +83,22 @@
                                         <button class="button_type_4 r_corners bg_light_color_2 m_left_5 mw_0 tr_all_hover color_dark" id="couponApply" type="button">Apply</button> <span class="col-sm-12"> <b>
                                                 <p class="cMsg" style="display:none;color:red;font-size:13px;margin-top:15px"></p>
                                             </b></span></td>
-                                    <td colspan="4"><p class="  v_align_m">Coupon(s)</p></td>
-                                    <td colspan="1"><p class=" "> - <i class="fa fa-rupee"></i> <span class="fwb couponUsedAmount"> 0</span></p></td>
+                                    <td colspan="3"><p class="  v_align_m">Coupon(s)</p></td>
+                                    <td colspan="1"><p class=" ">Rs. <span class="fwb couponUsedAmount"> 0</span></p></td>
                                 </tr>
                                 <tr>
 
 
                                     <td colspan="2">
 
-                                        <div class="alert_box new_alert r_corners color_green success delCost">
-                                            <i class="fa fa-smile-o"></i><p> Shop for Rs.<b id="freeCostAmt">172</b>  for Free Delivery. </p>
-                                        </div>
-
-
                                     </td>                               
-                                    <td colspan="4"><p class=" ">Shipping Charges</p></td>
-                                    <td colspan="1"><p class=" "><i class="fa fa-rupee"></i> <span class="fwb shippingValue ">30</span></p></td>
+                                    <td colspan="3"><p class=" ">Shipping Charges</p></td>
+                                    <td colspan="1"><p class=" "> Rs. <span class="fwb shippingValue ">{{ cart.Total < 250 ? '30' : 0 }}</span></p></td>
                                 </tr>
                                 <!--total-->
                                 <tr>
-                                    <td colspan="6" class="v_align_m d_ib_offset_large t_xs_align_l"><p class=" t_align_r scheme_color p_xs_hr_0 d_ib_offset_normal d_xs_block w_xs_full t_xs_align_c">Total</p></td>
-                                    <td colspan="1" class="v_align_m t_align_r tmobalignc"><p class=" scheme_color m_xs_bottom_10"> <i class="fa fa-rupee"></i> <span class="TotalCartAmt fwb">108</span></p></td>
+                                    <td colspan="5" class="v_align_m d_ib_offset_large t_xs_align_l"><p class=" t_align_r scheme_color p_xs_hr_0 d_ib_offset_normal d_xs_block w_xs_full t_xs_align_c">Total</p></td>
+                                    <td colspan="1" class="v_align_m t_align_r tmobalignc"><p class=" scheme_color m_xs_bottom_10"> Rs. <span class="TotalCartAmt fwb">{{ cart.Total < 250 ? (cart.Total + 30) : cart.Total}}</span></p></td>
                                 </tr>
                             </tbody>
 
