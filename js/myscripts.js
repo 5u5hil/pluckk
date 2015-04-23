@@ -12,14 +12,12 @@ app.controller('getMenu', function ($scope, $http) {
         contentType: "application/json; charset=utf-8"
     });
 
-    $.getJSON('http://whateverorigin.org/get?url=' +
-            encodeURIComponent(url) + '&callback=?',
-            function (data) {
+    $.get(url, function (data) {
 
-                $scope.$apply(function () {
-                    $scope.menu = data.contents;
-                });
-            });
+        $scope.$apply(function () {
+            $scope.menu = data;
+        });
+    });
 
 });
 
@@ -33,18 +31,16 @@ app.controller('homeList', function ($scope, $http) {
         contentType: "application/json; charset=utf-8"
     });
 
-    $.getJSON('http://whateverorigin.org/get?url=' +
-            encodeURIComponent(url) + '&callback=?',
-            function (data) {
-                $scope.$apply(function () {
-                    $scope.categories = data.contents;
-                });    
-                
-                $('#dvLoading').fadeOut(200);
-                navigator.splashscreen.hide();
-       
+    $.getJSON(url, function (data) {
+        $scope.$apply(function () {
+            $scope.categories = data;
+        });
 
-            });
+        $('#dvLoading').fadeOut(200);
+        navigator.splashscreen.hide();
+
+
+    });
 
 });
 
@@ -58,17 +54,15 @@ app.controller('productList', function ($scope, $http) {
         contentType: "application/json; charset=utf-8"
     });
 
-    $.getJSON('http://whateverorigin.org/get?url=' +
-            encodeURIComponent(url) + '&callback=?',
-            function (data) {
-                $scope.$apply(function () {
-                    $scope.products = data.contents.prods;
-                    var decoded = $('<div/>').html(data.contents.links).text();
-                    $scope.pagination = decoded;
+    $.getJSON(url, function (data) {
+        $scope.$apply(function () {
+            $scope.products = data.prods;
+            var decoded = $('<div/>').html(data.links).text();
+            $scope.pagination = decoded;
 
-                });
-                $('#dvLoading').fadeOut(200);
-            });
+        });
+        $('#dvLoading').fadeOut(200);
+    });
 
     $scope.getProds = function (url) {
 
@@ -80,8 +74,8 @@ app.controller('productList', function ($scope, $http) {
         $.get(url,
                 function (data) {
                     $scope.$apply(function () {
-                        $scope.products = data.contents.prods;
-                        var decoded = $('<div/>').html(data.contents.links).text();
+                        $scope.products = data.prods;
+                        var decoded = $('<div/>').html(data.links).text();
                         $scope.pagination = decoded;
                     });
                 });
@@ -99,15 +93,13 @@ app.controller('productDetails', function ($scope, $http, $location) {
         contentType: "application/json; charset=utf-8"
     });
 
-    $.getJSON('http://whateverorigin.org/get?url=' +
-            encodeURIComponent(url) + '&callback=?',
-            function (data) {
-                $scope.$apply(function () {
-                    $scope.product = data.contents;
+    $.getJSON(url, function (data) {
+        $scope.$apply(function () {
+            $scope.product = data;
 
-                });
-                $('#dvLoading').fadeOut(200);
-            });
+        });
+        $('#dvLoading').fadeOut(200);
+    });
 
 });
 
@@ -121,12 +113,9 @@ app.controller('cartList', function ($scope, $http) {
         contentType: "application/json; charset=utf-8"
     });
 
-    $.get(url ,
+    $.get(url,
             function (data) {
-                console.log(data);
                 $scope.$apply(function () {
-                   // data = jQuery.parseJSON(data);
-                    
                     $scope.cart = data;
                 });
                 $('#dvLoading').fadeOut(200);

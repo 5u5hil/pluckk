@@ -51,46 +51,28 @@
                             </thead>
                             <tbody>
                                 <tr ng-repeat="product in cart"> 
-                                    <td data-title="Product Image &amp; name" class="t_md_align_c"> 
-                                        <img ng-src="http://pluck-infini.cruxservers.in/public/admin/uploads/catalog/product/{{ product.options.image }}" class="img-thumbnail pull-left" width="100" alt="Baby Corn">
-                                        <h5 class="crt_h"> <strong>{{ product.name }}</strong>
-
-                                            <small> </small>
-
-                                        </h5>
-
-
-                                       
-
-
+                                    <td> 
+                                        <img ng-src="http://pluckk.com/public/admin/uploads/catalog/product/{{ product.options.image}}" class="img-thumbnail pull-left" width="100" alt="{{ product.name}}">
+                                        <br />
+                                        <h5><strong>{{ product.name}}</strong></h5>
                                     </td>
-                                    <!--product key-->
-                                    <td data-title="Remove" style="vertical-align: middle;"> 
-                                        <p class="font12 text-center">
-                                            <a href="http://pluck-infini.cruxservers.in/cart/delete-cart?rowid={{ product.rowid }}"><i class="fa fa-trash-o fa-lg"></i> </a></p></td>
-
-                          
-                                    <!--product price-->
-                                    <td data-title="Price" style="vertical-align: middle;">Rs <p class="f_size_large color_dark t_align_r">{{ product.price }}</p></td>
-                                    <!--quanity-->
-                                    <td data-title="Quantity" style="vertical-align: middle;">
-
-                                        <input type="number" class="qty editquantity mobw100" min="1" value="1" prod-id="{{ product.rowid }}" product-id="226" name="quantityb47cac2cb5e17ff63cdb75fe986b1645">
-
-
-
+                                    <td style="vertical-align: middle;"> 
+                                        <a href="http://pluckk.com/cart/delete-cart?rowid={{ product.rowid}}"><i class="fa fa-trash-o fa-lg"></i> </a>
                                     </td>
-                                    <td class="t_align_r"></td>
-                                    <!--subtotal-->
-                                    <td data-title="Subtotal" style="vertical-align: middle;" class="t_align_r"><p class="f_size_large fw_medium scheme_color tmobalignc">Rs<span class="b47cac2cb5e17ff63cdb75fe986b1645"> {{ product.subtotal }} </span></p></td>
+                                    <td  style="vertical-align: middle;">Rs {{ product.price}}</td>
+                                    <td style="vertical-align: middle;">
+                                        <input type="number" class="qty editquantity " min="1" value="1" prod-id="{{ product.rowid}}" product-id="{{ product.id}}" name="quantity{{ product.rowid}}">
+                                    </td>
+                                    <td style="vertical-align: middle;">Rs. {{ data.options.ysave}}</td>
+                                    <td style="vertical-align: middle;" ng-init="controller.Total = controller.Total + product.subtotal"><p class="f_size_large fw_medium scheme_color tmobalignc">Rs<span class="{{ product.rowid}}"> {{ product.subtotal}} </span></p></td>
                                 </tr>
-                              
-                                <tr>
-                                    <td colspan="2"><p class="fw_medium f_size_large t_align_r t_xs_align_c">Total Savings</p></td>
-                                    <td colspan="1"><p class="fw_medium f_size_large color_dark t_align_r tmobalignc"><i class="fa fa-rupee"></i> <span id="ysave" data-saving="0">0</span></p></td>
 
-                                    <td colspan="3"><p class="fw_medium f_size_large t_align_r t_xs_align_c">Subtotal</p></td>
-                                    <td colspan="1"><p class="fw_medium f_size_large color_dark t_align_r tmobalignc"> <i class="fa fa-rupee"></i> <span class="fwb grandTotal">78 </span></p></td>
+                                <tr>
+                                    <td colspan="2"><p>Total Savings</p></td>
+                                    <td colspan="1"><p><i class="fa fa-rupee"></i> <span id="ysave" data-saving="0">0</span></p></td>
+
+                                    <td colspan="3"><p>Subtotal</p></td>
+                                    <td colspan="1"><p> <i class="fa fa-rupee"></i> <span class="fwb grandTotal">{{ controller.Total }} </span></p></td>
                                 </tr>
 
                                 <tr>
@@ -101,8 +83,8 @@
                                         <button class="button_type_4 r_corners bg_light_color_2 m_left_5 mw_0 tr_all_hover color_dark" id="couponApply" type="button">Apply</button> <span class="col-sm-12"> <b>
                                                 <p class="cMsg" style="display:none;color:red;font-size:13px;margin-top:15px"></p>
                                             </b></span></td>
-                                    <td colspan="4"><p class="fw_medium f_size_large t_align_r t_xs_align_c v_align_m">Coupon(s)</p></td>
-                                    <td colspan="1"><p class="fw_medium f_size_large color_dark t_align_r tmobalignc"> - <i class="fa fa-rupee"></i> <span class="fwb couponUsedAmount"> 0</span></p></td>
+                                    <td colspan="4"><p class="  v_align_m">Coupon(s)</p></td>
+                                    <td colspan="1"><p class=" "> - <i class="fa fa-rupee"></i> <span class="fwb couponUsedAmount"> 0</span></p></td>
                                 </tr>
                                 <tr>
 
@@ -115,45 +97,19 @@
 
 
                                     </td>                               
-                                    <td colspan="4"><p class="fw_medium f_size_large t_align_r t_xs_align_c">Shipping Charges</p></td>
-                                    <td colspan="1"><p class="fw_medium f_size_large color_dark t_align_r tmobalignc"><i class="fa fa-rupee"></i> <span class="fwb shippingValue ">30</span></p></td>
+                                    <td colspan="4"><p class=" ">Shipping Charges</p></td>
+                                    <td colspan="1"><p class=" "><i class="fa fa-rupee"></i> <span class="fwb shippingValue ">30</span></p></td>
                                 </tr>
                                 <!--total-->
                                 <tr>
-                                    <td colspan="6" class="v_align_m d_ib_offset_large t_xs_align_l"><p class="fw_medium f_size_large t_align_r scheme_color p_xs_hr_0 d_ib_offset_normal d_xs_block w_xs_full t_xs_align_c">Total</p></td>
-                                    <td colspan="1" class="v_align_m t_align_r tmobalignc"><p class="fw_medium f_size_large scheme_color m_xs_bottom_10"> <i class="fa fa-rupee"></i> <span class="TotalCartAmt fwb">108</span></p></td>
+                                    <td colspan="6" class="v_align_m d_ib_offset_large t_xs_align_l"><p class=" t_align_r scheme_color p_xs_hr_0 d_ib_offset_normal d_xs_block w_xs_full t_xs_align_c">Total</p></td>
+                                    <td colspan="1" class="v_align_m t_align_r tmobalignc"><p class=" scheme_color m_xs_bottom_10"> <i class="fa fa-rupee"></i> <span class="TotalCartAmt fwb">108</span></p></td>
                                 </tr>
                             </tbody>
 
                         </table>
 
 
-                        <div class="col-sm-12 col-md-12 col-xs-12" ng-repeat="product in cart">
-                            <form id="prdForm-{{ product.id}}" class="atcForm" method="POST"  >
-                                <input type="hidden" name="prod_id" value="{{ product.id}}" />
-                                <input type="hidden" name="prod_type" value="{{ product.prod_type}}" />
-
-                                <div class="col-md-4 col-xs-4 col-sm-4">
-                                    <a href="product.html?id={{ product.id}}">
-                                        <img ng-src="{{ product.image}}" class="img-thumbnail center-block" />
-                                    </a>
-                                </div>
-                                <div class="col-md-8 col-xs-8 col-sm-8">
-                                    <h4>{{ product.product}}</h4>
-                                    <p ng-bind-html="product.options | unsafe"></p>
-                                    <p class="info" ng-bind-html="product.price | unsafe">Rs. </p>
-                                    <div class="input-group col-md-8 col-xs-8 col-sm-6 pull-left">
-                                        <div class="input-group-addon pQty">+</div>
-                                        <input type="number" name="quantity" value="1" min="1" class="quantity  center-block form-control input-sm"  placeholder="Quantity">
-                                        <div class="input-group-addon mQty">-</div>
-                                    </div>
-                                    <div class="col-md-4 col-xs-4 col-sm-4">              
-                                        <button form-id="prdForm-{{ product.id}}" form-action="{{ product.add | unsafe }}" class="addToCart btn btn-info btn-sm"><i class="glyphicon glyphicon-shopping-cart"></i>Add</button>
-                                    </div>   
-                                </div>
-                            </form>
-                        </div>
-                        <div class="pagination" ng-bind-html="pagination | unsafe"></div>
                     </div>
 
 
