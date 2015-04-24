@@ -1,4 +1,4 @@
-var domain = "http://www.pluckk.com/";
+var domain = "http://pluck-infini.cruxservers.in/";
 
 
 var app = angular.module('pluckk', ['ngResource', 'ngSanitize']);
