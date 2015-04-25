@@ -204,10 +204,19 @@ function getUrlParameter(sParam) {
 $(document).ready(function () {
     var ordertlt = $(".grandTotal").text();
 
+    var url = domain + "m/get-cart-count";
+
+    $.ajaxSetup({
+        scriptCharset: "utf-8", //maybe "ISO-8859-1"
+        contentType: "application/json; charset=utf-8"
+    });
+
+    $.get(url, function (data) {
+        $("a.navcart span.badge").html(data);
+    });
 
     if (ordertlt < 250)
     {
-        // alert(ordertlt);
         var total_pay_ship = parseInt(ordertlt) + 30;
         $(".orderAmt").val(total_pay_ship);
     }
@@ -224,7 +233,7 @@ $(document).ready(function () {
             $(".savQty").text(qty);
             $.ajax({
                 url: domain + "cart/edit-cart",
-                type: "POST",
+                type: 'get',
                 data: {rowid: rowid, qty: qty, productId: productId},
                 success: function (data) {
                     if (data != "Specified quantity is not available") {
@@ -267,7 +276,7 @@ $(document).ready(function () {
         var CartAmt = $(".TotalCartAmt").text();
         $.ajax({
             url: domain + "check_coupon",
-            type: 'POST',
+            type: 'get',
             data: {couponCode: couponCode, orderAmount: $(".orderAmt").val()},
             cache: false,
             success: function (msg) {
@@ -300,16 +309,13 @@ $(document).ready(function () {
     });
     $("#couponApply").click(function () {
         var couponCode = $(".userCouponCode").val();
-        //  var CartAmt = $(".TotalCartAmt").text();
-
-
 
         var CartAmt = $(".grandTotal").text();
         if ($(".userCouponCode").val() != "") {
             //    alert($(".grandTotal").text());
             $.ajax({
                 url: domain + "check_coupon",
-                type: 'POST',
+                type: 'get',
                 data: {couponCode: couponCode, orderAmount: CartAmt},
                 cache: false,
                 success: function (msg) {
@@ -366,9 +372,47 @@ $(document).ready(function () {
 
         return false;
     });
+    $("body").on('click', ".deleteCart", function (e) {
+        e.preventDefault();
+        var url = domain + $(this).attr('href');
+        var rowid = $(this).attr("prod-id");
+        var productId = $(this).attr("product-id");
+
+        $.ajax({
+            url: url,
+            type: 'get',
+            success: function (data) {
+                top.location.href = top.location.href
+
+            }
+        });
 
 
+    });
 
+
+    $(".loginBtn").click(function (e) {
+        e.preventDefault();
+
+        if ($("[name='username']").val() == "" || $("[name='password']").val() == "") {
+            alert("Please Enter Valid Email ID & Password!");
+        } else {
+            $.ajax({
+                url: domain + 'check_user_login',
+                type: 'get',
+                data: {username: $("[name='username']").val(), password: $("[name='password']").val()},
+                success: function (data) {
+                    if (data.match(/My Account/g)) {
+                        window.localStorage.setItem("username", $("[name='username']").val());
+
+                        alert('Logged In')
+                    } else {
+                        alert('Invalid Login Details');
+                    }
+                }
+            });
+        }
+    });
 
 
 
@@ -385,4 +429,17 @@ function get_checkout() {
         $("#chkoutForm").submit();
     }
 
+}
+
+function fb_login() {
+    var fbLoginSuccess = function (userData) {
+        alert("UserInfo: " + JSON.stringify(userData));
+    }
+
+    facebookConnectPlugin.login(["public_profile", "email"],
+            fbLoginSuccess,
+            function (error) {
+                alert("" + error)
+            }
+    );
 }

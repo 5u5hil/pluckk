@@ -26,5 +26,11 @@
     <gap:splash src="splash.png" />
     <gap:plugin name="org.apache.cordova.splashscreen" version="0.3.4" />
 
+    <gap:plugin name="com.phonegap.plugins.facebookconnect" version="0.9.0">
+        <param name="APP_ID" value="937502589613535" />
+        <param name="APP_NAME" value="Pluckk" />
+    </gap:plugin>
+    
+    <gap:plugin name="org.apache.cordova.inappbrowser" version="0.5.2" />
 
 </widget>

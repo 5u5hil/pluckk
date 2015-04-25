@@ -27,16 +27,19 @@
                             <a class="navbar-brand" href="index.html">
                                 <img class="logo" alt="Pluckk" src="images/logo.png">
                             </a>
-                            <a href="cart.html" class="btn btn-sm btn-info pull-right navcart "><i class="glyphicon glyphicon-shopping-cart"></i> Cart <span class="badge">0</span></a>
-
                         </div>      
-
                     </div>
                 </nav>
 
                 <div class="container-fluid mt60">
                     <div class="row" id="pList" ng-controller="cartList">
 
+                        <div class="alert alert-success" role="alert" style="font-size: 11px;">
+                            Minimum Order Amount for Delivery is Rs.  100! 
+                        </div>
+                        <div class="alert alert-success" role="alert" style="font-size: 11px;">
+                            Shop for Rs.  250 or more for free Shipping <i class="fa fa-smile-o"></i> 
+                        </div>
 
                         <table class="table table-condensed" id="cartable">
                             <thead>
@@ -57,43 +60,61 @@
                                     <td> 
                                         <strong>{{ product.name}}</strong>
                                     </td>
-                                    <td  style="vertical-align: middle;">Rs {{ product.price}}</td>
+                                    <td  style="vertical-align: middle;">Rs.  {{ product.price}}</td>
                                     <td style="vertical-align: middle;">
-                                        <input type="number" class="qty editquantity " min="1" value="1" prod-id="{{ product.rowid}}" product-id="{{ product.id}}" name="quantity{{ product.rowid}}">
+                                        <input type="number" class="qty editquantity " min="1" value="{{ product.qty}}" prod-id="{{ product.rowid}}" product-id="{{ product.id}}" name="quantity{{ product.rowid}}">
                                     </td>
-                                    <td style="vertical-align: middle;" ng-init="cart.Total = cart.Total + product.subtotal"><p class="f_size_large fw_medium scheme_color tmobalignc">Rs<span class="{{ product.rowid}}"> {{ product.subtotal}} </span></p></td>
+                                    <td style="vertical-align: middle;" ng-init="cart.Total = cart.Total + product.subtotal">Rs.  <span class="{{ product.rowid}}"> {{ product.subtotal}} </span></td>
                                     <td style="vertical-align: middle;"> 
-                                        <a href="http://pluckk.com/cart/delete-cart?rowid={{ product.rowid}}"><i class="fa fa-trash-o fa-lg"></i> </a>
+                                        <a class="deleteCart" href="cart/delete-cart?rowid={{ product.rowid}}"><i class="fa fa-trash-o fa-lg"></i> </a>
                                     </td>
                                 </tr>
 
                                 <tr>
 
-                                    <td colspan="5"><p>Subtotal</p></td>
-                                    <td colspan="1"><p> Rs. <span class="fwb grandTotal">{{ cart.Total}}</span></p></td>
+                                    <td colspan="5">Subtotal</td>
+                                    <td colspan="1"> Rs.  <span class="fwb grandTotal">{{ cart.Total}}</span></td>
                                 </tr>
 
                                 <tr>
-                                    <td colspan="3" class="v_align_m d_ib_offset_large t_xs_align_l"><!--coupon--> 
+                                    <td colspan="3" ><!--coupon--> 
 
-                                        <input class="userCouponCode r_corners f_size_medium cartinput" required="required" placeholder="Enter Coupon Code" name="user_coupon_code" type="text"> 
+                                        <input class="userCouponCode form-control cartinput pull-left" required="required" style="width:150px; margin-right: 10px;" placeholder="Enter Coupon Code" name="user_coupon_code" type="text"> 
 
-                                        <button class="button_type_4 r_corners bg_light_color_2 m_left_5 mw_0 tr_all_hover color_dark" id="couponApply" type="button">Apply</button> <span class="col-xs-12"> <b>
-                                                <p class="cMsg" style="display:none;color:red;font-size:13px;margin-top:15px"></p>
-                                            </b></span>
+                                        <button class="btn-xs btn-info" id="couponApply" type="button">Apply</button> 
+                                        <span class="col-xs-12 cMsg"  style="display:none;color:red;font-size:13px;margin-top:15px;"> 
+
+                                        </span>
                                     </td>
-                                    <td colspan="2"><p class="  v_align_m">Coupon(s)</p></td>
-                                    <td colspan="1"><p class=" ">Rs. <span class="fwb couponUsedAmount"> 0</span></p></td>
+                                    <td colspan="2">Coupon(s)</td>
+                                    <td colspan="1">Rs.  <span class="fwb couponUsedAmount"> 0</span></td>
                                 </tr>
                                 <tr>
-                                    <td colspan="5"><p class=" ">Shipping Charges</p></td>
-                                    <td colspan="1"><p class=" "> Rs. <span class="fwb shippingValue ">{{ cart.Total < 250 ? '30' : 0 }}</span></p></td>
+                                    <td colspan="5">Shipping Charges</td>
+                                    <td colspan="1">Rs.  <span class="fwb shippingValue ">{{ cart.Total < 250 ? '30' : 0 }}</span></td>
                                 </tr>
                                 <!--total-->
                                 <tr>
-                                    <td colspan="5" class="v_align_m d_ib_offset_large t_xs_align_l"><p class=" t_align_r scheme_color p_xs_hr_0 d_ib_offset_normal d_xs_block w_xs_full t_xs_align_c">Total</p></td>
-                                    <td colspan="1" class="v_align_m t_align_r tmobalignc"><p class=" scheme_color m_xs_bottom_10"> Rs. <span class="TotalCartAmt fwb">{{ cart.Total < 250 ? (cart.Total + 30) : cart.Total}}</span></p></td>
+                                    <td colspan="5" >Total</td>
+                                    <td colspan="1" class="v_align_m t_align_r tmobalignc"> Rs.  <span class="TotalCartAmt fwb">{{ cart.Total < 250 ? (cart.Total + 30) : cart.Total}}</span></td>
                                 </tr>
+
+                                <tr>
+                                    <td colspan="3" >
+                                        <a href="index.html" class="btn-sm btn-warning pull-left">Continue Shopping</a>   
+                                    </td>
+
+                                    <td colspan="3" class="v_align_m t_align_r tmobalignc">
+                                        <form id="chkoutForm" action="" method="post">
+                                            <input type="hidden" name="pay_amt" class="orderAmt" value="{{ cart.Total}}" />
+                                            <input type="hidden" name="shipping_amount_session" value="{{ cart.Total < 250 ? '30' : 0 }}" />
+                                            <a href="javascript:void()" onclick="get_checkout();" class="btn-sm btn-success pull-right" >Checkout</a>
+                                        </form> 
+                                    </td>
+                                </tr>
+
+
+
                             </tbody>
 
                         </table>

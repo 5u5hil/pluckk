@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html ng-app="pluckk">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Pluckk</title>
+        <link href="css/bootstrap.min.css" rel="stylesheet">
+        <link href="css/font-awesome.min.css" rel="stylesheet" />
+        <link href="css/style.css" rel="stylesheet">
+    </head>
+    <body>
+
+        <div id="wrapper" ng-cloak>
+            <div id="sidebar-wrapper">
+                <ul class="sidebar-nav" ng-controller="getMenu" ng-bind-html="menu | unsafe">
+
+                </ul>
+            </div>
+            <!-- /#sidebar-wrapper -->
+            <div id="page-content-wrapper">
+                <nav class="navbar navbar-default navbar-static-top navbar-fixed-top">
+                    <div class="container-fluid">
+                        <div class="navbar-header">
+                            <button type="button" id="menu-toggle" class="glyphicon glyphicon-menu-hamburger pull-left btn btn-success navbar-btn"></button>
+                            <a class="navbar-brand" href="index.html">
+                                <img class="logo" alt="Pluckk" src="images/logo.png">
+                            </a>
+                            <a href="cart.html" class="btn btn-sm btn-success pull-right navcart h30 "><i class="glyphicon glyphicon-shopping-cart"></i> Cart <span class="badge">0</span></a>
+
+                        </div>      
+
+                    </div>
+                </nav>
+
+                <div class="container-fluid mt60">
+                    <div class="row">
+
+                        <form action="check_user_login" method="post" class="userLoginForm" novalidate="novalidate">
+                            <div class="col-md-12 col-xs-12 form-group">
+                                <input placeholder="Email ID" type="email" name="username" required="" class="form-control" />
+                            </div>
+
+                            <div class="col-md-12 col-xs-12 form-group">
+                                <input placeholder="Password" type="Password" name="password" required="" class="form-control" />
+                            </div>
+                            <div class="col-md-12 col-xs-12 form-group">
+                                <input type="submit" class="btn btn-success clearfix form-control loginBtn" value="Submit">
+                            </div>
+
+                            <div class="col-md-12 col-xs-12 form-group">
+                                <a href="#" class="info pull-left" onclick="window.open('http://www.pluckk.com/forgot-password', '_system');" href="#">Forgot Password?</a>
+                                <a href="register.html" class="success pull-right">Create an account</a>
+                            </div>
+
+                            <div class="col-md-12 col-xs-12 form-group">
+                                <a href="javascript:void(0);" onclick="fb_login();" class="btn btn-info center-block"><i class="fa fa-facebook m_right_6"></i> Login With Facebook</a>
+                            </div>
+                        </form>
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+
+        <script src="phonegap.js"></script>
+        <script src="js/jquery.min.js"></script>
+        <script src="js/bootstrap.min.js"></script>
+        <script src="js/angular.min.js"></script>
+        <script src="js/angular-resource.min.js"></script>
+        <script src='js/angular-sanitize.min.js'></script>
+        <script src="js/myscripts.js"></script>
+    </body>
+</html>
