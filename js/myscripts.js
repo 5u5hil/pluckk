@@ -411,6 +411,7 @@ $(document).ready(function () {
         var url = domain + $(this).attr('href');
         var rowid = $(this).attr("prod-id");
         var productId = $(this).attr("product-id");
+<<<<<<< HEAD
 
         $.ajax({
             url: url,
@@ -460,11 +461,47 @@ $(document).ready(function () {
                 } else {
                     alert("Something went wrong! Try again Later!");
                 }
+=======
+
+        $.ajax({
+            url: url,
+            type: 'get',
+            success: function (data) {
+                top.location.href = top.location.href
+
+            }
+        });
+>>>>>>> origin/master
 
             }
         });
     });
 
+    });
+
+
+    $(".loginBtn").click(function (e) {
+        e.preventDefault();
+
+        if ($("[name='username']").val() == "" || $("[name='password']").val() == "") {
+            alert("Please Enter Valid Email ID & Password!");
+        } else {
+            $.ajax({
+                url: domain + 'check_user_login',
+                type: 'get',
+                data: {username: $("[name='username']").val(), password: $("[name='password']").val()},
+                success: function (data) {
+                    if (data.match(/My Account/g)) {
+                        window.localStorage.setItem("username", $("[name='username']").val());
+
+                        alert('Logged In')
+                    } else {
+                        alert('Invalid Login Details');
+                    }
+                }
+            });
+        }
+    });
 
 
     $(".loginBtn").click(function (e) {
