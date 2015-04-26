@@ -36,45 +36,50 @@
 
                 <div class="container-fluid mt60" ng-controller="productDetails">
                     <div class="row">
-                    <div class="col-md-12 col-xs-12 col-sm-12">
-                        <img ng-src="{{ product.image}}" class="img-responsive img-thumbnail" />
-                    </div>
-                    <div class=" col-md-10 col-xs-10 col-sm-10 col-xs-offset-1">
-                        <h2 class="text-center">{{ product.product}}</h2>
-                        <p ng-bind-html="product.options | unsafe"></p>
+                        <form id="prdForm-{{ product.id}}" class="atcForm" method="POST"  >
+                            <input type="hidden" name="prod_id" value="{{ product.id}}" />
+                            <input type="hidden" name="prod_type" value="{{ product.prod_type}}" />
 
-                        <p class="info text-center" ng-bind-html="product.price | unsafe">Rs. </p>
+                            <div class="col-md-12 col-xs-12 col-sm-12">
+                                <img ng-src="{{ product.image}}" class="img-responsive img-thumbnail" />
+                            </div>
+                            <div class=" col-md-10 col-xs-10 col-sm-10 col-xs-offset-1">
+                                <h2 class="text-center">{{ product.product}}</h2>
+                                <p ng-bind-html="product.options | unsafe"></p>
 
-                    </div>
-                    <div class=" col-md-12 col-xs-12 col-sm-12">
-                        <div class="input-group col-md-5 col-xs-5 col-sm-5 col-xs-offset-1 pull-left">
-                            <div class="input-group-addon pQty">+</div>
-                            <input type="number" name="quantity" value="1" min="1" class="quantity  center-block form-control qtyinput input-sm"  placeholder="Quantity">
-                            <div class="input-group-addon mQty">-</div>
+                                <p class="info text-center" ng-bind-html="product.price | unsafe">Rs. </p>
+
+                            </div>
+                            <div class=" col-md-12 col-xs-12 col-sm-12">
+                                <div class="input-group col-md-5 col-xs-5 col-sm-5 col-xs-offset-1 pull-left">
+                                    <div class="input-group-addon pQty">+</div>
+                                    <input type="number" name="quantity" value="1" min="1" class="quantity  center-block form-control qtyinput input-sm"  placeholder="Quantity">
+                                    <div class="input-group-addon mQty">-</div>
+                                </div>
+                                <div class="col-md-5 col-xs-5 col-sm-5">              
+                                    <button form-id="prdForm-{{ product.id}}" form-action="{{ product.add | unsafe }}" class="h30 addToCart btn btn-success btn-block btn-sm"><i class="glyphicon glyphicon-shopping-cart"></i>Add</button>
+                                </div> 
+                            </div>
+                        </form>
+                        <div style="margin-top: 19px;" class=" col-md-12 col-xs-12 col-sm-12">
+                            <ul class="nav nav-tabs" role="tablist">
+                                <li class="active"><a href="#desc" data-toggle="tab">Description</a></li>
+                                <li><a href="#ben" data-toggle="tab">Benefits</a></li>
+                                <li><a href="#res" data-toggle="tab">Recipe</a></li>
+                            </ul>
+
+                            <div id="myTabContent" class="tab-content">
+                                <div class="tab-pane fade in active" id="desc" ng-bind-html="product.desc | unsafe">
+
+                                </div>
+                                <div class="tab-pane fade in " id="ben" ng-bind-html="product.ben | unsafe">
+
+                                </div>
+                                <div class="tab-pane fade in " id="res" ng-bind-html="product.res | unsafe">
+
+                                </div>
+                            </div>
                         </div>
-                        <div class="col-md-5 col-xs-5 col-sm-5">              
-                            <button form-id="prdForm-{{ product.id}}" form-action="{{ product.add | unsafe }}" class="h30 addToCart btn btn-success btn-block btn-sm"><i class="glyphicon glyphicon-shopping-cart"></i>Add</button>
-                        </div> 
-                    </div>
-                    <div style="margin-top: 19px;" class=" col-md-12 col-xs-12 col-sm-12">
-                        <ul class="nav nav-tabs" role="tablist">
-                            <li class="active"><a href="#desc" data-toggle="tab">Description</a></li>
-                            <li><a href="#ben" data-toggle="tab">Benefits</a></li>
-                            <li><a href="#res" data-toggle="tab">Recipe</a></li>
-                        </ul>
-
-                        <div id="myTabContent" class="tab-content">
-                            <div class="tab-pane fade in active" id="desc" ng-bind-html="product.desc | unsafe">
-
-                            </div>
-                            <div class="tab-pane fade in " id="ben" ng-bind-html="product.ben | unsafe">
-
-                            </div>
-                            <div class="tab-pane fade in " id="res" ng-bind-html="product.res | unsafe">
-
-                            </div>
-                        </div>
-                    </div>
 
 
                     </div>

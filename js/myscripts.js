@@ -125,6 +125,37 @@ app.controller('cartList', function ($scope, $http) {
 });
 
 
+app.controller('login', function ($scope, $http) {
+    $('#dvLoading').fadeOut(200);
+});
+
+app.controller('updt', function ($scope, $http) {
+    $('#dvLoading').fadeOut(200);
+});
+
+app.controller('finall', function ($scope, $http) {
+    console.log(getUrlParameter('slot'));
+    $scope.options = decodeURIComponent(getUrlParameter('slot'));
+    $('#dvLoading').fadeOut(200);
+});
+
+function updDetails() {
+    $("[ng-model]").each(function () {
+        $(this).val(window.localStorage.getItem($(this).attr('name')));
+    });
+
+    $.ajax({
+        url: domain + 'm/get-mini',
+        type: 'get',
+        success: function (data) {
+            $("[name='pay_amt']").val(data[0]);
+            $("[name='shippingAmount']").val(data[1]);
+            $("[name='cart_content']").val(JSON.stringify(data[2]));
+        }
+    });
+}
+
+
 app.filter('unsafe', function ($sce) {
     return function (val) {
         return $sce.trustAsHtml(val);
@@ -202,12 +233,24 @@ function getUrlParameter(sParam) {
 
 
 $(document).ready(function () {
+
+    updDetails();
+
     var ordertlt = $(".grandTotal").text();
 
+    var url = domain + "m/get-cart-count";
+
+    $.ajaxSetup({
+        scriptCharset: "utf-8", //maybe "ISO-8859-1"
+        contentType: "application/json; charset=utf-8"
+    });
+
+    $.get(url, function (data) {
+        $("a.navcart span.badge").html(data);
+    });
 
     if (ordertlt < 250)
     {
-        // alert(ordertlt);
         var total_pay_ship = parseInt(ordertlt) + 30;
         $(".orderAmt").val(total_pay_ship);
     }
@@ -224,7 +267,7 @@ $(document).ready(function () {
             $(".savQty").text(qty);
             $.ajax({
                 url: domain + "cart/edit-cart",
-                type: "POST",
+                type: 'get',
                 data: {rowid: rowid, qty: qty, productId: productId},
                 success: function (data) {
                     if (data != "Specified quantity is not available") {
@@ -267,7 +310,7 @@ $(document).ready(function () {
         var CartAmt = $(".TotalCartAmt").text();
         $.ajax({
             url: domain + "check_coupon",
-            type: 'POST',
+            type: 'get',
             data: {couponCode: couponCode, orderAmount: $(".orderAmt").val()},
             cache: false,
             success: function (msg) {
@@ -300,16 +343,13 @@ $(document).ready(function () {
     });
     $("#couponApply").click(function () {
         var couponCode = $(".userCouponCode").val();
-        //  var CartAmt = $(".TotalCartAmt").text();
-
-
 
         var CartAmt = $(".grandTotal").text();
         if ($(".userCouponCode").val() != "") {
             //    alert($(".grandTotal").text());
             $.ajax({
                 url: domain + "check_coupon",
-                type: 'POST',
+                type: 'get',
                 data: {couponCode: couponCode, orderAmount: CartAmt},
                 cache: false,
                 success: function (msg) {
@@ -366,9 +406,113 @@ $(document).ready(function () {
 
         return false;
     });
+    $("body").on('click', ".deleteCart", function (e) {
+        e.preventDefault();
+        var url = domain + $(this).attr('href');
+        var rowid = $(this).attr("prod-id");
+        var productId = $(this).attr("product-id");
+
+        $.ajax({
+            url: url,
+            type: 'get',
+            success: function (data) {
+                top.location.href = top.location.href
+
+            }
+        });
+
+
+    });
+
+
+    $(".updtBtn").click(function (e) {
+        e.preventDefault();
+        $('#dvLoading').show();
+        $.ajax({
+            url: domain + 'secure',
+            type: 'get',
+            data: $(this).parent().parent().serialize(),
+            success: function (data) {
+                if (data.match(/COD not available for your selected Pincode/g)) {
+                    $('#dvLoading').hide();
+                    alert("COD not available for your selected Pincode!");
+                } else {
+                    a = $.parseHTML(data);
+                    top.location.href = "final.html?slot=" + encodeURIComponent($(a).find("select.optAvlSlot").html());
+                }
+
+            }
+        });
+    });
+
+
+    $(".finalStep").click(function (e) {
+        e.preventDefault();
+        $('#dvLoading').show();
+        $.ajax({
+            url: domain + 'order_cash_on_delivery',
+            type: 'get',
+            data: $(this).parent().parent().serialize(),
+            success: function (data) {
+                if (data.match(/thank/g)) {
+                    $('#dvLoading').hide();
+                    top.location.href = "thankyou.html";
+                } else {
+                    alert("Something went wrong! Try again Later!");
+                }
+
+            }
+        });
+    });
 
 
 
+    $(".loginBtn").click(function (e) {
+        e.preventDefault();
+        $('#dvLoading').show();
+
+        if ($("[name='username']").val() == "" || $("[name='password']").val() == "") {
+            alert("Please Enter Valid Email ID & Password!");
+        } else {
+            $.ajax({
+                url: domain + 'check_user_login',
+                type: 'get',
+                data: {username: $("[name='username']").val(), password: $("[name='password']").val()},
+                success: function (data) {
+                    if (data.match(/My Account/g)) {
+                        $.ajax({
+                            url: domain + 'm/get-session',
+                            type: 'get',
+                            success: function (data) {
+                                window.localStorage.setItem("id", data.id);
+                                window.localStorage.setItem("email", data.email);
+                                window.localStorage.setItem("password", $("[name='password']").val());
+                                window.localStorage.setItem("firstname", data.firstname);
+                                window.localStorage.setItem("lastname", data.lastname);
+                                window.localStorage.setItem("telephone", data.telephone);
+                                window.localStorage.setItem("address1", data.address1);
+                                window.localStorage.setItem("address2", data.address2);
+                                window.localStorage.setItem("address3", data.address3);
+                                window.localStorage.setItem("landmark", data.landmark);
+                                window.localStorage.setItem("postal_code", data.postcode);
+                                window.localStorage.setItem("city", data.city);
+                                window.localStorage.setItem("country", data.country_id);
+                                window.localStorage.setItem("zone", data.zone_id);
+                                if (getUrlParameter('route') == "confirm-details") {
+                                    top.location.href = "update-details.html";
+                                } else {
+                                    top.location.href = "myacc.html";
+
+                                }
+                            }
+                        });
+                    } else {
+                        alert('Invalid Login Details');
+                    }
+                }
+            });
+        }
+    });
 
 
 
@@ -382,7 +526,32 @@ function get_checkout() {
         alert("Please place order of at least Rs. 100");
 
     } else {
-        $("#chkoutForm").submit();
+        if (window.localStorage.getItem('id')) {
+            $.ajax({
+                url: domain + 'checkout',
+                type: 'post',
+                data: $("form").serialize(),
+                success: function (data) {
+                    top.location.href = "update-details.html";
+                }
+            });
+        } else {
+            top.location.href = "login.html?route=confirm-details";
+
+        }
     }
 
+}
+
+function fb_login() {
+    var fbLoginSuccess = function (userData) {
+        alert("UserInfo: " + JSON.stringify(userData));
+    }
+
+    facebookConnectPlugin.login(["public_profile", "email"],
+            fbLoginSuccess,
+            function (error) {
+                alert("" + error)
+            }
+    );
 }
