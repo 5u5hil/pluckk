@@ -37,17 +37,7 @@
                 <div class="container-fluid mt60">
                     <div class="row">
 
-                        <form  method="post" class="cDetails" novalidate="novalidate" ng-controller="updt">
-
-                            <input name="address_id" type="hidden">
-
-                            <input name="pay_amt" type="hidden" >
-
-                            <input name="shippingAmount" type="hidden">
-
-
-                            <input name="cart_content" type="hidden">
-
+                        <form  method="post" class="cDetails" novalidate="novalidate" ng-controller="reg">
 
                             <div class="col-md-12 col-xs-12 form-group">
                                 <input placeholder="First Name" type="text" name="firstname"  required="" ng-model="firstname" class="form-control" />
@@ -58,35 +48,18 @@
                             </div>
 
                             <div class="col-md-12 col-xs-12 form-group">
-                                <input placeholder="Address Line 1" type="text" name="address1" required="" ng-model="address1" class="form-control" />
+                                <input placeholder="Email" type="email" name="email" required="" ng-model="email" class="form-control" />
                             </div>
 
                             <div class="col-md-12 col-xs-12 form-group">
-                                <input placeholder="Address Line 2" type="text" name="address2" required="" ng-model="address2" class="form-control" />
+                                <input placeholder="password" type="password" name="password" required="" ng-model="password" class="form-control" />
                             </div>
 
                             <div class="col-md-12 col-xs-12 form-group">
-                                <input placeholder="Address Line 3" type="text" name="address3" required="" ng-model="address3" class="form-control" />
+                                <input placeholder="cpassword" type="password" name="cpassword" required="" ng-model="cpassword" class="form-control" />
                             </div>
-
                             <div class="col-md-12 col-xs-12 form-group">
-                                <input placeholder="Landmark" type="text" name="landmark" required="" ng-model="landmark" class="form-control" />
-                            </div>
-
-                            <div class="col-md-12 col-xs-12 form-group">
-                                <input placeholder="Pincode" type="text" name="postal_code" required="" ng-model="postcode" class="form-control" />
-                            </div>
-
-                            <div class="col-md-12 col-xs-12 form-group">
-                                <input placeholder="Contact No." type="text" name="telephone" required="" ng-model="telephone" class="form-control" />
-                            </div>
-
-                            <div class="col-md-12 col-xs-12 form-group">
-                                <input placeholder="City" type="text" name="city" value="Mumbai" readonly="" class="form-control" />
-                            </div>
-
-                            <div class="col-md-12 col-xs-12 form-group">
-                                <input type="submit" class="btn btn-success clearfix form-control updtBtn" value="Submit">
+                                <input type="submit" class="btn btn-success clearfix form-control regBtn" value="Submit">
                             </div>
                         </form>
 
@@ -104,10 +77,5 @@
         <script src="js/angular-resource.min.js"></script>
         <script src='js/angular-sanitize.min.js'></script>
         <script src="js/myscripts.js"></script>
-        <script>
-            $(document).ready(function(){
-               updDetails(); 
-            });
-        </script>
     </body>
 </html>

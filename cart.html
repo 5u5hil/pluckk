@@ -44,12 +44,12 @@
                         <table class="table table-condensed" id="cartable">
                             <thead>
                                 <tr class="f_size_large"> 
-                                    <th>Product</th>
-                                    <th class="t_align_c"> </th>
-                                    <th class="t_align_c">Price</th>
-                                    <th class="t_align_c">Quantity</th>
-                                    <th class="t_align_r">Subtotal</th>
-                                    <th class="t_align_c">Remove</th>
+                                    <th width="10%">Product</th>
+                                    <th class="t_align_c" width="15%"> </th>
+                                    <th class="t_align_c" width="10%">Price</th>
+                                    <th class="t_align_c" width="40%">Quantity</th>
+                                    <th class="t_align_r" width="10%">Subtotal</th>
+                                    <th class="t_align_c" width="10%"></th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -61,8 +61,12 @@
                                         <strong>{{ product.name}}</strong>
                                     </td>
                                     <td  style="vertical-align: middle;">Rs.  {{ product.price}}</td>
-                                    <td style="vertical-align: middle;">
-                                        <input type="number" class="qty editquantity " min="1" value="{{ product.qty}}" prod-id="{{ product.rowid}}" product-id="{{ product.id}}" name="quantity{{ product.rowid}}">
+                                    <td style="vertical-align: middle;" >
+                                        <div class="col-xs-5 col-sm-5 col-md-5 input-group">
+                                            <div class="input-group-addon mQty input-sm">-</div>
+                                            <input type="number" class="qty editquantity quantity  center-block form-control qtyinput input-sm" min="1" value="{{ product.qty}}" prod-id="{{ product.rowid}}" product-id="{{ product.id}}" name="quantity{{ product.rowid}}">
+                                            <div class="input-group-addon pQty input-sm">+</div>                                                
+                                        </div>
                                     </td>
                                     <td style="vertical-align: middle;" ng-init="cart.Total = cart.Total + product.subtotal">Rs.  <span class="{{ product.rowid}}"> {{ product.subtotal}} </span></td>
                                     <td style="vertical-align: middle;"> 
@@ -137,5 +141,16 @@
         <script src="js/angular-resource.min.js"></script>
         <script src='js/angular-sanitize.min.js'></script>
         <script src="js/myscripts.js"></script>
+        <script>
+                                                $(document).ready(function () {
+                                                    $("body").on("click", ".pQty", function () {
+                                                        $(this).siblings(".quantity").change();
+                                                    });
+
+                                                    $("body").on("click", ".mQty", function () {
+                                                        $(this).siblings(".quantity").change();
+                                                    });
+                                                });
+        </script>
     </body>
 </html>

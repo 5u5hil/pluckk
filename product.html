@@ -34,7 +34,7 @@
                     </div>
                 </nav>
 
-                <div class="container-fluid mt60" ng-controller="productDetails">
+                <div class="container-fluid mt60 custom-nav" ng-controller="productDetails">
                     <div class="row">
                         <form id="prdForm-{{ product.id}}" class="atcForm" method="POST"  >
                             <input type="hidden" name="prod_id" value="{{ product.id}}" />
@@ -43,7 +43,7 @@
                             <div class="col-md-12 col-xs-12 col-sm-12">
                                 <img ng-src="{{ product.image}}" class="img-responsive img-thumbnail" />
                             </div>
-                            <div class=" col-md-10 col-xs-10 col-sm-10 col-xs-offset-1">
+                            <div class=" col-md-12 col-xs-12 col-sm-12 ">
                                 <h2 class="text-center">{{ product.product}}</h2>
                                 <p ng-bind-html="product.options | unsafe"></p>
 
@@ -51,13 +51,13 @@
 
                             </div>
                             <div class=" col-md-12 col-xs-12 col-sm-12">
-                                <div class="input-group col-md-5 col-xs-5 col-sm-5 col-xs-offset-1 pull-left">
-                                    <div class="input-group-addon pQty">+</div>
-                                    <input type="number" name="quantity" value="1" min="1" class="quantity  center-block form-control qtyinput input-sm"  placeholder="Quantity">
+                                <div class="input-group col-md-6 col-xs-6 col-sm-6  pull-left" style="padding: 1px 0px;">
                                     <div class="input-group-addon mQty">-</div>
+                                    <input type="number" name="quantity" value="1" min="1" class="quantity  center-block form-control qtyinput input-sm"  placeholder="Quantity">
+                                    <div class="input-group-addon pQty">+</div>
                                 </div>
-                                <div class="col-md-5 col-xs-5 col-sm-5">              
-                                    <button form-id="prdForm-{{ product.id}}" form-action="{{ product.add | unsafe }}" class="h30 addToCart btn btn-success btn-block btn-sm"><i class="glyphicon glyphicon-shopping-cart"></i>Add</button>
+                                <div class="col-md-6 col-xs-6 col-sm-6">              
+                                    <button form-id="prdForm-{{ product.id}}" form-action="{{ product.add | unsafe }}" class="h30 addToCart btn btn-success btn-block btn-sm custom-btn-add"><i class="glyphicon glyphicon-shopping-cart"></i> Add to Cart</button>
                                 </div> 
                             </div>
                         </form>
