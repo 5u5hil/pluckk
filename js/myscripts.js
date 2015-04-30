@@ -44,7 +44,8 @@ app.controller('homeList', function ($scope, $http) {
 
 app.controller('productList', function ($scope, $http) {
 
-    url = domain + 'm/get-category-products/' + getUrlParameter('slug');
+    url = domain + 'm/get-category-products/' + getUrlParameter('slug') + '?sort=' + (getUrlParameter('sort') ? getUrlParameter('sort') : 0);
+
 
     $.ajaxSetup({
         scriptCharset: "utf-8", //maybe "ISO-8859-1"
@@ -53,6 +54,48 @@ app.controller('productList', function ($scope, $http) {
 
     $.getJSON(url, function (data) {
         $scope.$apply(function () {
+            $scope.s = data.cat;
+            $scope.count = data.count; 
+            $scope.products = data.prods;
+            var decoded = $('<div/>').html(data.links).text();
+            $scope.pagination = decoded;
+
+        });
+        $('#dvLoading').fadeOut(200);
+    });
+
+    $scope.getProds = function (url) {
+
+        $.ajaxSetup({
+            scriptCharset: "utf-8", //maybe "ISO-8859-1"
+            contentType: "application/json; charset=utf-8"
+        });
+
+        $.get(url,
+                function (data) {
+                    $scope.$apply(function () {
+                        $scope.products = data.prods;
+                        var decoded = $('<div/>').html(data.links).text();
+                        $scope.pagination = decoded;
+                    });
+                });
+    }
+
+});
+
+app.controller('sList', function ($scope, $http) {
+
+    url = domain + 'm/search/' + getUrlParameter('s') + '?sort=' + (getUrlParameter('sort') ? getUrlParameter('sort') : 0);
+
+    $.ajaxSetup({
+        scriptCharset: "utf-8", //maybe "ISO-8859-1"
+        contentType: "application/json; charset=utf-8"
+    });
+
+    $.getJSON(url, function (data) {
+        $scope.$apply(function () {
+            $scope.s = getUrlParameter('s');
+            $scope.count = data.count;
             $scope.products = data.prods;
             var decoded = $('<div/>').html(data.links).text();
             $scope.pagination = decoded;
@@ -130,9 +173,9 @@ app.controller('odetails', function ($scope, $http, $location) {
     $.get(url, function (data) {
         a = $.parseHTML(data);
         data = $(a).find(".acc_right").html();
-        
+
         console.log(data);
-        
+
         $scope.$apply(function () {
 
             $scope.details = data;
@@ -295,11 +338,17 @@ function chkLogin() {
 $(document).ready(function () {
 
 
+
+
+    $("#sListt").on('click', 'a', function (e) {
+        e.preventDefault();
+        angular.element($("#sList")).scope().getProds($(this).attr('href'));
+    });
+
     $(".pagination").on('click', 'a', function (e) {
         e.preventDefault();
         angular.element($("#pList")).scope().getProds($(this).attr('href'));
     });
-
 
     $("body").on("change", "select[name='sub_prod']", function () {
         $(this).parent().parent().find(".sprice").html($('option:selected', this).attr("data-sp"));
@@ -618,6 +667,18 @@ $(document).ready(function () {
                 top.location.href = 'cart.html';
             }
         });
+    });
+
+    $("#sList #ssort").change(function () {
+        if ($(this).val() !== "") {
+            top.location.href = "search.html?s=" + getUrlParameter("s") + "&sort=" + $(this).val();
+        }
+    });
+
+    $("#pList #ssort").change(function () {
+        if ($(this).val() !== "") {
+            top.location.href = "category.html?slug=" + getUrlParameter("slug") + "&sort=" + $(this).val();
+        }
     });
 
 });

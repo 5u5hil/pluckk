@@ -1,81 +1,178 @@
 <!DOCTYPE html>
 <html ng-app="pluckk">
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>Pluckk</title>
-        <link href="css/bootstrap.min.css" rel="stylesheet">
-        <link href="css/font-awesome.min.css" rel="stylesheet" />
-        <link href="css/style.css" rel="stylesheet">
-    </head>
-    <body>
-        <div id="dvLoading"></div>
-
-        <div id="wrapper" ng-cloak>
-            <div id="sidebar-wrapper">
-                <ul class="sidebar-nav" ng-controller="getMenu" ng-bind-html="menu | unsafe">
-
-                </ul>
+  
+  <head>
+    
+    <meta charset="utf-8">
+    
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <title>
+      Pluckk
+    </title>
+    
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    
+    <link href="css/font-awesome.min.css" rel="stylesheet" />
+    
+    <link href="css/style.css" rel="stylesheet">
+    
+    <link rel="stylesheet" href="dist/style.css" />
+    
+    <link rel="stylesheet" href="dist/css/sidebar.css"/>
+    
+  </head>
+  
+  <body>
+    
+    <div id="dvLoading">
+    </div>
+    
+    <div id="wrapper" ng-cloak>
+      
+      <div class="col-xs-7 col-sm-3 col-md-3 sidebar sidebar-left sidebar-animate">
+        
+        <ul class="sidebar-nav list collapsibleList" ng-controller="getMenu" id="accordion" ng-bind-html="menu | unsafe">
+          
+        </ul>
+        
+      </div>
+      
+      <!-- /#sidebar-wrapper -->
+      
+      <div id="page-content-wrapper" ng-controller="login">
+        
+        <nav class="navbar navbar-default navbar-static-top navbar-fixed-top">
+          
+          <div class="container-fluid">
+            
+            <div class="navbar-header">
+              
+              <button type="button" class="navbar-toggle toggle-left" data-toggle="sidebar" data-target=".sidebar-left">
+                
+                <span class="icon-bar">
+                </span>
+                
+                <span class="icon-bar">
+                </span>
+                
+                <span class="icon-bar">
+                </span>
+                
+              </button>
+              
+              <a class="navbar-brand" href="index.html">
+                
+                <img class="logo" alt="Pluckk" src="images/logo.png">
+                
+              </a>
+              
+              <a href="cart.html" class="btn btn-sm btn-success pull-right navcart h30 ">
+                <i class="glyphicon glyphicon-shopping-cart">
+                </i>
+                Cart 
+                <span class="badge">
+                  0
+                </span>
+              </a>
+              
             </div>
-            <!-- /#sidebar-wrapper -->
-            <div id="page-content-wrapper" ng-controller="login">
-                <nav class="navbar navbar-default navbar-static-top navbar-fixed-top">
-                    <div class="container-fluid">
-                        <div class="navbar-header">
-                            <button type="button" id="menu-toggle" class="glyphicon glyphicon-menu-hamburger pull-left btn btn-success navbar-btn"></button>
-                            <a class="navbar-brand" href="index.html">
-                                <img class="logo" alt="Pluckk" src="images/logo.png">
-                            </a>
-                            <a href="cart.html" class="btn btn-sm btn-success pull-right navcart h30 "><i class="glyphicon glyphicon-shopping-cart"></i> Cart <span class="badge">0</span></a>
-
-                        </div>      
-
-                    </div>
-                </nav>
-
-                <div class="container-fluid mt60">
-                    <div class="row">
-
-                        <form  method="post" class="cDetails" novalidate="novalidate" ng-controller="finall">
-
-
-                            <div class="col-md-12 col-xs-12 form-group">
-                                <label>Select Delivery Slot</label>                     
-                            </div>
-
-                            <div class="col-md-12 col-xs-12 form-group">
-                                <select class="form-control optAvlSlot" required="" name="delSlot" ng-bind-html="options | unsafe">
-                                </select>
-                            </div>
-
-                            <div class="col-md-12 col-xs-12 form-group">
-                                <label>Payment Method </label>
-                            </div>
-                            <div class="col-md-12 col-xs-12 form-group">
-                                <input class="" checked="checked" name="paymentMethod" type="radio" value="paymentMethod"> Cash on Delivery
-                            </div>
-
-
-
-                            <div class="col-md-12 col-xs-12 form-group">
-                                <input type="submit" class="btn btn-success clearfix form-control finalStep" value="Place The Order">
-                            </div>
-                        </form>
-
-                    </div>
-
-                </div>
-            </div>
+            
+          </div>
+          
+        </nav>
+        
+        <div class="container-fluid mt60">
+          
+          <div class="row">
+            
+            <form  method="post" class="cDetails" novalidate="novalidate" ng-controller="finall">
+              
+              <div class="col-md-12 col-xs-12 form-group">
+                
+                <label>
+                  Select Delivery Slot
+                </label>
+                
+              </div>
+              
+              <div class="col-md-12 col-xs-12 form-group">
+                
+                <select class="form-control optAvlSlot" required="" name="delSlot" ng-bind-html="options | unsafe">
+                  
+                </select>
+                
+              </div>
+              
+              <div class="col-md-12 col-xs-12 form-group">
+                
+                <label>
+                  Payment Method 
+                </label>
+                
+              </div>
+              
+              <div class="col-md-12 col-xs-12 form-group">
+                
+                <input class="" checked="checked" name="paymentMethod" type="radio" value="paymentMethod">
+                Cash on Delivery                            
+              </div>
+              
+              <div class="col-md-12 col-xs-12 form-group">
+                
+                <input type="submit" class="btn btn-success clearfix form-control finalStep" value="Place The Order">
+                
+              </div>
+              
+            </form>
+            
+          </div>
+          
         </div>
-
-
-        <script src="phonegap.js"></script>
-        <script src="js/jquery.min.js"></script>
-        <script src="js/bootstrap.min.js"></script>
-        <script src="js/angular.min.js"></script>
-        <script src="js/angular-resource.min.js"></script>
-        <script src='js/angular-sanitize.min.js'></script>
-        <script src="js/myscripts.js"></script>
-    </body>
+        
+      </div>
+      
+    </div>
+    
+    <script src="phonegap.js">
+    </script>
+    
+    <script src="js/jquery.min.js">
+    </script>
+    
+    <script src="js/bootstrap.min.js">
+    </script>
+    
+    <script src="js/angular.min.js">
+    </script>
+    
+    <script src="js/angular-resource.min.js">
+    </script>
+    
+    <script src='js/angular-sanitize.min.js'>
+    </script>
+    
+    <script src="js/myscripts.js">
+    </script>
+    
+    <script src="dist/js/sidebar.js">
+    </script>
+    
+    <script type="text/javascript">
+      $(document).ready(function () {
+        $("body").on("click", "#accordion li.parent", function () {
+          if (false == $(this).children("ul").is(':visible')) {
+            $('#accordion ul').slideUp(300);
+          }
+          $(this).children("ul").slideToggle(300);
+        }
+                    );
+      }
+                       );
+      
+    </script>
+    
+  </body>
 </html>
