@@ -35,8 +35,17 @@ app.controller('homeList', function ($scope, $http) {
         });
 
         $('#dvLoading').fadeOut(200);
-        navigator.splashscreen.hide();
+        $(".ySave").each(function () {
 
+            if ($(this).text() == 0) {
+                $(this).parent().hide();
+                $(".ssprice[data-id='" + $(this).attr("data-id") + "']").parent().hide();
+            } else {
+                $(this).parent().show();
+                $(".ssprice[data-id='" + $(this).attr("data-id") + "']").parent().show();
+            }
+        });
+        navigator.splashscreen.hide();
 
     });
 
@@ -55,12 +64,24 @@ app.controller('productList', function ($scope, $http) {
     $.getJSON(url, function (data) {
         $scope.$apply(function () {
             $scope.s = data.cat;
-            $scope.count = data.count; 
+            $scope.count = data.count;
             $scope.products = data.prods;
             var decoded = $('<div/>').html(data.links).text();
             $scope.pagination = decoded;
 
         });
+
+        $(".ySave").each(function () {
+
+            if ($(this).text() == 0) {
+                $(this).parent().hide();
+                $(".ssprice[data-id='" + $(this).attr("data-id") + "']").parent().hide();
+            } else {
+                $(this).parent().show();
+                $(".ssprice[data-id='" + $(this).attr("data-id") + "']").parent().show();
+            }
+        });
+
         $('#dvLoading').fadeOut(200);
     });
 
@@ -78,7 +99,21 @@ app.controller('productList', function ($scope, $http) {
                         var decoded = $('<div/>').html(data.links).text();
                         $scope.pagination = decoded;
                     });
+
+                    $(".ySave").each(function () {
+
+                        if ($(this).text() == 0) {
+                            $(this).parent().hide();
+                            $(".ssprice[data-id='" + $(this).attr("data-id") + "']").parent().hide();
+                        } else {
+                            $(this).parent().show();
+                            $(".ssprice[data-id='" + $(this).attr("data-id") + "']").parent().show();
+                        }
+                    });
                 });
+
+
+
     }
 
 });
@@ -101,6 +136,16 @@ app.controller('sList', function ($scope, $http) {
             $scope.pagination = decoded;
 
         });
+        $(".ySave").each(function () {
+
+            if ($(this).text() == 0) {
+                $(this).parent().hide();
+                $(".ssprice[data-id='" + $(this).attr("data-id") + "']").parent().hide();
+            } else {
+                $(this).parent().show();
+                $(".ssprice[data-id='" + $(this).attr("data-id") + "']").parent().show();
+            }
+        });
         $('#dvLoading').fadeOut(200);
     });
 
@@ -117,6 +162,16 @@ app.controller('sList', function ($scope, $http) {
                         $scope.products = data.prods;
                         var decoded = $('<div/>').html(data.links).text();
                         $scope.pagination = decoded;
+                    });
+                    $(".ySave").each(function () {
+
+                        if ($(this).text() == 0) {
+                            $(this).parent().hide();
+                            $(".ssprice[data-id='" + $(this).attr("data-id") + "']").parent().hide();
+                        } else {
+                            $(this).parent().show();
+                            $(".ssprice[data-id='" + $(this).attr("data-id") + "']").parent().show();
+                        }
                     });
                 });
     }
@@ -136,6 +191,16 @@ app.controller('productDetails', function ($scope, $http, $location) {
         $scope.$apply(function () {
             $scope.product = data;
 
+        });
+        $(".ySave").each(function () {
+
+            if ($(this).text() == 0) {
+                $(this).parent().hide();
+                $(".ssprice[data-id='" + $(this).attr("data-id") + "']").parent().hide();
+            } else {
+                $(this).parent().show();
+                $(".ssprice[data-id='" + $(this).attr("data-id") + "']").parent().show();
+            }
         });
         $('#dvLoading').fadeOut(200);
     });
@@ -185,6 +250,31 @@ app.controller('odetails', function ($scope, $http, $location) {
     });
 
 });
+
+app.controller('offers', function ($scope, $http, $location) {
+
+    url = domain + '/offers';
+
+    $.ajaxSetup({
+        scriptCharset: "utf-8", //maybe "ISO-8859-1"
+        contentType: "application/json; charset=utf-8"
+    });
+
+    $.get(url, function (data) {
+        a = $.parseHTML(data);
+        data = $(a).find(".page_content_offset").html();
+
+      
+        $scope.$apply(function () {
+
+            $scope.details = data;
+
+        });
+        $('#dvLoading').fadeOut(200);
+    });
+
+});
+
 
 app.controller('cartList', function ($scope, $http) {
 
@@ -248,7 +338,7 @@ function get_checkout() {
     var MinAmt = 100;
 
     if ($(".grandTotal").text() < MinAmt) {
-        alert("Please place order of at least Rs. 100");
+        alert("Please place order of at least Rs. 100 (excluding Shipping Charges)");
 
     } else {
         if (window.localStorage.getItem('id') && window.localStorage.getItem('email') && window.localStorage.getItem('password')) {
@@ -326,19 +416,26 @@ function login(uname, pass, rurl) {
     });
 }
 
+function capitalizeFirstLetter(string) {
+    return string.charAt(0).toUpperCase() + string.slice(1);
+}
+
 function chkLogin() {
-    if (window.localStorage.getItem('id') && window.localStorage.getItem('email') && window.localStorage.getItem('password')) {
-        $(".nlogin").hide();
-        $("ul.sidebar-nav").append("<li class='parent'><a href='#' >Hi " + window.localStorage.getItem('firstname').toUpperCase() + "</a></li>")
-        $("ul.sidebar-nav").append("<li class='parent'><a href='update-details.html?route=home' ><i class='fa fa-user'> My Account</a></li>");
-        $("ul.sidebar-nav").append("<li class='parent'><a href='myorders.html?id=" + window.localStorage.getItem('id') + "' ><i class='fa fa-dashboard'> My Orders</a></li>")
+
+    if (window.localStorage.getItem('id') != "") {
+        if (window.localStorage.getItem('id') && window.localStorage.getItem('email') && window.localStorage.getItem('password')) {
+            $(".nlogin").hide();
+            $("ul.sidebar-nav").append("<li class='parent'><a href='#' ><i class='fa fa-user lf20'></i>  Hi " + capitalizeFirstLetter(window.localStorage.getItem('firstname')) + "</a></li>")
+            $("ul.sidebar-nav").append("<li class='parent'><a href='update-details.html?route=home' ><i class='fa fa-caret-right fa-1x'></i> My Account</a></li>");
+            $("ul.sidebar-nav").append("<li class='parent'><a href='myorders.html?id=" + window.localStorage.getItem('id') + "' ><i class='fa fa-caret-right fa-1x'></i> My Orders</a></li>")
+
+            $("ul.sidebar-nav").append("<li class='parent'><a  href='#'  id='logoutMenueButton'><i class='fa fa-caret-right fa-1x'></i> Logout</a></li>")
+
+        }
     }
 }
 
 $(document).ready(function () {
-
-
-
 
     $("#sListt").on('click', 'a', function (e) {
         e.preventDefault();
@@ -352,6 +449,29 @@ $(document).ready(function () {
 
     $("body").on("change", "select[name='sub_prod']", function () {
         $(this).parent().parent().find(".sprice").html($('option:selected', this).attr("data-sp"));
+
+
+
+        var id = $(this).attr("data-id");
+
+        $(".ySave[data-id='" + id + "']").text($('option:selected', this).attr('data-saving'));
+        $(".sprice[data-id='" + id + "']").text($('option:selected', this).attr('data-sp'));
+        $(".ssprice[data-id='" + id + "']").text($('option:selected', this).attr('data-mrp'));
+        $(".ySave[data-id='" + id + "']").parent().show();
+        $(".ssprice[data-id='" + id + "']").parent().show();
+        if ($('option:selected', this).attr('data-saving') == 0) {
+
+            $(".ySave[data-id='" + id + "']").parent().hide();
+        }
+
+        if ($('option:selected', this).attr('data-sp') == $('option:selected', this).attr('data-mrp')) {
+
+            $(".ssprice[data-id='" + id + "']").parent().hide();
+        }
+
+
+
+
     });
 
     $("#menu-toggle").click(function (e) {
@@ -373,8 +493,11 @@ $(document).ready(function () {
         $.get((url),
                 function (result) {
                     var cart_cont = result.split("||||||");
-                    $(".navcart .badge").text(cart_cont[1]);
-                    alert("Product Added Successfully");
+
+                    setTimeout(function () {
+                        $(".navcart .badge").text(cart_cont[1]);
+                    }, 1200)
+                    //  alert("Product Added Successfully");
                 });
     });
 
@@ -626,13 +749,19 @@ $(document).ready(function () {
         $('#dvLoading').show();
         $.ajax({
             url: domain + 'order_cash_on_delivery', type: 'get',
-            data: $(this).parent().parent().serialize(),
+            //data: $(this).parent().parent().serialize(),
+
+            data: $("#slotForm").serialize(),
             success: function (data) {
+
+
                 if (data.match(/thank/g)) {
                     $('#dvLoading').hide();
-                    top.location.href = "thankyou.html";
+                    location.href = "thankyou.html";
                 } else {
-                    alert("Something went wrong! Try again Later!");
+                    // alert("Something went wrong! Try again Later!");
+                    $('#dvLoading').hide();
+                    location.href = "thankyou.html";
                 }
 
             }
@@ -680,5 +809,58 @@ $(document).ready(function () {
             top.location.href = "category.html?slug=" + getUrlParameter("slug") + "&sort=" + $(this).val();
         }
     });
+
+
+    ///madhuri
+    $("body").on("click", "#logoutMenueButton", function () {
+        localStorage.clear();
+        top.location.href = "index.html";
+
+    });
+
+
+    $('body').on('click', '.addToCart', function () {
+        var cart = $('.shopping-cart');
+        var imgtodrag = $(this).closest('.citem').find("div.pimg");
+        if (imgtodrag) {
+            var imgclone = imgtodrag.clone()
+                    .offset({
+                        top: imgtodrag.offset().top,
+                        left: imgtodrag.offset().left
+                    })
+                    .css({
+                        'opacity': '0.5',
+                        'position': 'absolute',
+                        'height': '150px',
+                        'width': '150px',
+                        'z-index': '100'
+                    })
+                    .appendTo($('body'))
+                    .animate({
+                        'top': cart.offset().top + 10,
+                        'left': cart.offset().left + 10,
+                        'width': 75,
+                        'height': 75
+                    }, 1000, 'easeInOutExpo');
+
+            setTimeout(function () {
+                cart.effect("shake", {
+                    times: 2
+                }, 200);
+            }, 1500);
+
+            imgclone.animate({
+                'width': 0,
+                'height': 0
+            }, function () {
+                $(this).detach()
+            });
+        }
+    });
+
+
+
+
+
 
 });

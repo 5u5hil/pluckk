@@ -22,7 +22,13 @@
     <link rel="stylesheet" href="dist/style.css" />
     
     <link rel="stylesheet" href="dist/css/sidebar.css"/>
+    <style>.final-continue{height: 28px;
+width: 100%;
+text-align: center;}
+    .final-continue:hover, .final-continue:active{ text-decoration: none !important; }
+    .form-grup{ font-family: inherit;}</style>
     
+ 
   </head>
   
   <body>
@@ -42,59 +48,22 @@
       
       <!-- /#sidebar-wrapper -->
       
-      <div id="page-content-wrapper" ng-controller="login">
+      <div id="page-content-wrapper" ng-controller="login"> 
         
-        <nav class="navbar navbar-default navbar-static-top navbar-fixed-top">
-          
-          <div class="container-fluid">
-            
-            <div class="navbar-header">
-              
-              <button type="button" class="navbar-toggle toggle-left" data-toggle="sidebar" data-target=".sidebar-left">
-                
-                <span class="icon-bar">
-                </span>
-                
-                <span class="icon-bar">
-                </span>
-                
-                <span class="icon-bar">
-                </span>
-                
-              </button>
-              
-              <a class="navbar-brand" href="index.html">
-                
-                <img class="logo" alt="Pluckk" src="images/logo.png">
-                
-              </a>
-              
-              <a href="cart.html" class="btn btn-sm btn-success pull-right navcart h30 ">
-                <i class="glyphicon glyphicon-shopping-cart">
-                </i>
-                Cart 
-                <span class="badge">
-                  0
-                </span>
-              </a>
-              
-            </div>
-            
-          </div>
-          
-        </nav>
+           <!-- /#header inlcude -->
+                <div ng-include="'header.html'"></div>
         
-        <div class="container-fluid mt60">
+        <div class="container-fluid ">
           
           <div class="row">
-            
-            <form  method="post" class="cDetails" novalidate="novalidate" ng-controller="finall">
-              
-              <div class="col-md-12 col-xs-12 form-group">
                 
-                <label>
-                  Select Delivery Slot
-                </label>
+            <form id="slotForm"  method="post" class="cDetails" novalidate="novalidate" ng-controller="finall">
+              
+              <div class="col-md-12 col-xs-12 form-grup">
+                
+              <h2 class="cat-name custom-cart-name"> Select Delivery Slot</h2>
+                 
+                
                 
               </div>
               
@@ -105,25 +74,31 @@
                 </select>
                 
               </div>
-              
-              <div class="col-md-12 col-xs-12 form-group">
                 
-                <label>
-                  Payment Method 
-                </label>
+              
+              
+              <div class="col-md-12 col-xs-12 form-goup">
+                <br />
+                <h2 class="cat-name custom-cart-name">Payment Method</h2>
+                  
+              
                 
               </div>
               
               <div class="col-md-12 col-xs-12 form-group">
                 
                 <input class="" checked="checked" name="paymentMethod" type="radio" value="paymentMethod">
-                Cash on Delivery                            
+                Cash On Delivery                            
               </div>
-              
-              <div class="col-md-12 col-xs-12 form-group">
-                
-                <input type="submit" class="btn btn-success clearfix form-control finalStep" value="Place The Order">
-                
+               
+              <div class="col-md-12 col-xs-12 form-group row">
+                    <div class="col-md-6 col-xs-6 form-group">
+                     <a href="index.html" class="btn-sm btn-warning pull-left final-continue">Continue Shopping</a>    
+                </div>
+                  
+                <div class="col-md-6 col-xs-6 form-group">
+                <input type="submit" class="btn btn-success clearfix form-control finalStep" style="height: 28px;" value="Place Order">
+                </div>
               </div>
               
             </form>

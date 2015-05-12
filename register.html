@@ -22,7 +22,7 @@
     <link rel="stylesheet" href="dist/style.css" />
     
     <link rel="stylesheet" href="dist/css/sidebar.css"/>
-    
+    <style> .form-group{ margin-bottom:2px;}</style>
   </head>
   
   <body>
@@ -42,55 +42,19 @@
       
       <div id="page-content-wrapper">
         
-        <nav class="navbar navbar-default navbar-static-top navbar-fixed-top">
-          
-          <div class="container-fluid">
-            
-            <div class="navbar-header">
-              
-              <button type="button" class="navbar-toggle toggle-left" data-toggle="sidebar" data-target=".sidebar-left">
+     <!-- /#header inlcude -->
+                <div ng-include="'header.html'"></div>
                 
-                <span class="icon-bar">
-                </span>
-                
-                <span class="icon-bar">
-                </span>
-                
-                <span class="icon-bar">
-                </span>
-                
-              </button>
-              
-              <a class="navbar-brand" href="index.html">
-                
-                <img class="logo" alt="Pluckk" src="images/logo.png">
-                
-              </a>
-              
-              <a href="cart.html" class="btn btn-sm btn-success pull-right navcart h30 ">
-                <i class="glyphicon glyphicon-shopping-cart">
-                </i>
-                Cart 
-                <span class="badge">
-                  0
-                </span>
-              </a>
-              
-            </div>
-            
-          </div>
-          
-        </nav>
         
-        <div class="container-fluid mt60">
+        <div class="container-fluid">
           
           <div class="row">
-            
+               <h2 class="cat-name custom-cart-name">Registration Form</h2>
             <form  method="post" class="cDetails" novalidate="novalidate" ng-controller="reg">
               
               <div class="col-md-12 col-xs-12 form-group">
                 
-                <input placeholder="First Name" type="text" name="firstname"  required="" ng-model="firstname" class="form-control custom-search custom-search-reg" />
+                <input placeholder="First Name" type="text" name="firstname"  required="" ng-model="firstname" class="form-control head-login custom-search custom-search-reg" />
                 
               </div>
               
@@ -120,7 +84,7 @@
               
               <div class="col-md-12 col-xs-12 form-group">
                 
-                <input type="submit" class="btn btn-success clearfix form-control custom-search regBtn custom-reg-btn" value="SUBMIT">
+                <input type="submit" class="btn btn-success clearfix form-control custom-ac custom-search regBtn custom-reg-btn" value="SUBMIT">
                 
               </div>
               

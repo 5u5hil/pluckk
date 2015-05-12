@@ -13,8 +13,43 @@
 
 
         <link rel="stylesheet" href="dist/css/sidebar.css"/>
-
+        <style>#cart-cart{ display: none;}</style>
     </head>
+    <style>
+ 
+        .product-outer-cart{border: 1px solid rgb(238, 238, 238);
+background-color: rgb(255, 255, 255);
+padding: 7px 5px 13px 5px !important;}
+        .product-name-text{vertical-align: middle;
+margin-bottom: 13px;
+font-size: 17px;
+ color:#333;
+font-family: inherit;}
+        .cmn-cart{ text-align: right;}
+        .subttl-outer-cart li{ list-style: none;}
+        .subttl-outer-cart{border: 1px solid rgb(238, 238, 238);
+background-color: rgb(255, 255, 255);
+margin: 10px 0px !important;
+line-height: 23px;
+padding: 10px 5px !important;
+font-family: inherit;
+        letter-spacing: 0.5px;}
+/*    .saving{ font-style: italic; color:red; }
+    .total{ font-weight: 900; color:green;}
+    .shiping{ color:gray;}
+    .subtotal{ color:navy;}*/
+.infoline-outer-cart{font-size: 11px;
+padding: 9px !important;}
+.custom-cart-name{margin: 20px 9px 7px 9px;}
+.options-outer-cart a{width: 126px;}
+.options-outer-cart a:hover, .options-outer-cart a:active{ text-decoration: none !important;}
+.custom-checkout:active { text-decoration: none !important;}
+.btn-info:active { background-color:#449D44 !important;}
+.btn-info{ background-color: #5CB85C !important;}
+.deleteCart{ float:right;}
+
+ 
+    </style>
     <body>
         <div id="dvLoading"></div>
 
@@ -26,110 +61,97 @@
             </div>
             <!-- /#sidebar-wrapper -->
             <div id="page-content-wrapper">
-                <nav class="navbar navbar-default navbar-static-top navbar-fixed-top">
-                    <div class="container-fluid">
-                        <div class="navbar-header">
-                            <button type="button" class="navbar-toggle toggle-left" data-toggle="sidebar" data-target=".sidebar-left">
-                                <span class="icon-bar"></span>
-                                <span class="icon-bar"></span>
-                                <span class="icon-bar"></span>
-                            </button> 
-                            <a class="navbar-brand" href="index.html">
-                                <img class="logo" alt="Pluckk" src="images/logo.png">
-                            </a>
-                        </div>      
-                    </div>
-                </nav>
-
-                <div class="container-fluid mt30">
+                       <!-- /#header inlcude -->
+                <div ng-include="'header.html'"></div>
+                
+                
+                <div class="container-fluid">
                     <div class="row" id="pList" ng-controller="cartList">
-
-                        <div class="alert alert-success" role="alert" style="font-size: 11px;">
-                            Minimum Order Amount for Delivery is <i class="fa fa-inr"></i>100! 
-                        </div>
-                        <div class="alert alert-success" role="alert" style="font-size: 11px;">
-                            Shop for <i class="fa fa-inr"></i>250 or more for free Shipping <i class="fa fa-smile-o"></i> 
-                        </div>
-
-                        <table class="table table-condensed" style="background-color:#FFF;" id="cartable">
-                            <thead>
-                                <tr class="f_size_large"> 
-                                    <th width="38%">Product</th>
-                                
-                                    <th class="t_align_c" width="10%">Price</th>
-                                    <th class="t_align_c" width="42%">Quantity</th> 
-                                    <th class="t_align_r" width="5%">Subtotal</th>
-                                    <th class="t_align_c" width="5%"></th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr ng-repeat="product in cart" ng-if="product.name">
-                                    <td>  <strong>{{ product.name}}</strong></td>
-                           
-                                    <td  style="vertical-align: middle;"><i class="fa fa-inr"></i>{{ product.price}}</td>
-                                    <td style="vertical-align: middle;" >
-                                        <div class="col-xs-12 col-sm-12 col-md-12 input-group" style="padding-left:0px !important;">
-                                            <div class="input-group-addon mQty input-sm">-</div>
-                                            <input type="number" class="qty text-center editquantity quantity  center-block form-control qtyinput custom-qty input-sm" min="1" value="{{ product.qty}}" prod-id="{{ product.rowid}}" product-id="{{ product.id}}" name="quantity{{ product.rowid}}">
-                                            <div class="input-group-addon pQty input-sm">+</div>                                                
-                                        </div>
-                                    </td>
-                                    <td style="vertical-align: middle;" ng-init="cart.Total = cart.Total + product.subtotal"><i class="fa fa-inr"></i><span class="{{product.rowid}}">{{product.subtotal}}</span></td>
-                                    <td style="vertical-align: middle; text-align: right;"> 
-                                        <a class="deleteCart" href="cart/delete-cart?rowid={{product.rowid}}"><i class="fa fa-trash-o fa-lg"></i> </a>
-                                    </td>
-                                </tr>
-
-                                <tr>
-
-                                    <td colspan="3">Subtotal</td>
-                                    <td colspan="3" style="text-align: right;"><i class="fa fa-inr"></i><span class="fwb grandTotal">{{cart.Total}}</span></td>
-                                </tr>
-
-                                <tr>
-                                    <td colspan="3" ><!--coupon--> 
-
-                                        <input class="userCouponCode form-control cartinput pull-left" required="required" style="width:150px; margin-right: 10px;" placeholder="Enter Coupon Code" name="user_coupon_code" type="text"> 
-
-                                        <button class="btn-xs btn-info" id="couponApply" type="button">Apply</button> 
-                                        <span class="col-xs-12 cMsg"  style="display:none;color:red;font-size:13px;margin-top:15px;"> 
-
-                                        </span>
-                                    </td>
-                                    <td colspan="1">Coupon(s)</td>
-                                    <td colspan="2"><i class="fa fa-inr"></i><span class="fwb couponUsedAmount"> 0</span></td>
-                                </tr>
-                                <tr>
-                                    <td colspan="3">Shipping Charges</td>
-                                    <td colspan="3" style="text-align: right;"><i class="fa fa-inr"></i><span class="fwb shippingValue ">{{ cart.Total < 250 ? '30' : 0 }}</span></td>
-                                </tr>
-                                <!--total-->
-                                <tr>
-                                    <td colspan="3" >Total</td>
-                                    <td colspan="3" class="v_align_m t_align_r tmobalignc" style="text-align: right;"><i class="fa fa-inr "></i><span class="TotalCartAmt fwb">{{ cart.Total < 250 ? (cart.Total + 30) : cart.Total}}</span></td>
-                                </tr>
-
-                                <tr>
-                                    <td colspan="3" >
-                                        <a href="index.html" class="btn-sm btn-warning pull-left">Continue Shopping</a>   
-                                    </td>
-
-                                    <td colspan="3" class="v_align_m t_align_r tmobalignc">
-                                        <form id="chkoutForm" action="" method="post">
+                        
+                        <h2 class="cat-name custom-cart-name">Your Cart</h2>
+      <div class="col-xs-12 col-sm-12 col-md-12 options-outer-cart xstop10">
+        
+         <div class="col-xs-6 col-sm-6 col-md-6">
+              <a href="index.html" class="btn-sm btn-warning pull-left full-width text-center">Continue Shop<span class="xshide">ping</span></a>  
+         </div>
+         
+         <div class="col-xs-6 col-sm-6 col-md-6">
+									<form id="chkoutForm" action="" method="post">
                                             <input type="hidden" name="pay_amt" class="orderAmt" value="{{ cart.Total}}" />
                                             <input type="hidden" name="shipping_amount_session" value="{{ cart.Total < 250 ? '30' : 0 }}" />
-                                            <a href="javascript:void()" onclick="get_checkout();" class="btn-sm btn-success custom-checkout pull-right" >Checkout</a>
+                                            <a href="javascript:void()" onclick="get_checkout();" class="btn-sm btn-success custom-checkout pull-right full-width" >Checkout</a>
                                         </form> 
-                                    </td>
-                                </tr>
+         </div>
+    </div>
+                      
+<div class="col-xs-12 col-sm-12 col-md-12 wrapper-product-cart" id="cartable"  >
+    <div class="col-xs-12 col-sm-12 col-md-12 product-outer-cart" ng-repeat="product in cart" ng-if="product.name">
+        <div class="col-xs-12 col-sm-12 col-md-12 product-name-text"  style="vertical-align:middle;">
+           {{ product.name}}
+        </div>
+      
+            <div class="col-xs-3 col-sm-2 col-md-2 product-price-text">
+               <i class="fa fa-inr"></i>{{product.price}} 
+               <span style="float:right">x</span>
+            </div>    
+             
+           
+            <div class="col-xs-4 col-sm-5 col-md-5 product-qty-text input-group" style="float:left;  vertical-align:middle; margin: -5px 0px 0px 0px;" > 
+                <div class="input-group-addon mQty input-sm">-</div>
+                <input type="number"  style="background-color:#FFF;" class="qty text-center editquantity quantity  center-block form-control qtyinput custom-qty input-sm" min="1" value="{{ product.qty}}" prod-id="{{ product.rowid}}" product-id="{{ product.id}}" name="quantity{{ product.rowid}}">
+                <div class="input-group-addon pQty input-sm">+</div> 
+            </div>
+           
+             <div class="col-xs-3 col-sm-3 col-md-3 product-subttl-text" style="vertical-align:middle;">
+                   <span style="float:left">=</span>
+                   <span style="float:right" ng-init="cart.Total = cart.Total + product.subtotal"> <i class="fa fa-inr"></i><span class="{{product.rowid}}">{{product.subtotal}}</span></span>
+            </div>
+          
+            <div class="col-xs-2 col-sm-2 col-md-2 product-del-text pull-right" style="vertical-align:middle;">
+                <a class="deleteCart" href="cart/delete-cart?rowid={{product.rowid}}"><i class="fa fa-trash-o fa-lg"></i> </a>
+            </div>
+        
+        
+        
+    </div>
+    
+    <div class="col-xs-12 col-sm-12 col-md-12 coupon-outer-cart xstop10">
+         <input class="userCouponCode form-control  custom-search cartinput pull-left inline" required="required" style="width:190px;margin: 0px 10px 0px 0px; height:28px;" placeholder="Enter Coupon Code" name="user_coupon_code" type="text"> 
+
+         <button class="btn-xs btn-info nav-btn-submit inline" style=" height:28px;" id="couponApply" type="button">Apply</button> 
+         <span class="col-xs-12 cMsg"  style="display:none;color:red;font-size:13px;margin-top:15px;">  </span>
+  </div>
+    
+    <div class="col-xs-12 col-sm-12 col-md-12 subttl-outer-cart row">
+        <div class="col-xs-9 col-sm-9 col-md-9 cmn-cart">
+            <li class="subtotal">Subtotal:</li>
+            <li class="shiping">Shipping Charges:</li>
+            <li class="saving">Saving:</li>
+            <li class="total">Total:</li>
+           
+        </div>
+          <div class="col-xs-3 col-sm-3 col-md-3 cmn-cart">
+            <li class="subtotal"><i class="fa fa-inr"></i><span class="fwb grandTotal">{{cart.Total}}</span></li>
+            <li class="shiping"><i class="fa fa-inr"></i><span class="fwb shippingValue">{{ cart.Total < 250 ? '30' : 0 }}</span></li>
+        
+            <li class="saving"><i class="fa fa-inr"></i>0</li>
+            <li class="total"><i class="fa fa-inr "></i><span class="TotalCartAmt fwb">{{ cart.Total < 250 ? (cart.Total + 30) : cart.Total}}</span></li>
+        </div>
+         
+                                
+    </div>
+    <div class="col-xs-12 col-sm-12 col-md-12 infoline-outer-cart alert alert-success">
+        Shop for <i class="fa fa-inr"></i>250 or more for free Shipping <i class="fa fa-smile-o"></i> 
+    </div>
+    
+
+    
+      
+</div>
 
 
 
-                            </tbody>
-
-                        </table>
-
-
+                     
                     </div>
 
 

@@ -22,7 +22,7 @@
     <link rel="stylesheet" href="dist/style.css" />
     
     <link rel="stylesheet" href="dist/css/sidebar.css"/>
-    
+    <style>.btn-success { border: none;}</style>
   </head>
   
   <body>
@@ -46,74 +46,76 @@
       
       <div id="page-content-wrapper">
         
-        <nav class="navbar navbar-default navbar-static-top navbar-fixed-top">
-          
-          <div class="container-fluid">
+         <!-- /#header inlcude -->
+                <div ng-include="'header.html'"></div>
+        
+        <div class="container-fluid">
+           <h2 class="cat-name custom-cart-name">Order Details</h2>
+            <div class="row custom-heading-order" id="pList" >
             
-            <div class="navbar-header">
+               
+                
+            <div class="col-sm-12 col-md-12 col-xs-12" >
               
-              <button type="button" class="navbar-toggle toggle-left" data-toggle="sidebar" data-target=".sidebar-left">
-                
-                <span class="icon-bar">
-                </span>
-                
-                <span class="icon-bar">
-                </span>
-                
-                <span class="icon-bar">
-                </span>
-                
-              </button>
+              <div class="col-md-3 col-xs-3 col-sm-3 text-center">
+                Order Id                       
+              </div>
               
-              <a class="navbar-brand" href="index.html">
-                
-                <img class="logo" alt="Pluckk" src="images/logo.png">
-                
-              </a>
+              <div class="col-md-3 col-xs-3 col-sm-3 text-center">
+                Order Amount                  
+              </div>
               
-              <a href="cart.html" class="btn btn-sm btn-success pull-right navcart h30 ">
-                <i class="glyphicon glyphicon-shopping-cart">
-                </i>
-                Cart 
-                <span class="badge">
-                  0
-                </span>
-              </a>
+             <div class="col-md-6 col-xs-6 col-sm-6 row">
+                
+                  <div class="col-md-6 col-xs-6 col-sm-6 text-center">
+                
+                  Re-Order
+               
+                  </div>
+            
+              
+            
+                <div class="col-md-6 col-xs-6 col-sm-6 text-center">
+               
+                  View Order
+                
+                </div>
+                  
+              </div>
               
             </div>
+      
             
           </div>
-          
-        </nav>
-        
-        <div class="container-fluid mt60">
-          
+            
           <div class="row" id="pList" ng-controller="orderList">
             
-            <div class="col-sm-12 col-md-12 col-xs-12" ng-repeat="order in orders">
+            <div class="col-sm-12 col-md-12 col-xs-12 custom-myorders" ng-repeat="order in orders">
               
-              <div class="col-md-2 col-xs-2 col-sm-2">
-                Order Id - {{ order.id}}                            
+              <div class="col-md-3 col-xs-3 col-sm-3 text-center custom-vertical">
+                        {{order.id}}                            
               </div>
               
-              <div class="col-md-2 col-xs-2 col-sm-2">
-                Order Amt - Rs. {{ order.order_amt }}                            
+              <div class="col-md-3 col-xs-3 col-sm-3 text-center custom-vertical">
+                <i class="fa fa-inr"></i>{{order.order_amt }}                            
               </div>
               
-              <div class="col-md-4 col-xs-4 col-sm-4">
+              <div class="col-md-6 col-xs-6 col-sm-6 row">
                 
+                  <div class="col-md-6 col-xs-6 col-sm-5 text-center">
                 <a class="btn btn-sm btn-success reOrder" href="m/re-orders?id={{ order.id}}">
-                  Re-order
+                  Re-Order
                 </a>
-                
-              </div>
+                  </div>
+            
               
-              <div class="col-md-4 col-xs-4 col-sm-4">
-                
+            
+                <div class="col-md-6 col-xs-6 col-sm-5 text-center">
                 <a class="btn btn-sm btn-success" href="odetails.html?id={{ order.id}}" class="reOrder">
                   View Order
                 </a>
-                
+                </div>
+                  
               </div>
               
             </div>

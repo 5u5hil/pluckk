@@ -5,43 +5,32 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>Pluckk</title>
-       <link href="css/bootstrap.min.css" rel="stylesheet">
+        <link href="css/bootstrap.min.css" rel="stylesheet">
         <link href="css/font-awesome.min.css" rel="stylesheet" />
         <link href="css/style.css" rel="stylesheet">
-         <link rel="stylesheet" href="dist/style.css" />
-         <link rel="stylesheet" href="dist/css/sidebar.css"/>
+        <link rel="stylesheet" href="dist/style.css" />
+        <link rel="stylesheet" href="dist/css/sidebar.css"/>
     </head>
     <body>
         <div id="dvLoading"></div>
 
         <div id="wrapper" ng-cloak>
-  <div class="col-xs-10 col-sm-3 col-md-3 sidebar sidebar-left sidebar-animate">
+            <div class="col-xs-10 col-sm-3 col-md-3 sidebar sidebar-left sidebar-animate">
                 <ul class="sidebar-nav list collapsibleList" ng-controller="getMenu" id="accordion" ng-bind-html="menu | unsafe">
 
                 </ul>
             </div> 
             <!-- /#sidebar-wrapper -->
             <div id="page-content-wrapper">
-                <nav class="navbar navbar-default navbar-static-top navbar-fixed-top">
-                    <div class="container-fluid">
-                        <div class="navbar-header">
-                              <button type="button" class="navbar-toggle toggle-left" data-toggle="sidebar" data-target=".sidebar-left">
-                                <span class="icon-bar"></span>
-                                <span class="icon-bar"></span>
-                                <span class="icon-bar"></span>
-                            </button> 
-                            <a class="navbar-brand" href="index.html">
-                                <img class="logo" alt="Pluckk" src="images/logo.png">
-                            </a>
-                            <a href="cart.html" class="btn btn-sm btn-success pull-right navcart h30 "><i class="glyphicon glyphicon-shopping-cart"></i> Cart <span class="badge">0</span></a>
+                <!-- /#header inlcude -->
+                <div ng-include="'header.html'"></div>
 
-                        </div>      
 
-                    </div>
-                </nav>
 
-                <div class="container-fluid mt60 custom-nav" ng-controller="productDetails">
+                <div class="container-fluid custom-nav" ng-controller="productDetails">
                     <div class="row">
+                        <h2 class="cat-name custom-cart-name">Product Information</h2>
+
                         <form id="prdForm-{{ product.id}}" class="atcForm" method="POST"  >
                             <input type="hidden" name="prod_id" value="{{ product.id}}" />
                             <input type="hidden" name="prod_type" value="{{ product.prod_type}}" />
@@ -51,10 +40,15 @@
                             </div>
                             <div class=" col-md-12 col-xs-12 col-sm-12 ">
                                 <h2 class="text-center">{{ product.product}}</h2>
+                                <h2 class="text-center">{{ product.alias}}</h2>
+
                                 <p ng-bind-html="product.options | unsafe"></p>
 
-                                <p class="info text-center" ng-bind-html="product.price | unsafe">Rs. </p>
-
+                                <p class="info text-center scheme_color" ng-bind-html="product.savings | unsafe">  </p>
+                                <div class="text-center">
+                                    <p class="info sfont scheme_color inline"  ng-bind-html="product.spl_price | unsafe">  </p>  
+                                    <p class="info scheme_color inline" ng-bind-html="product.price | unsafe">  </p>
+                                </div>
                             </div>
                             <div class=" col-md-12 col-xs-12 col-sm-12">
                                 <div class="input-group col-md-6 col-xs-6 col-sm-6  pull-left" style="padding: 1px 0px;">
@@ -94,7 +88,7 @@
             </div>
         </div>
 
-  <script src="phonegap.js"></script>
+        <script src="phonegap.js"></script>
         <script src="js/jquery.min.js"></script>
         <script src="js/bootstrap.min.js"></script>
         <script src="js/angular.min.js"></script>
@@ -104,14 +98,14 @@
         <script src="dist/js/sidebar.js"></script>
 
         <script type="text/javascript">
-                             $(document).ready(function () {
-                                $("body").on("click", "#accordion li.parent", function () {
-                                     if (false == $(this).children("ul").is(':visible')) {
-                                         $('#accordion ul').slideUp(300);
-                                     }
-                                     $(this).children("ul").slideToggle(300);
-                                 });
-                             });
+                                    $(document).ready(function () {
+                                        $("body").on("click", "#accordion li.parent", function () {
+                                            if (false == $(this).children("ul").is(':visible')) {
+                                                $('#accordion ul').slideUp(300);
+                                            }
+                                            $(this).children("ul").slideToggle(300);
+                                        });
+                                    });
         </script>
     </body>
 </html>

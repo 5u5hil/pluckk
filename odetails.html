@@ -22,7 +22,7 @@
     <link rel="stylesheet" href="dist/style.css" />
     
     <link rel="stylesheet" href="dist/css/sidebar.css"/>
-    
+    <style>.text-center{ text-align: left !important;}</style>
   </head>
   
   <body>
@@ -41,51 +41,15 @@
       <!-- /#sidebar-wrapper -->
       
       <div id="page-content-wrapper">
+       <!-- /#header inlcude -->
+                <div ng-include="'header.html'"></div>
+                
         
-        <nav class="navbar navbar-default navbar-static-top navbar-fixed-top">
-          
-          <div class="container-fluid">
-            
-            <div class="navbar-header">
-              
-              <button type="button" class="navbar-toggle toggle-left" data-toggle="sidebar" data-target=".sidebar-left">
-                
-                <span class="icon-bar">
-                </span>
-                
-                <span class="icon-bar">
-                </span>
-                
-                <span class="icon-bar">
-                </span>
-                
-              </button>
-              
-              <a class="navbar-brand" href="index.html">
-                
-                <img class="logo" alt="Pluckk" src="images/logo.png">
-                
-              </a>
-              
-              <a href="cart.html" class="btn btn-sm btn-success pull-right navcart h30 ">
-                <i class="glyphicon glyphicon-shopping-cart">
-                </i>
-                Cart 
-                <span class="badge">
-                  0
-                </span>
-              </a>
-              
-            </div>
-            
-          </div>
-          
-        </nav>
-        
-        <div class="container-fluid mt60">
+        <div class="container-fluid  ">
           
           <div class="row" id="pList" ng-controller="odetails">
-            
+             <h2 class="cat-name custom-cart-name">Order Detail</h2>
+              
             <div class="col-sm-12 col-md-12 col-xs-12" ng-bind-html="details | unsafe">
               
             </div>
