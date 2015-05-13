@@ -3,7 +3,7 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=1.0, minimum-scale=1.0, maximum-scale=1.0">
         <title>Pluckk</title>
        <link href="css/bootstrap.min.css" rel="stylesheet">
         <link href="css/font-awesome.min.css" rel="stylesheet" />
@@ -96,7 +96,7 @@ padding: 9px !important;}
             </div>    
              
            
-            <div class="col-xs-4 col-sm-5 col-md-5 product-qty-text input-group" style="float:left;  vertical-align:middle; margin: -5px 0px 0px 0px;" > 
+            <div class="col-xs-5 col-sm-6 col-md-6 product-qty-text input-group" style="float:left;  vertical-align:middle; margin: -5px 0px 0px 0px;" > 
                 <div class="input-group-addon mQty input-sm">-</div>
                 <input type="number"  style="background-color:#FFF;" class="qty text-center editquantity quantity  center-block form-control qtyinput custom-qty input-sm" min="1" value="{{ product.qty}}" prod-id="{{ product.rowid}}" product-id="{{ product.id}}" name="quantity{{ product.rowid}}">
                 <div class="input-group-addon pQty input-sm">+</div> 
@@ -107,7 +107,7 @@ padding: 9px !important;}
                    <span style="float:right" ng-init="cart.Total = cart.Total + product.subtotal"> <i class="fa fa-inr"></i><span class="{{product.rowid}}">{{product.subtotal}}</span></span>
             </div>
           
-            <div class="col-xs-2 col-sm-2 col-md-2 product-del-text pull-right" style="vertical-align:middle;">
+            <div class="col-xs-1 col-sm-1 col-md-1 product-del-text pull-right" style="vertical-align:middle;">
                 <a class="deleteCart" href="cart/delete-cart?rowid={{product.rowid}}"><i class="fa fa-trash-o fa-lg"></i> </a>
             </div>
         

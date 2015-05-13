@@ -3,7 +3,7 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=1.0, minimum-scale=1.0, maximum-scale=1.0">
         <title>Pluckk</title>
         <link href="css/bootstrap.min.css" rel="stylesheet">
         <link href="css/font-awesome.min.css" rel="stylesheet" />
@@ -51,31 +51,35 @@
                                 <div class="citem">
                                     <input type="hidden" name="prod_id" value="{{ product.id}}" />
                                     <input type="hidden" name="prod_type" value="{{ product.prod_type}}" />
-
+									
+									<div class="col-md-4 col-xs-4 col-sm-4">
                                     <a href="product.html?id={{ product.id}}">
-                                        <div class="col-md-4 col-xs-4 col-sm-4 custom-img-warpper-listing pimg"  style="background-image:url({{ product.image}});">
-                                        </div>
-                                    </a>
-
+                                        <div class="custom-img-warpper-listing pimg"  style="background-image:url({{ product.image}});">
+										 <div class="hotse" ng-bind-html="product.savings | unsafe">  </div>
+										</div>
+									  </a>
+									  
+									    <button form-id="prdForm-{{product.id}}" form-action="{{product.add| unsafe }}" class="addToCart custom-btn-add h30 btn btn-success btn-block btn-sm">
+										<i class="glyphicon glyphicon-shopping-cart"></i>Add</button>
+									  
+									</div>
                                     <div class="col-md-8 col-xs-8 col-sm-8 custom-wrapper-details">
-                                        <h4 class="product-name-listing">{{product.product}}</h4>
-                                       <h4 class="product-name-listing">{{product.alias }}</h4>
+                                        <h4 class="product-name-listing">{{product.product}}  </h4>
+										<h4 class="f12">{{product.alias }} &nbsp; </h4>
+									<!-- <h4 class="product-name-listing f14"></h4>-->
                                         
                                         <p class="custom-mb8" ng-bind-html="product.options | unsafe"></p>
-                                        <p class="info text-center scheme_color" ng-bind-html="product.savings | unsafe">  </p>
+                                     
                                         <div class="text-center">
                                             <p class="info sfont scheme_color inline"  ng-bind-html="product.spl_price | unsafe">  </p>  
                                             <p class="info scheme_color inline" ng-bind-html="product.price | unsafe">  </p>
                                         </div>
-                                        <div class="input-group col-md-7 col-xs-7 col-sm-7 pull-left">
+                                        <div class="input-group col-md-12 col-xs-12 col-sm-12 pull-left">
                                             <div class="input-group-addon mQty">-</div>
                                             <input  type="number"   name="quantity" value="1" min="1" class="quantity  center-block form-control qtyinput input-sm text-center"  placeholder="Quantity">
                                             <div class="input-group-addon pQty">+</div>
                                         </div>
-                                        <div class="col-md-5 col-xs-5 col-sm-5 pull-right">              
-                                            <button form-id="prdForm-{{product.id}}" form-action="{{product.add| unsafe }}" class="addToCart custom-btn-add h30 btn btn-success btn-block btn-sm">
-                                                <i class="glyphicon glyphicon-shopping-cart"></i>Add</button>
-                                        </div>   
+                                          
                                     </div>
                                 </div>
                             </form>
@@ -108,7 +112,17 @@
                                     }
                                     $(this).children("ul").slideToggle(300);
                                 });
+								
+									
+									function pqr(){alert('fdasf');}
+					
+								$('.logo').on('click',pqr);									
+	
                             });
+							
+							
+							
+							
         </script>
     </body>
 </html>
