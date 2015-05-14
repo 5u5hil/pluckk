@@ -4,7 +4,6 @@
 /* Note: this also disables the navbar-header class positioning settings in small screens. */
 
  body {
-  padding-top: 51px; 
   box-sizing:border-box;
 } 
 .sidebar {

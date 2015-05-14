@@ -68,7 +68,7 @@ padding: 9px !important;}
                 <div class="container-fluid">
                     <div class="row" id="pList" ng-controller="cartList">
                         
-                        <h2 class="cat-name custom-cart-name">Your Cart</h2>
+					<h2 class="cat-name custom-cart-name" >Cart <div class="ctotal">Total: <i class="fa fa-inr "></i><span class="TotalCartAmt fwb">{{ cart.Total < 250 ? (cart.Total + 30) : cart.Total}}</span></div></h2>
       <div class="col-xs-12 col-sm-12 col-md-12 options-outer-cart xstop10">
         
          <div class="col-xs-6 col-sm-6 col-md-6">
@@ -128,13 +128,11 @@ padding: 9px !important;}
             <li class="shiping">Shipping Charges:</li>
             <li class="saving">Saving:</li>
             <li class="total">Total:</li>
-           
-        </div>
+		</div>
           <div class="col-xs-3 col-sm-3 col-md-3 cmn-cart">
             <li class="subtotal"><i class="fa fa-inr"></i><span class="fwb grandTotal">{{cart.Total}}</span></li>
             <li class="shiping"><i class="fa fa-inr"></i><span class="fwb shippingValue">{{ cart.Total < 250 ? '30' : 0 }}</span></li>
-        
-            <li class="saving"><i class="fa fa-inr"></i>0</li>
+			<li class="saving"><i class="fa fa-inr"></i>0</li>
             <li class="total"><i class="fa fa-inr "></i><span class="TotalCartAmt fwb">{{ cart.Total < 250 ? (cart.Total + 30) : cart.Total}}</span></li>
         </div>
          
