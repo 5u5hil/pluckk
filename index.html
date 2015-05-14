@@ -31,13 +31,13 @@
 
                 <img src="images/banner.jpg" class="img-responsive center-block " />
 
-                <div class="container-fluid custom-container-index" ng-controller="homeList">
-                    <div class="row col-md-12 mb20"  ng-repeat="cat in categories">
+                <div class="container-fluid" ng-controller="homeList">
+                    <div class="row mb10"  ng-repeat="cat in categories">
                         <div class="" >
                             <h2 class="cat-name">{{ cat.name}}</h2>
 
-                            <div class="owl-carousel col-xs-12 col-sm-12 col-md-12 custom-product-wrapper" >
-                                <div class="col-xs-12 col-sm-12 col-md-12" ng-repeat="product in cat.products"> 
+                            
+                                <div class="col-xs-12 col-sm-12 col-md-12 custom-listing-warpper" ng-repeat="product in cat.products"> 
 
                                     <form id="prdForm-{{ product.id}}" class="atcForm item" method="POST"  >
 
@@ -89,7 +89,7 @@
 
                                 </div>
 
-                            </div>
+                           
 
                         </div>
 

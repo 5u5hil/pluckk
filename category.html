@@ -32,11 +32,11 @@
                 <div ng-include="'header.html'"></div>
 
 
-                <div class="container-fluid mt30">
+                <div class="container-fluid mt10">
                     <div class="row" id="pList" ng-controller="productList">
                         <div class="col-xs-12 col-md-12 col-sm-12" >
                             <div class="col-xs-9 col-md-10 col-sm-9" >
-                                <h4>"{{ s}}" ({{ count}})</h4> 
+                                <h4 class="mt0">"{{ s}}" ({{ count}})</h4> 
                             </div>
                             <div class="col-xs-3 col-md-2 col-sm-3" >
                                 <select name="sort" class="form-control input-sm" id="ssort" style="display: inline-block;">
@@ -64,11 +64,11 @@
 									  
 									</div>
                                     <div class="col-md-8 col-xs-8 col-sm-8 custom-wrapper-details">
-                                        <h4 class="product-name-listing">{{product.product}}  </h4>
+                                        <h4 class="success custom-product-name">{{product.product}}  </h4>
 										<h4 class="f12">{{product.alias }} &nbsp; </h4>
 									<!-- <h4 class="product-name-listing f14"></h4>-->
                                         
-                                        <p class="custom-mb8" ng-bind-html="product.options | unsafe"></p>
+                                        <p  ng-bind-html="product.options | unsafe"></p>
                                      
                                         <div class="text-center">
                                             <p class="info sfont scheme_color inline"  ng-bind-html="product.spl_price | unsafe">  </p>  

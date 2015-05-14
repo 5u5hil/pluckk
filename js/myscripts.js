@@ -275,7 +275,6 @@ app.controller('offers', function ($scope, $http, $location) {
 
 });
 
-
 app.controller('cartList', function ($scope, $http) {
 
     url = domain + 'm/cart';
