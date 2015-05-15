@@ -642,7 +642,7 @@ $(document).ready(function () {
             url: url,
             type: 'get',
             success: function (data) {
-                top.location.href = top.location.href
+                top.location.href = 'cart.html';
 
             }
         });
