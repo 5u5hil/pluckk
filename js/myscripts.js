@@ -650,16 +650,15 @@ $(document).ready(function () {
     $(".updtBtn").click(function (e) {
         e.preventDefault();
         var error = 0;
-        $(".cDetails input[type='text']").each(function () {
-            if ($(this).val() == "") {
 
-                error = 1;
-                return false;
-            }
-        });
-
-        if (error == 1) {
-            alert("Please complete the entire form!");
+        if ($("[name='firstname']").val() == "") {
+            alert("Please Enter a valid Firstname");
+        } else if ($("[name='lastname']").val() == "") {
+            alert("Please Enter a valid Lastname");
+        } else if ($("[name='address1']").val() == "") {
+            alert("Please Enter a valid Address Line No 1");
+        } else if ($("[name='postal_code']").val() == "") {
+            alert("Please Enter a valid Pincode");
         } else if (!validatephonenumber($("[name='telephone']").val())) {
             alert("Please Enter a valid Contact number");
         } else {
@@ -683,6 +682,7 @@ $(document).ready(function () {
                 }
             });
         }
+        
     });
     $(".regBtn").click(function (e) {
         e.preventDefault();
