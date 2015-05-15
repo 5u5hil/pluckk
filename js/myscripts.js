@@ -259,6 +259,7 @@ app.filter('unsafe', function ($sce) {
         return $sce.trustAsHtml(val);
     };
 });
+
 function getUrlParameter(sParam) {
     var sPageURL = window.location.search.substring(1);
     var sURLVariables = sPageURL.split('&');
@@ -278,7 +279,7 @@ function get_checkout() {
         alert("Please place order of at least Rs. 100 (excluding Shipping Charges)");
     } else {
         if (window.localStorage.getItem('id') && window.localStorage.getItem('email') && window.localStorage.getItem('via')) {
-            fbLogin(window.localStorage.getItem('email'), window.localStorage.getItem('email'), window.localStorage.getItem('firstname'), window.localStorage.getItem('lastname'));
+            fbLogin(window.localStorage.getItem('email'), window.localStorage.getItem('id'), window.localStorage.getItem('firstname'), window.localStorage.getItem('lastname'),'update-details.html');
         } else if (window.localStorage.getItem('id') && window.localStorage.getItem('email') && window.localStorage.getItem('password')) {
             login(window.localStorage.getItem('email'), window.localStorage.getItem('password'), 'update-details.html');
         } else {
@@ -299,7 +300,13 @@ function fb_login() {
                         user_id = response.id; //get user email
                         firstname = response.first_name; //get user email
                         lastname = response.last_name; //get user email
-                        fbLogin(user_email, user_id, firstname, lastname);
+                           if (getUrlParameter('route') == "confirm-details") {
+                        var rurl = "update-details.html";
+                    } else {
+                        var rurl = "index.html";
+                    }
+                
+                        fbLogin(user_email, user_id, firstname, lastname,rurl);
                     });
         }
     }
@@ -311,8 +318,7 @@ function fb_login() {
     );
 }
 
-
-function fbLogin(user_email, user_id, firstname, lastname) {
+function fbLogin(user_email, user_id, firstname, lastname, rurl) {
     $.ajax({
         type: "GET",
         url: domain + "/fb_details",
@@ -339,12 +345,7 @@ function fbLogin(user_email, user_id, firstname, lastname) {
                     window.localStorage.setItem("country", data.country_id);
                     window.localStorage.setItem("zone", data.zone_id);
 
-                    if (getUrlParameter('route') == "confirm-details") {
-                        var rurl = "update-details.html";
-                    } else {
-                        var rurl = "index.html";
-                    }
-                    top.location.href = rurl;
+                     top.location.href = rurl;
                 }
             });
         }
