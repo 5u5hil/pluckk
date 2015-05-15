@@ -644,6 +644,9 @@ $(document).ready(function () {
             success: function (data) {
                 top.location.href = 'cart.html';
 
+            },
+            error: function (data){
+                top.location.href = 'cart.html';
             }
         });
     });
