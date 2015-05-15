@@ -413,7 +413,7 @@ function capitalizeFirstLetter(string) {
 function chkLogin() {
 
 
-    if (window.localStorage.getItem('id') && window.localStorage.getItem('email') && window.localStorage.getItem('password')) {
+    if (window.localStorage.getItem('id') && window.localStorage.getItem('email') && (window.localStorage.getItem('password') || window.localStorage.getItem('via'))) {
         $(".nlogin").hide();
         $("ul.sidebar-nav").append("<li class='parent'><a href='update-details.html?route=home' ><i class='fa fa-user lf20'></i>  Hi " + capitalizeFirstLetter(window.localStorage.getItem('firstname')) + "</a></li>")
         $("ul.sidebar-nav").append("<li class='parent'><a href='update-details.html?route=home' ><i class='fa fa-caret-right fa-1x'></i> My Account</a></li>");
