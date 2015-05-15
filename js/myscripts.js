@@ -1,15 +1,11 @@
 var domain = "http://pluck-infini.cruxservers.in/";
-
 var app = angular.module('pluckk', ['ngResource', 'ngSanitize']);
-
 app.controller('getMenu', function ($scope, $http) {
     var url = domain + "m/get-menu";
-
     $.ajaxSetup({
         scriptCharset: "utf-8", //maybe "ISO-8859-1"
         contentType: "application/json; charset=utf-8"
     });
-
     $.get(url, function (data) {
 
         $scope.$apply(function () {
@@ -17,23 +13,18 @@ app.controller('getMenu', function ($scope, $http) {
         });
         chkLogin();
     });
-
 });
-
 app.controller('homeList', function ($scope, $http) {
 
     url = domain + 'm/get-home-prods';
-
     $.ajaxSetup({
         scriptCharset: "utf-8", //maybe "ISO-8859-1"
         contentType: "application/json; charset=utf-8"
     });
-
     $.getJSON(url, function (data) {
         $scope.$apply(function () {
             $scope.categories = data;
         });
-
         $('#dvLoading').fadeOut(200);
         $(".ySave").each(function () {
 
@@ -46,21 +37,15 @@ app.controller('homeList', function ($scope, $http) {
             }
         });
         navigator.splashscreen.hide();
-
     });
-
 });
-
 app.controller('productList', function ($scope, $http) {
 
     url = domain + 'm/get-category-products/' + getUrlParameter('slug') + '?sort=' + (getUrlParameter('sort') ? getUrlParameter('sort') : 0);
-
-
     $.ajaxSetup({
         scriptCharset: "utf-8", //maybe "ISO-8859-1"
         contentType: "application/json; charset=utf-8"
     });
-
     $.getJSON(url, function (data) {
         $scope.$apply(function () {
             $scope.s = data.cat;
@@ -68,9 +53,7 @@ app.controller('productList', function ($scope, $http) {
             $scope.products = data.prods;
             var decoded = $('<div/>').html(data.links).text();
             $scope.pagination = decoded;
-
         });
-
         $(".ySave").each(function () {
 
             if ($(this).text() == 0) {
@@ -81,17 +64,14 @@ app.controller('productList', function ($scope, $http) {
                 $(".ssprice[data-id='" + $(this).attr("data-id") + "']").parent().show();
             }
         });
-
         $('#dvLoading').fadeOut(200);
     });
-
     $scope.getProds = function (url) {
 
         $.ajaxSetup({
             scriptCharset: "utf-8", //maybe "ISO-8859-1"
             contentType: "application/json; charset=utf-8"
         });
-
         $.get(url,
                 function (data) {
                     $scope.$apply(function () {
@@ -99,7 +79,6 @@ app.controller('productList', function ($scope, $http) {
                         var decoded = $('<div/>').html(data.links).text();
                         $scope.pagination = decoded;
                     });
-
                     $(".ySave").each(function () {
 
                         if ($(this).text() == 0) {
@@ -111,22 +90,16 @@ app.controller('productList', function ($scope, $http) {
                         }
                     });
                 });
-
-
-
     }
 
 });
-
 app.controller('sList', function ($scope, $http) {
 
     url = domain + 'm/search/' + getUrlParameter('s') + '?sort=' + (getUrlParameter('sort') ? getUrlParameter('sort') : 0);
-
     $.ajaxSetup({
         scriptCharset: "utf-8", //maybe "ISO-8859-1"
         contentType: "application/json; charset=utf-8"
     });
-
     $.getJSON(url, function (data) {
         $scope.$apply(function () {
             $scope.s = getUrlParameter('s');
@@ -134,7 +107,6 @@ app.controller('sList', function ($scope, $http) {
             $scope.products = data.prods;
             var decoded = $('<div/>').html(data.links).text();
             $scope.pagination = decoded;
-
         });
         $(".ySave").each(function () {
 
@@ -148,14 +120,12 @@ app.controller('sList', function ($scope, $http) {
         });
         $('#dvLoading').fadeOut(200);
     });
-
     $scope.getProds = function (url) {
 
         $.ajaxSetup({
             scriptCharset: "utf-8", //maybe "ISO-8859-1"
             contentType: "application/json; charset=utf-8"
         });
-
         $.get(url,
                 function (data) {
                     $scope.$apply(function () {
@@ -177,20 +147,16 @@ app.controller('sList', function ($scope, $http) {
     }
 
 });
-
 app.controller('productDetails', function ($scope, $http, $location) {
 
     url = domain + 'm/get-product-details/' + getUrlParameter('id');
-
     $.ajaxSetup({
         scriptCharset: "utf-8", //maybe "ISO-8859-1"
         contentType: "application/json; charset=utf-8"
     });
-
     $.getJSON(url, function (data) {
         $scope.$apply(function () {
             $scope.product = data;
-
         });
         $(".ySave").each(function () {
 
@@ -204,122 +170,95 @@ app.controller('productDetails', function ($scope, $http, $location) {
         });
         $('#dvLoading').fadeOut(200);
     });
-
 });
-
 app.controller('orderList', function ($scope, $http, $location) {
 
     url = domain + 'm/get-orders/' + window.localStorage.getItem('id');
-
     $.ajaxSetup({
         scriptCharset: "utf-8", //maybe "ISO-8859-1"
         contentType: "application/json; charset=utf-8"
     });
-
     $.getJSON(url, function (data) {
         $scope.$apply(function () {
             $scope.orders = data;
-
         });
         $('#dvLoading').fadeOut(200);
     });
-
 });
-
 app.controller('odetails', function ($scope, $http, $location) {
 
     url = domain + 'm/order-details?id=' + getUrlParameter('id');
-
     $.ajaxSetup({
         scriptCharset: "utf-8", //maybe "ISO-8859-1"
         contentType: "application/json; charset=utf-8"
     });
-
     $.get(url, function (data) {
         a = $.parseHTML(data);
         data = $(a).find(".acc_right").html();
-
         console.log(data);
-
         $scope.$apply(function () {
 
             $scope.details = data;
-
         });
         $('#dvLoading').fadeOut(200);
     });
-
 });
-
 app.controller('offers', function ($scope, $http, $location) {
 
     url = domain + '/offers';
-
     $.ajaxSetup({
         scriptCharset: "utf-8", //maybe "ISO-8859-1"
         contentType: "application/json; charset=utf-8"
     });
-
     $.get(url, function (data) {
         a = $.parseHTML(data);
         data = $(a).find(".page_content_offset").html();
-
-      
         $scope.$apply(function () {
 
             $scope.details = data;
-
         });
         $('#dvLoading').fadeOut(200);
     });
-
 });
-
 app.controller('cartList', function ($scope, $http) {
 
     url = domain + 'm/cart';
-
     $.ajaxSetup({
         scriptCharset: "utf-8", //maybe "ISO-8859-1"
         contentType: "application/json; charset=utf-8"
     });
-
     $.get(url,
             function (data) {
                 $scope.$apply(function () {
-                    $scope.cart = data;
+                    $scope.cart = data.cart;
+                    $scope.coupons  = data.coupons;
                 });
                 $('#dvLoading').fadeOut(200);
-
             });
-
 });
-
 app.controller('login', function ($scope, $http) {
     $('#dvLoading').fadeOut(200);
 });
-
+app.controller('fpassword', function ($scope, $http) {
+    $('#dvLoading').fadeOut(200);
+});
 app.controller('updt', function ($scope, $http) {
     updDetails();
     $('#dvLoading').fadeOut(200);
 });
-
 app.controller('reg', function ($scope, $http) {
     $('#dvLoading').fadeOut(200);
 });
-
 app.controller('finall', function ($scope, $http) {
     console.log(getUrlParameter('slot'));
     $scope.options = decodeURIComponent(getUrlParameter('slot'));
     $('#dvLoading').fadeOut(200);
 });
-
 app.filter('unsafe', function ($sce) {
     return function (val) {
         return $sce.trustAsHtml(val);
     };
 });
-
 function getUrlParameter(sParam) {
     var sPageURL = window.location.search.substring(1);
     var sURLVariables = sPageURL.split('&');
@@ -335,16 +274,13 @@ function getUrlParameter(sParam) {
 
 function get_checkout() {
     var MinAmt = 100;
-
     if ($(".grandTotal").text() < MinAmt) {
         alert("Please place order of at least Rs. 100 (excluding Shipping Charges)");
-
     } else {
         if (window.localStorage.getItem('id') && window.localStorage.getItem('email') && window.localStorage.getItem('password')) {
             login(window.localStorage.getItem('email'), window.localStorage.getItem('password'), 'update-details.html');
         } else {
             top.location.href = "login.html?route=confirm-details";
-
         }
     }
 
@@ -352,7 +288,8 @@ function get_checkout() {
 
 function fb_login() {
     var fbLoginSuccess = function (userData) {
-        alert("UserInfo: " + JSON.stringify(userData));
+        a = JSON.stringify(userData);
+        alert(a.email );
     }
 
     facebookConnectPlugin.login(["public_profile", "email"], fbLoginSuccess,
@@ -366,7 +303,6 @@ function updDetails() {
     $("[ng-model]").each(function () {
         $(this).val(window.localStorage.getItem($(this).attr('name')));
     });
-
     $.ajax({
         url: domain + 'm/get-mini',
         type: 'get',
@@ -404,10 +340,10 @@ function login(uname, pass, rurl) {
                         window.localStorage.setItem("country", data.country_id);
                         window.localStorage.setItem("zone", data.zone_id);
                         top.location.href = rurl;
-
                     }
                 });
             } else {
+                $('#dvLoading').hide();
                 alert('Invalid Login, Please provide valid details or try to login again!');
                 top.location.href = 'login.html';
             }
@@ -440,22 +376,16 @@ $(document).ready(function () {
         e.preventDefault();
         angular.element($("#sList")).scope().getProds($(this).attr('href'));
     });
-
     $(".pagination").on('click', 'a', function (e) {
         e.preventDefault();
         angular.element($("#pList")).scope().getProds($(this).attr('href'));
     });
-
     $("body").on("change", "select[name='sub_prod']", function () {
         $(this).parent().parent().find(".sprice").html($('option:selected', this).attr("data-sp"));
-
-
-
         var id = $(this).attr("data-id");
-
-        $(".ySave[data-id='" + id + "']").text($('option:selected', this).attr('data-saving'));
-        $(".sprice[data-id='" + id + "']").text($('option:selected', this).attr('data-sp'));
-        $(".ssprice[data-id='" + id + "']").text($('option:selected', this).attr('data-mrp'));
+        $(".ySave[data-id='" + id + "']").html("<i class='fa fa-rupee'></i>" + $('option:selected', this).attr('data-saving'));
+        $(".sprice[data-id='" + id + "']").html("<i class='fa fa-rupee'></i>" + $('option:selected', this).attr('data-sp'));
+        $(".ssprice[data-id='" + id + "']").html("<i class='fa fa-rupee'></i>" + $('option:selected', this).attr('data-mrp'));
         $(".ySave[data-id='" + id + "']").parent().show();
         $(".ssprice[data-id='" + id + "']").parent().show();
         if ($('option:selected', this).attr('data-saving') == 0) {
@@ -472,40 +402,32 @@ $(document).ready(function () {
 
 
     });
-
     $("#menu-toggle").click(function (e) {
         e.preventDefault();
         $("#wrapper").toggleClass("toggled");
     });
-
     $("#wrapper").on('click', '.addToCart', function (e) {
         e.preventDefault();
         var formId = $(this).attr("form-id");
-
         url = $(this).attr('form-action') + "?" + $("#" + formId).serialize();
-
         $.ajaxSetup({
             scriptCharset: "utf-8", //maybe "ISO-8859-1"
             contentType: "application/json; charset=utf-8"
         });
-
         $.get((url),
                 function (result) {
                     var cart_cont = result.split("||||||");
-
                     setTimeout(function () {
                         $(".navcart .badge").text(cart_cont[1]);
                     }, 1200)
                     //  alert("Product Added Successfully");
                 });
     });
-
     $("#wrapper").on('click', '.pQty', function (e) {
         var val = parseInt($(this).siblings(".quantity").val());
         val++;
         $(this).siblings(".quantity").val(val);
     });
-
     $("#wrapper").on('click', '.mQty', function (e) {
         var val = parseInt($(this).siblings(".quantity").val());
         if (val > 1) {
@@ -513,19 +435,15 @@ $(document).ready(function () {
             $(this).siblings(".quantity").val(val);
         }
     });
-
     var ordertlt = $(".grandTotal").text();
     var url = domain + "m/get-cart-count";
-
     $.ajaxSetup({
         scriptCharset: "utf-8", //maybe "ISO-8859-1"
         contentType: "application/json; charset=utf-8"
     });
-
     $.get(url, function (data) {
         $("a.navcart span.badge").html(data);
     });
-
     if (ordertlt < 250)
     {
         var total_pay_ship = parseInt(ordertlt) + 30;
@@ -537,9 +455,6 @@ $(document).ready(function () {
         var qty = $(this).val();
         var rowid = $(this).attr("prod-id");
         var productId = $(this).attr("product-id");
-
-
-
         if (qty !== "" && qty > 0) {
             $(".savQty").text(qty);
             $.ajax({
@@ -593,7 +508,6 @@ $(document).ready(function () {
                 if (msg.split(":-")[1].length > 0) {
 
                     var newCartAmt = parseInt(CartAmt) + parseInt(Math.round(msg.split(":-")[1]));
-
                     if (newCartAmt < '250')
                     {
                         var aa = parseInt(newCartAmt) + 30;
@@ -606,7 +520,6 @@ $(document).ready(function () {
                     $(".orderAmt").val(aa);
                 }
                 $(".couponUsedAmount").text("0");
-
                 $(".cMsg").html("Coupon Removed!");
                 $("#couponApply").removeAttr("disabled");
                 $(".userCouponCode").removeAttr("disabled");
@@ -615,7 +528,6 @@ $(document).ready(function () {
     });
     $("#couponApply").click(function () {
         var couponCode = $(".userCouponCode").val();
-
         var CartAmt = $(".grandTotal").text();
         if ($(".userCouponCode").val() != "") {
             $.ajax({
@@ -626,7 +538,6 @@ $(document).ready(function () {
                 success: function (msg) {
                     $(".cMsg").css("display", "block");
                     $(".emptyCouponError").css("display", "none");
-
                     var Cmsg = msg.split(":-")[0];
                     if (msg.split(":-")[0] != "Coupon Not Valid") {
                         $("#couponApply").attr("disabled", "disabled");
@@ -636,17 +547,14 @@ $(document).ready(function () {
                             var CouponVal = parseInt(Math.round(msg.split(":-")[1])) + parseInt($(".shippingValue").text());
                         } else {
                             var CouponVal = parseInt(Math.round(msg.split(":-")[1]));
-
                         }
 
 
                         var usedCouponAmount = Math.round(msg.split(":-")[3]);
-
                         $(".TotalCartAmt").text(CouponVal);
                         $(".orderAmt").val(CouponVal);
                         $(".couponUsedAmount").text(usedCouponAmount);
                         $(".cMsg").html(Cmsg);
-
                     } else {
 
                         if (msg.split(":-")[1].length > 0) {
@@ -667,7 +575,6 @@ $(document).ready(function () {
 
             $(".emptyCouponError").show();
             $(".cMsg").html("");
-
             $(".emptyCouponError").html("Please enter valid coupon code.");
         }
 
@@ -679,7 +586,6 @@ $(document).ready(function () {
         var url = domain + $(this).attr('href');
         var rowid = $(this).attr("prod-id");
         var productId = $(this).attr("product-id");
-
         $.ajax({
             url: url,
             type: 'get',
@@ -688,92 +594,110 @@ $(document).ready(function () {
 
             }
         });
-
-
     });
-
-
     $(".updtBtn").click(function (e) {
         e.preventDefault();
+        var error = 0;
+        $(".cDetails input[type='text']").each(function () {
+            if ($(this).val() == "") {
 
-        $('#dvLoading').show();
-        $.ajax({
-            url: domain + 'secure',
-            type: 'get',
-            data: $(this).parent().parent().serialize(),
-            success: function (data) {
-                if (getUrlParameter('route') == "home") {
-                    top.location.href = "index.html";
-                } else {
-                    if (data.match(/COD not available for your selected Pincode/g)) {
-                        $('#dvLoading').hide();
-                        alert("COD not available for your selected Pincode!");
-                    } else {
-                        a = $.parseHTML(data);
-                        top.location.href = "final.html?slot=" + encodeURIComponent($(a).find("select.optAvlSlot").html());
-                    }
-                }
+                error = 1;
+                return false;
             }
         });
-    });
 
+        if (error == 1) {
+            alert("Please complete the entire form!");
+        } else if (!validatephonenumber($("[name='telephone']").val())) {
+            alert("Please Enter a valid Contact number");
+        } else {
+            $('#dvLoading').show();
+            $.ajax({
+                url: domain + 'secure',
+                type: 'get',
+                data: $(this).parent().parent().serialize(),
+                success: function (data) {
+                    if (getUrlParameter('route') == "home") {
+                        top.location.href = "index.html";
+                    } else {
+                        if (data.match(/COD not available for your selected Pincode/g)) {
+                            $('#dvLoading').hide();
+                            alert("COD not available for your selected Pincode!");
+                        } else {
+                            a = $.parseHTML(data);
+                            top.location.href = "final.html?slot=" + encodeURIComponent($(a).find("select.optAvlSlot").html());
+                        }
+                    }
+                }
+            });
+        }
+    });
     $(".regBtn").click(function (e) {
         e.preventDefault();
-        $('#dvLoading').show();
-        $.ajax({
-            url: domain + 'm/m-save-user',
-            type: 'get',
-            data: $(this).parent().parent().serialize(),
-            success: function (data) {
-                if (data != "The email address you have entered is already registered.") {
-                    var dataValues = jQuery.parseJSON(data);
-                    if (getUrlParameter('route') == "confirm-details") {
-                        var rurl = "update-details.html";
+        if ($("[name='firstname']").val() == "" || $("[name='lastname']").val() == "" || $("[name='password']").val() == "" || $("[name='cpassword']").val() == "" || $("[name='email']").val() == "") {
+            alert("Please complete the entire form!");
+        }
+        else if (!validateEmail($("[name='email']").val())) {
+            alert("Please Enter a Valid Email!");
+        } else if ($("[name='password']").val() != $("[name='cpassword']").val()) {
+            alert("Passwords did not match!");
+        } else {
+            $('#dvLoading').show();
+            $.ajax({
+                url: domain + 'm/m-save-user',
+                type: 'get',
+                data: $(this).parent().parent().serialize(),
+                success: function (data) {
+                    if (data != "The email address you have entered is already registered.") {
+                        var dataValues = jQuery.parseJSON(data);
+                        if (getUrlParameter('route') == "confirm-details") {
+                            var rurl = "update-details.html";
+                        } else {
+                            var rurl = "index.html";
+                        }
+                        login(dataValues.email, dataValues.password, rurl);
                     } else {
-                        var rurl = "index.html";
+                        $('#dvLoading').hide();
+                        alert("The email address you have entered is already registered.");
                     }
-                    login(dataValues.email, dataValues.password, rurl);
-                } else {
-                    alert("The email address you have entered is already registered.");
-                    //top.location.href = 'login.html';
+
                 }
-
-            }
-        });
+            });
+        }
     });
-
-
     $(".finalStep").click(function (e) {
         e.preventDefault();
-        $('#dvLoading').show();
-        $.ajax({
-            url: domain + 'order_cash_on_delivery', type: 'get',
-            //data: $(this).parent().parent().serialize(),
 
-            data: $("#slotForm").serialize(),
-            success: function (data) {
+        if ($("[name='delSlot']").val() === null) {
+            alert("Please Select a Delivery Slot");
+        } else {
+            $('#dvLoading').show();
+            $.ajax({
+                url: domain + 'order_cash_on_delivery', type: 'get',
+                //data: $(this).parent().parent().serialize(),
+
+                data: $("#slotForm").serialize(),
+                success: function (data) {
 
 
-                if (data.match(/thank/g)) {
-                    $('#dvLoading').hide();
-                    location.href = "thankyou.html";
-                } else {
-                    // alert("Something went wrong! Try again Later!");
-                    $('#dvLoading').hide();
-                    location.href = "thankyou.html";
+                    if (data.match(/thank/g)) {
+                        $('#dvLoading').hide();
+                        location.href = "thankyou.html";
+                    } else {
+                        // alert("Something went wrong! Try again Later!");
+                        $('#dvLoading').hide();
+                        location.href = "thankyou.html";
+                    }
+
                 }
-
-            }
-        });
+            });
+        }
     });
-
-
-
     $(".loginBtn").click(function (e) {
         e.preventDefault();
         $('#dvLoading').show();
-
         if ($("[name='username']").val() == "" || $("[name='password']").val() == "") {
+            $('#dvLoading').hide();
             alert("Please Enter Valid Email ID & Password!");
         } else {
             if (getUrlParameter('route') == "confirm-details") {
@@ -784,7 +708,6 @@ $(document).ready(function () {
             login($("[name='username']").val(), $("[name='password']").val(), rurl);
         }
     });
-
     $("body").on("click", ".reOrder", function (e) {
         e.preventDefault();
         $('#dvLoading').show();
@@ -796,28 +719,21 @@ $(document).ready(function () {
             }
         });
     });
-
     $("#sList #ssort").change(function () {
         if ($(this).val() !== "") {
             top.location.href = "search.html?s=" + getUrlParameter("s") + "&sort=" + $(this).val();
         }
     });
-
     $("#pList #ssort").change(function () {
         if ($(this).val() !== "") {
             top.location.href = "category.html?slug=" + getUrlParameter("slug") + "&sort=" + $(this).val();
         }
     });
-
-
     ///madhuri
     $("body").on("click", "#logoutMenueButton", function () {
         localStorage.clear();
         top.location.href = "index.html";
-
     });
-
-
     $('body').on('click', '.addToCart', function () {
         var cart = $('.shopping-cart');
         var imgtodrag = $(this).closest('.citem').find("div.pimg");
@@ -841,13 +757,11 @@ $(document).ready(function () {
                         'width': 75,
                         'height': 75
                     }, 1000, 'easeInOutExpo');
-
             setTimeout(function () {
                 cart.effect("shake", {
                     times: 2
                 }, 200);
             }, 1500);
-
             imgclone.animate({
                 'width': 0,
                 'height': 0
@@ -855,16 +769,55 @@ $(document).ready(function () {
                 $(this).detach()
             });
         }
-    });		
-	
-	$('body').on('click','#searchicon',function(e){		
-	e.preventDefault();
-		$(this).toggleClass('searchpull');	
-		
-		});
+    });
+    $('body').on('click', '#searchicon', function (e) {
+        e.preventDefault();
+        $(this).toggleClass('searchpull');
+    });
+    if (getUrlParameter('sort')) {
+        $('[name=sort]').val(getUrlParameter('sort'))
+    }
 
 
+    $(".fpasswdBtn").click(function (e) {
+        e.preventDefault();
+        $('#dvLoading').show();
+        if ($("[name='username']").val() == "" || !validateEmail($("[name='username']").val())) {
+            $('#dvLoading').hide();
+            alert("Please Enter Valid Email ID");
+        } else {
+            $.ajax({
+                url: domain + "m/check-mail-password",
+                type: 'get',
+                data: {email: $("[name='username']").val()},
+                success: function (data) {
+                    $('#dvLoading').hide();
+                    if (data.match(/A Link to reset your password has been sent. Please check your email./g)) {
+                        alert("A Link to reset your password has been sent. Please check your email.");
+                    } else {
+                        alert("Sorry!This email isn't registered with us!");
+                    }
+                }
+            });
 
-
-
+        }
+    });
 });
+function validateEmail(sEmail) {
+    var filter = /^([\w-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/;
+    if (filter.test(sEmail)) {
+        return true;
+    }
+    else {
+        return false;
+    }
+}
+
+function validatephonenumber(inputtxt) {
+    var phoneno = /^[\s()+-]*([0-9][\s()+-]*){6,20}$/;
+    if ((phoneno.test(inputtxt))) {
+        return true;
+    } else {
+        return false;
+    }
+}
