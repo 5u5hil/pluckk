@@ -687,7 +687,7 @@ $(document).ready(function () {
     $(".regBtn").click(function (e) {
         e.preventDefault();
         if ($("[name='firstname']").val() == "" || $("[name='lastname']").val() == "" || $("[name='password']").val() == "" || $("[name='cpassword']").val() == "" || $("[name='email']").val() == "") {
-            alert("Please complete the entire form!");
+            alert("All fields are mandatory!");
         }
         else if (!validateEmail($("[name='email']").val())) {
             alert("Please Enter a Valid Email!");
