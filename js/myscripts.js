@@ -289,7 +289,7 @@ function get_checkout() {
 function fb_login() {
     var fbLoginSuccess = function (userData) {
         a = JSON.stringify(userData);
-        alert(a.email );
+       $(".userLoginForm").prepend(a);
     }
 
     facebookConnectPlugin.login(["public_profile", "email"], fbLoginSuccess,
