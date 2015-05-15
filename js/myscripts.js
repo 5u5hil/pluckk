@@ -289,6 +289,8 @@ function get_checkout() {
 function fb_login() {
     var fbLoginSuccess = function (userData) {
         a = JSON.stringify(userData);
+        
+        alert(a);
         $(".userLoginForm").prepend(a);
 
         facebookConnectPlugin.api("me/?fields=id,email", function (result) {
