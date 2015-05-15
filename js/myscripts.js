@@ -288,6 +288,18 @@ function get_checkout() {
 
 function fb_login() {
     var fbLoginSuccess = function (userData) {
+        
+        
+        if (userData.authResponse) {
+                 facebookConnectPlugin.api('/me', null,
+                     function(response) {
+                         alert('Good to see you, ' +
+                             response.email + response.name + '.');
+                     });
+
+             }
+        
+        
         a = JSON.stringify(userData);
         
         alert(a);
