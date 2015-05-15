@@ -279,6 +279,8 @@ function get_checkout() {
     } else {
         if (window.localStorage.getItem('id') && window.localStorage.getItem('email') && window.localStorage.getItem('password')) {
             login(window.localStorage.getItem('email'), window.localStorage.getItem('password'), 'update-details.html');
+        } else if (window.localStorage.getItem('id') && window.localStorage.getItem('email') && window.localStorage.getItem('via')) {
+            fbLogin(window.localStorage.getItem('email'), window.localStorage.getItem('email'), window.localStorage.getItem('firstname'), window.localStorage.getItem('lastname'));
         } else {
             top.location.href = "login.html?route=confirm-details";
         }
@@ -293,10 +295,12 @@ function fb_login() {
         if (userData.authResponse) {
             facebookConnectPlugin.api('/me', null,
                     function (response) {
-                        alert('Good to see you, ' +
-                                response.email + response.name + '.');
+                        user_email = response.email; //get user email
+                        user_id = response.id; //get user email
+                        firstname = response.first_name; //get user email
+                        lastname = response.last_name; //get user email
+                        fbLogin(user_email, user_id, firstname, lastname);
                     });
-
         }
     }
 
@@ -305,6 +309,48 @@ function fb_login() {
                 alert("Error " + JSON.stringify(error))
             }
     );
+}
+
+
+function fbLogin(user_email, user_id, firstname, lastname) {
+    $.ajax({
+        type: "GET",
+        url: domain + "/fb_details",
+        data: {email: user_email, user_id: user_id, firstname: firstname, lastname: lastname},
+        cache: false,
+        success: function (data)
+        {
+            $.ajax({
+                url: domain + 'm/get-session',
+                type: 'get',
+                success: function (data) {
+                    window.localStorage.setItem("id", data.id);
+                    window.localStorage.setItem("via", "facebook");
+                    window.localStorage.setItem("email", data.email);
+                    window.localStorage.setItem("firstname", data.firstname);
+                    window.localStorage.setItem("lastname", data.lastname);
+                    window.localStorage.setItem("telephone", data.telephone);
+                    window.localStorage.setItem("address1", data.address1);
+                    window.localStorage.setItem("address2", data.address2);
+                    window.localStorage.setItem("address3", data.address3);
+                    window.localStorage.setItem("landmark", data.landmark);
+                    window.localStorage.setItem("postal_code", data.postcode);
+                    window.localStorage.setItem("city", data.city);
+                    window.localStorage.setItem("country", data.country_id);
+                    window.localStorage.setItem("zone", data.zone_id);
+
+                    if (getUrlParameter('route') == "confirm-details") {
+                        var rurl = "update-details.html";
+                    } else {
+                        var rurl = "index.html";
+                    }
+                    top.location.href = rurl;
+                }
+            });
+        }
+
+    });
+
 }
 
 function updDetails() {
@@ -531,8 +577,7 @@ $(document).ready(function () {
                 $(".cMsg").html("Coupon Removed!");
                 $("#couponApply").removeAttr("disabled");
                 $(".userCouponCode").removeAttr("disabled");
-            }
-        });
+            }});
     });
     $("#couponApply").click(function () {
         var couponCode = $(".userCouponCode").val();
@@ -542,8 +587,7 @@ $(document).ready(function () {
                 url: domain + "check_coupon",
                 type: 'get',
                 data: {couponCode: couponCode, orderAmount: CartAmt},
-                cache: false,
-                success: function (msg) {
+                cache: false, success: function (msg) {
                     $(".cMsg").css("display", "block");
                     $(".emptyCouponError").css("display", "none");
                     var Cmsg = msg.split(":-")[0];
@@ -654,8 +698,7 @@ $(document).ready(function () {
             $.ajax({
                 url: domain + 'm/m-save-user',
                 type: 'get',
-                data: $(this).parent().parent().serialize(),
-                success: function (data) {
+                data: $(this).parent().parent().serialize(), success: function (data) {
                     if (data != "The email address you have entered is already registered.") {
                         var dataValues = jQuery.parseJSON(data);
                         if (getUrlParameter('route') == "confirm-details") {
@@ -720,8 +763,7 @@ $(document).ready(function () {
         e.preventDefault();
         $('#dvLoading').show();
         $.ajax({
-            url: domain + $(this).attr('href'),
-            type: 'get',
+            url: domain + $(this).attr('href'), type: 'get',
             success: function (data) {
                 top.location.href = 'cart.html';
             }
