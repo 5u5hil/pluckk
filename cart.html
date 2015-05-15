@@ -72,11 +72,11 @@
                         <h2 class="cat-name custom-cart-name" >Cart <div class="ctotal">Total: <i class="fa fa-inr "></i><span class="TotalCartAmt fwb">{{ cart.Total < 250 ? (cart.Total + 30) : cart.Total}}</span></div></h2>
                         <div class="col-xs-12 col-sm-12 col-md-12 options-outer-cart xstop10">
 
-                            <div class="col-xs-6 col-sm-6 col-md-6">
+                            <div class="col-xs-6 col-sm-3 col-md-3">
                                 <a href="index.html" class="btn-sm btn-warning pull-left full-width text-center">Continue Shop<span class="xshide">ping</span></a>  
                             </div>
 
-                            <div class="col-xs-6 col-sm-6 col-md-6">
+                            <div class="col-xs-6 col-sm-3 col-md-3">
                                 <form id="chkoutForm" action="" method="post">
                                     <input type="hidden" name="pay_amt" class="orderAmt" value="{{ cart.Total}}" />
                                     <input type="hidden" name="shipping_amount_session" value="{{ cart.Total < 250 ? '30' : 0 }}" />
