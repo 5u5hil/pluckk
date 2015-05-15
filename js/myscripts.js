@@ -302,7 +302,7 @@ function fb_login() {
 
     facebookConnectPlugin.login(["public_profile", "email"], fbLoginSuccess,
             function (error) {
-                alert("Error " + error)
+                alert("Error " + JSON.stringify(error))
             }
     );
 }
