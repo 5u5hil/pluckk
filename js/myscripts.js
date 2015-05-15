@@ -231,7 +231,7 @@ app.controller('cartList', function ($scope, $http) {
             function (data) {
                 $scope.$apply(function () {
                     $scope.cart = data.cart;
-                    $scope.coupons  = data.coupons;
+                    $scope.coupons = data.coupons;
                 });
                 $('#dvLoading').fadeOut(200);
             });
@@ -289,7 +289,16 @@ function get_checkout() {
 function fb_login() {
     var fbLoginSuccess = function (userData) {
         a = JSON.stringify(userData);
-       $(".userLoginForm").prepend(a);
+        $(".userLoginForm").prepend(a);
+
+        facebookConnectPlugin.api("me/?fields=id,email", function (result) {
+            alert("Result: " + JSON.stringify(result));
+
+        },
+                function (error) {
+                    alert("Failed: " + error);
+                });
+
     }
 
     facebookConnectPlugin.login(["public_profile", "email"], fbLoginSuccess,
