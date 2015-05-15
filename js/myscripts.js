@@ -277,10 +277,10 @@ function get_checkout() {
     if ($(".grandTotal").text() < MinAmt) {
         alert("Please place order of at least Rs. 100 (excluding Shipping Charges)");
     } else {
-        if (window.localStorage.getItem('id') && window.localStorage.getItem('email') && window.localStorage.getItem('password')) {
-            login(window.localStorage.getItem('email'), window.localStorage.getItem('password'), 'update-details.html');
-        } else if (window.localStorage.getItem('id') && window.localStorage.getItem('email') && window.localStorage.getItem('via')) {
+        if (window.localStorage.getItem('id') && window.localStorage.getItem('email') && window.localStorage.getItem('via')) {
             fbLogin(window.localStorage.getItem('email'), window.localStorage.getItem('email'), window.localStorage.getItem('firstname'), window.localStorage.getItem('lastname'));
+        } else if (window.localStorage.getItem('id') && window.localStorage.getItem('email') && window.localStorage.getItem('password')) {
+            login(window.localStorage.getItem('email'), window.localStorage.getItem('password'), 'update-details.html');
         } else {
             top.location.href = "login.html?route=confirm-details";
         }
