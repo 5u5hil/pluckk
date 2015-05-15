@@ -279,7 +279,7 @@ function get_checkout() {
         alert("Please place order of at least Rs. 100 (excluding Shipping Charges)");
     } else {
         if (window.localStorage.getItem('id') && window.localStorage.getItem('email') && window.localStorage.getItem('via')) {
-            fbLogin(window.localStorage.getItem('email'), window.localStorage.getItem('id'), window.localStorage.getItem('firstname'), window.localStorage.getItem('lastname'),'update-details.html');
+            fbLogin(window.localStorage.getItem('email'), window.localStorage.getItem('id'), window.localStorage.getItem('firstname'), window.localStorage.getItem('lastname'), 'update-details.html');
         } else if (window.localStorage.getItem('id') && window.localStorage.getItem('email') && window.localStorage.getItem('password')) {
             login(window.localStorage.getItem('email'), window.localStorage.getItem('password'), 'update-details.html');
         } else {
@@ -300,13 +300,13 @@ function fb_login() {
                         user_id = response.id; //get user email
                         firstname = response.first_name; //get user email
                         lastname = response.last_name; //get user email
-                           if (getUrlParameter('route') == "confirm-details") {
-                        var rurl = "update-details.html";
-                    } else {
-                        var rurl = "index.html";
-                    }
-                
-                        fbLogin(user_email, user_id, firstname, lastname,rurl);
+                        if (getUrlParameter('route') == "confirm-details") {
+                            var rurl = "update-details.html";
+                        } else {
+                            var rurl = "index.html";
+                        }
+
+                        fbLogin(user_email, user_id, firstname, lastname, rurl);
                     });
         }
     }
@@ -345,7 +345,7 @@ function fbLogin(user_email, user_id, firstname, lastname, rurl) {
                     window.localStorage.setItem("country", data.country_id);
                     window.localStorage.setItem("zone", data.zone_id);
 
-                     top.location.href = rurl;
+                    top.location.href = rurl;
                 }
             });
         }
@@ -412,17 +412,16 @@ function capitalizeFirstLetter(string) {
 
 function chkLogin() {
 
-    if (window.localStorage.getItem('id') != "") {
-        if (window.localStorage.getItem('id') && window.localStorage.getItem('email') && window.localStorage.getItem('password')) {
-            $(".nlogin").hide();
-            $("ul.sidebar-nav").append("<li class='parent'><a href='update-details.html?route=home' ><i class='fa fa-user lf20'></i>  Hi " + capitalizeFirstLetter(window.localStorage.getItem('firstname')) + "</a></li>")
-            $("ul.sidebar-nav").append("<li class='parent'><a href='update-details.html?route=home' ><i class='fa fa-caret-right fa-1x'></i> My Account</a></li>");
-            $("ul.sidebar-nav").append("<li class='parent'><a href='myorders.html?id=" + window.localStorage.getItem('id') + "' ><i class='fa fa-caret-right fa-1x'></i> My Orders</a></li>")
 
-            $("ul.sidebar-nav").append("<li class='parent'><a  href='#'  id='logoutMenueButton'><i class='fa fa-caret-right fa-1x'></i> Logout</a></li>")
+    if (window.localStorage.getItem('id') && window.localStorage.getItem('email') && window.localStorage.getItem('password')) {
+        $(".nlogin").hide();
+        $("ul.sidebar-nav").append("<li class='parent'><a href='update-details.html?route=home' ><i class='fa fa-user lf20'></i>  Hi " + capitalizeFirstLetter(window.localStorage.getItem('firstname')) + "</a></li>")
+        $("ul.sidebar-nav").append("<li class='parent'><a href='update-details.html?route=home' ><i class='fa fa-caret-right fa-1x'></i> My Account</a></li>");
+        $("ul.sidebar-nav").append("<li class='parent'><a href='myorders.html?id=" + window.localStorage.getItem('id') + "' ><i class='fa fa-caret-right fa-1x'></i> My Orders</a></li>")
+        $("ul.sidebar-nav").append("<li class='parent'><a  href='#'  id='logoutMenueButton'><i class='fa fa-caret-right fa-1x'></i> Logout</a></li>")
 
-        }
     }
+
 }
 
 $(document).ready(function () {
