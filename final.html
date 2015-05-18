@@ -59,15 +59,15 @@ text-align: center;}
                 
             <form id="slotForm"  method="post" class="cDetails" novalidate="novalidate" ng-controller="finall">
               
-              <div class="col-md-12 col-xs-12 form-grup">
+              <div class="col-md-6 col-xs-6 col-sm-6 form-group">
                 
               <h2 class="cat-name custom-cart-name"> Select Delivery Slot</h2>
                  
                 
-                
+              <input type="hidden" name="amount" value="" />
               </div>
-              
-              <div class="col-md-12 col-xs-12 form-group">
+              <div class="clearfix"></div>
+              <div class="col-md-6 col-xs-6 col-sm-6 form-group">
                 
                 <select class="form-control optAvlSlot" required="" name="delSlot" ng-bind-html="options | unsafe">
                   
@@ -92,11 +92,11 @@ text-align: center;}
               </div>
                
               <div class="col-md-12 col-xs-12 form-group row">
-                    <div class="col-md-6 col-xs-6 form-group">
+                    <div class="col-sm-3 col-md-3 col-xs-6 form-group">
                      <a href="index.html" class="btn-sm btn-warning pull-left final-continue">Continue Shopping</a>    
                 </div>
                   
-                <div class="col-md-6 col-xs-6 form-group">
+                <div class="col-sm-3 col-md-3 col-xs-6 form-group">
                 <input type="submit" class="btn btn-success clearfix form-control finalStep" style="height: 28px;" value="Place Order">
                 </div>
               </div>

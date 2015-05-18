@@ -3,7 +3,7 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
-       <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=1.0, minimum-scale=1.0, maximum-scale=1.0">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=1.0, minimum-scale=1.0, maximum-scale=1.0">
         <title>Pluckk</title>
         <link href="css/bootstrap.min.css" rel="stylesheet">
         <link href="css/font-awesome.min.css" rel="stylesheet" />
@@ -14,7 +14,7 @@
     <body>
         <div id="dvLoading"></div>
         <div id="wrapper" ng-cloak>
-            <div class="col-xs-10 col-sm-3 col-md-3 sidebar sidebar-left sidebar-animate">
+            <div class="col-xs-10 col-sm-5 col-md-3 sidebar sidebar-left sidebar-animate">
                 <ul class="sidebar-nav list collapsibleList" ng-controller="getMenu" id="accordion" ng-bind-html="menu | unsafe">                </ul>
             </div>
             <!-- /#sidebar-wrapper -->            
@@ -37,38 +37,38 @@
                         </div>
                         <div class="col-sm-12 col-md-12 col-xs-12 custom-listing-warpper" ng-repeat="product in products">
                             <form id="prdForm-{{ product.id}}" class="atcForm" method="POST"  >
-							 <div class="citem">
-                                <input type="hidden" name="prod_id" value="{{ product.id}}" />
-								<input type="hidden" name="prod_type" value="{{ product.prod_type}}" /> 
-								
-								<div class="col-md-4 col-xs-4 col-sm-4">
-                                <a href="product.html?id={{ product.id}}">
-                                    <div class="custom-img-warpper-listing pimg"  style="background-image:url({{ product.image}});">   
-									<div class="hotse" ng-bind-html="product.savings | unsafe">  </div>
-									 
-									</div>
-                                </a>
-								<button form-id="prdForm-{{ product.id}}" form-action="{{ product.add | unsafe }}" class="addToCart custom-btn-add btn btn-block btn-success" style=" "><i class="glyphicon glyphicon-shopping-cart"></i>Add</button>
-								</div>
-								
-                                <div class="col-md-8 col-xs-8 col-sm-8 custom-wrapper-details">
-                                    
-									<h4 class="success custom-product-name">{{ product.product }}</h4>
-									<h4 class="f12">{{product.alias }} &nbsp;</h4>
-									  <p ng-bind-html="product.options | unsafe"></p>
-                                
-                                    <div class="text-center">
-                                        <p class="info sfont scheme_color inline"  ng-bind-html="product.spl_price | unsafe">  </p>  
-                                        <p class="info scheme_color inline" ng-bind-html="product.price | unsafe">  </p>
+                                <div class="citem">
+                                    <input type="hidden" name="prod_id" value="{{ product.id}}" />
+                                    <input type="hidden" name="prod_type" value="{{ product.prod_type}}" /> 
+
+                                    <div class="col-md-4 col-xs-4 col-sm-4">
+                                        <a href="product.html?id={{ product.id}}">
+                                            <div class="custom-img-warpper-listing pimg"  style="background-image:url({{ product.image}});">   
+                                                <div class="hotse" ng-bind-html="product.savings | unsafe">  </div>
+
+                                            </div>
+                                        </a>
+                                        <button form-id="prdForm-{{ product.id}}" form-action="{{ product.add | unsafe }}" class="addToCart custom-btn-add btn btn-block btn-success" style=" "><i class="glyphicon glyphicon-shopping-cart"></i>Add</button>
                                     </div>
-                                    <div class="input-group col-md-12 col-xs-12 col-sm-12 pull-left">
-                                        <div class="input-group-addon mQty">-</div>
-                                        <input style="background-color: #FFF;" type="number" readonly name="quantity" value="1" min="1" class="quantity  center-block form-control qtyinput input-sm text-center"  placeholder="Quantity">                                        
-                                        <div class="input-group-addon pQty">+</div>
+
+                                    <div class="col-md-8 col-xs-8 col-sm-8 custom-wrapper-details">
+
+                                        <h4 class="success custom-product-name">{{ product.product}}</h4>
+                                        <h4 class="f12">{{product.alias}} &nbsp;</h4>
+                                        <p ng-bind-html="product.options | unsafe"></p>
+
+                                        <div class="text-center">
+                                            <p class="info sfont scheme_color inline"  ng-bind-html="product.spl_price | unsafe">  </p>  
+                                            <p class="info scheme_color inline" ng-bind-html="product.price | unsafe">  </p>
+                                        </div>
+                                        <div class="input-group col-md-12 col-xs-12 col-sm-12 pull-left">
+                                            <div class="input-group-addon mQty">-</div>
+                                            <input style="background-color: #FFF;" type="number" readonly name="quantity" value="1" min="1" class="quantity  center-block form-control qtyinput input-sm text-center"  placeholder="Quantity">                                        
+                                            <div class="input-group-addon pQty">+</div>
+                                        </div>
+
                                     </div>
-                                   
                                 </div>
-							 </div>
                             </form>
                         </div>
                         <div class="pagination" id="sListt" ng-bind-html="pagination | unsafe"></div>
@@ -77,23 +77,23 @@
             </div>
         </div>
         <script src="phonegap.js"></script>       
-		<script src="js/jquery.min.js"></script>
-		<script src="js/bootstrap.min.js"></script>
-		<script src="js/angular.min.js"></script>        
-		<script src="js/angular-resource.min.js"></script>
-		<script src='js/angular-sanitize.min.js'></script>
-		<script src="js/myscripts.js"></script>
-		<script src="dist/js/sidebar.js"></script>
-		   <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/jquery-ui.min.js"></script>
-		<script type="text/javascript">                           
-		$(document).ready(function () {
-                            $("body").on("click", "#accordion li.parent", function () {
-                                if (false == $(this).children("ul").is(':visible')) {
-                                    $('#accordion ul').slideUp(300);
-                                }
-                                $(this).children("ul").slideToggle(300);
-                            });
+        <script src="js/jquery.min.js"></script>
+        <script src="js/bootstrap.min.js"></script>
+        <script src="js/angular.min.js"></script>        
+        <script src="js/angular-resource.min.js"></script>
+        <script src='js/angular-sanitize.min.js'></script>
+        <script src="js/myscripts.js"></script>
+        <script src="dist/js/sidebar.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/jquery-ui.min.js"></script>
+        <script type="text/javascript">
+                    $(document).ready(function () {
+                        $("body").on("click", "#accordion li.parent", function () {
+                            if (false == $(this).children("ul").is(':visible')) {
+                                $('#accordion ul').slideUp(300);
+                            }
+                            $(this).children("ul").slideToggle(300);
                         });
+                    });
         </script>    
     </body>
 </html>

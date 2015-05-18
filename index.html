@@ -19,7 +19,7 @@
     <body>
         <div id="dvLoading"></div> 
         <div id="wrapper" ng-cloak >
-            <div class="col-xs-10 col-sm-3 col-md-3 sidebar sidebar-left sidebar-animate">
+            <div class="col-xs-10 col-sm-6 col-md-4 sidebar sidebar-left sidebar-animate">
                 <ul class="sidebar-nav list collapsibleList" ng-controller="getMenu" id="accordion" ng-bind-html="menu | unsafe">
 				</ul>
             </div>
@@ -29,11 +29,11 @@
                 <div ng-include="'header.html'"></div>
 
 
-                <img src="images/banner.jpg" class="img-responsive center-block " />
+                <img src="images/banner.jpg" class="img-responsive center-block " style="width:100%;"/>
 
                 <div class="container-fluid" ng-controller="homeList">
                     <div class="row mb10"  ng-repeat="cat in categories">
-                        <div class="" >
+                        <div class="" id="sm-listing" >
                             <h2 class="cat-name">{{ cat.name}}</h2>
 
                             
@@ -122,10 +122,7 @@
                                                                 $(this).children("ul").slideToggle(300);
                                                             });
                                                         });</script>
-            <script>
-
-
-            </script>
+  
 
 
     </body>

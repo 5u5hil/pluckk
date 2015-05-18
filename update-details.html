@@ -2,7 +2,7 @@
     <head>      
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">  
-        <meta name="viewport" content="width=device-width, initial-scale=1">
+       <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=1.0, minimum-scale=1.0, maximum-scale=1.0">
         <title>Pluckk</title>
         <link href="css/bootstrap.min.css" rel="stylesheet">  
         <link href="css/font-awesome.min.css" rel="stylesheet" />  
@@ -14,7 +14,7 @@
     <body>   
         <div id="dvLoading"></div>  
         <div id="wrapper" ng-cloak>  
-           <div class="col-xs-10 col-sm-3 col-md-3 sidebar sidebar-left sidebar-animate">
+           <div class="col-xs-10 col-sm-5 col-md-3 sidebar sidebar-left sidebar-animate">
                 <ul class="sidebar-nav list collapsibleList" ng-controller="getMenu" id="accordion" ng-bind-html="menu | unsafe">
 
                 </ul>
@@ -27,8 +27,12 @@
                 
                 <div class="container-fluid ">       
                     <div class="row">  
+					<div class="col-md-6 col-sm-6 col-xs-12">
+					<div class="row">
                            <h2 class="cat-name custom-cart-name">Shipping Details</h2>
-                        <form  method="post" class="cDetails" novalidate="novalidate" ng-controller="updt">    
+                        <form  method="post" class="cDetails" novalidate="novalidate" ng-controller="updt"> 
+						
+						
                             <input name="address_id" type="hidden">            
                             <input name="pay_amt" type="hidden" >               
                             <input name="shippingAmount" type="hidden">              
@@ -53,16 +57,19 @@
                             </div>                        
                             <div class="col-md-12 col-xs-12 form-group">        
                                 <input placeholder="Pincode" type="text" name="postal_code" required="" ng-model="postcode" class="form-control custom-search custom-search-reg" />   
-                            </div>                            <div class="col-md-12 col-xs-12 form-group">                          
+                            </div>                            
+							<div class="col-md-12 col-xs-12 form-group">                          
                                 <input placeholder="Contact No." type="text" name="telephone" required="" ng-model="telephone" class="form-control custom-search custom-search-reg" />     
                             </div>               
                             <div class="col-md-12 col-xs-12 form-group">        
                                 <input placeholder="City" type="text" name="city" value="Mumbai" readonly="" class="form-control custom-search custom-search-reg" />  
                             </div>             
-                            <div class="col-md-12 col-xs-12 form-group">            
+                            <div class="col-sm-12 col-md-12 col-xs-12 form-group">            
                                 <input type="submit" class="btn btn-success clearfix form-control updtBtn custom-search custom-reg-btn" value="Submit">       
                             </div>               
-                        </form>                  
+                        </form>  
+					</div>
+					</div>
                     </div>             
                 </div>          
             </div>       

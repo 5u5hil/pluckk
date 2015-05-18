@@ -5,7 +5,7 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=1.0, minimum-scale=1.0, maximum-scale=1.0">
         <title>Pluckk</title>
-       <link href="css/bootstrap.min.css" rel="stylesheet">
+        <link href="css/bootstrap.min.css" rel="stylesheet">
         <link href="css/font-awesome.min.css" rel="stylesheet" />
         <link href="css/style.css" rel="stylesheet">
 
@@ -14,142 +14,165 @@
 
         <link rel="stylesheet" href="dist/css/sidebar.css"/>
         <style>#cart-cart{ display: none;}</style>
-    </head>
-    <style>
- 
-        .product-outer-cart{border: 1px solid rgb(238, 238, 238);
-background-color: rgb(255, 255, 255);
-padding: 7px 5px 13px 5px !important;}
-        .product-name-text{vertical-align: middle;
-margin-bottom: 13px;
-font-size: 17px;
- color:#333;
-font-family: inherit;}
-        .cmn-cart{ text-align: right;}
-        .subttl-outer-cart li{ list-style: none;}
-        .subttl-outer-cart{border: 1px solid rgb(238, 238, 238);
-background-color: rgb(255, 255, 255);
-margin: 10px 0px !important;
-line-height: 23px;
-padding: 10px 5px !important;
-font-family: inherit;
-        letter-spacing: 0.5px;}
-/*    .saving{ font-style: italic; color:red; }
-    .total{ font-weight: 900; color:green;}
-    .shiping{ color:gray;}
-    .subtotal{ color:navy;}*/
-.infoline-outer-cart{font-size: 11px;
-padding: 9px !important;}
-.custom-cart-name{margin: 20px 9px 7px 9px;}
-.options-outer-cart a{width: 126px;}
-.options-outer-cart a:hover, .options-outer-cart a:active{ text-decoration: none !important;}
-.custom-checkout:active { text-decoration: none !important;}
-.btn-info:active { background-color:#449D44 !important;}
-.btn-info{ background-color: #5CB85C !important;}
-.deleteCart{ float:right;}
+        <style>
+			.custom-offer li{ list-style:none !important;}
+             .product-outer-cart{border: 1px solid rgb(238, 238, 238);
+                                background-color: rgb(255, 255, 255);
+                                padding: 7px 5px 13px 5px !important;}
+            .product-name-text{vertical-align: middle;
+                               margin-bottom: 13px;
+                               font-size: 17px;
+                               color:#333;
+                               font-family: inherit;}
+            .cmn-cart{ text-align: right;}
+            .subttl-outer-cart li{ list-style: none;}
+            .subttl-outer-cart{border: 1px solid rgb(238, 238, 238);
+                               background-color: rgb(255, 255, 255);
+                               margin: 10px 0px !important;
+                               line-height: 23px;
+                               padding: 10px 5px !important;
+                               font-family: inherit;
+                               letter-spacing: 0.5px;}
+            /*    .saving{ font-style: italic; color:red; }
+                .total{ font-weight: 900; color:green;}
+                .shiping{ color:gray;}
+                .subtotal{ color:navy;}*/
+            .infoline-outer-cart{font-size: 11px;
+                                 padding: 9px !important;}
+            .custom-cart-name{margin: 20px 9px 7px 9px;}
+            .options-outer-cart a{width: 126px;}
+            .options-outer-cart a:hover, .options-outer-cart a:active{ text-decoration: none !important;}
+            .custom-checkout:active { text-decoration: none !important;}
+            .btn-info:active { background-color:#449D44 !important;}
+            .btn-info{ background-color: #5CB85C !important;}
+            .deleteCart{ float:right;}
 
- 
-    </style>
+
+        </style>
+    </head>
+
     <body>
         <div id="dvLoading"></div>
 
         <div id="wrapper" ng-cloak>
-              <div class="col-xs-10 col-sm-3 col-md-3 sidebar sidebar-left sidebar-animate">
+            <div class="col-xs-10 col-sm-5 col-md-4 sidebar sidebar-left sidebar-animate">
                 <ul class="sidebar-nav list collapsibleList" ng-controller="getMenu" id="accordion" ng-bind-html="menu | unsafe">
 
                 </ul>
             </div>
             <!-- /#sidebar-wrapper -->
             <div id="page-content-wrapper">
-                       <!-- /#header inlcude -->
+                <!-- /#header inlcude -->
                 <div ng-include="'header.html'"></div>
-                
-                
+
+
                 <div class="container-fluid">
                     <div class="row" id="pList" ng-controller="cartList">
-                        
-					<h2 class="cat-name custom-cart-name" >Cart <div class="ctotal">Total: <i class="fa fa-inr "></i><span class="TotalCartAmt fwb">{{ cart.Total < 250 ? (cart.Total + 30) : cart.Total}}</span></div></h2>
-      <div class="col-xs-12 col-sm-12 col-md-12 options-outer-cart xstop10">
-        
-         <div class="col-xs-6 col-sm-6 col-md-6">
-              <a href="index.html" class="btn-sm btn-warning pull-left full-width text-center">Continue Shop<span class="xshide">ping</span></a>  
-         </div>
-         
-         <div class="col-xs-6 col-sm-6 col-md-6">
-									<form id="chkoutForm" action="" method="post">
-                                            <input type="hidden" name="pay_amt" class="orderAmt" value="{{ cart.Total}}" />
-                                            <input type="hidden" name="shipping_amount_session" value="{{ cart.Total < 250 ? '30' : 0 }}" />
-                                            <a href="javascript:void()" onclick="get_checkout();" class="btn-sm btn-success custom-checkout pull-right full-width" >Checkout</a>
-                                        </form> 
-         </div>
-    </div>
-                      
-<div class="col-xs-12 col-sm-12 col-md-12 wrapper-product-cart" id="cartable"  >
-    <div class="col-xs-12 col-sm-12 col-md-12 product-outer-cart" ng-repeat="product in cart" ng-if="product.name">
-        <div class="col-xs-12 col-sm-12 col-md-12 product-name-text"  style="vertical-align:middle;">
-           {{ product.name}}
-        </div>
-      
-            <div class="col-xs-3 col-sm-2 col-md-2 product-price-text">
-               <i class="fa fa-inr"></i>{{product.price}} 
-               <span style="float:right">x</span>
-            </div>    
-             
-           
-            <div class="col-xs-5 col-sm-6 col-md-6 product-qty-text input-group" style="float:left;  vertical-align:middle; margin: -5px 0px 0px 0px;" > 
-                <div class="input-group-addon mQty input-sm">-</div>
-                <input type="number"  style="background-color:#FFF;" class="qty text-center editquantity quantity  center-block form-control qtyinput custom-qty input-sm" min="1" value="{{ product.qty}}" prod-id="{{ product.rowid}}" product-id="{{ product.id}}" name="quantity{{ product.rowid}}">
-                <div class="input-group-addon pQty input-sm">+</div> 
-            </div>
-           
-             <div class="col-xs-3 col-sm-3 col-md-3 product-subttl-text" style="vertical-align:middle;">
-                   <span style="float:left">=</span>
-                   <span style="float:right" ng-init="cart.Total = cart.Total + product.subtotal"> <i class="fa fa-inr"></i><span class="{{product.rowid}}">{{product.subtotal}}</span></span>
-            </div>
-          
-            <div class="col-xs-1 col-sm-1 col-md-1 product-del-text pull-right" style="vertical-align:middle;">
-                <a class="deleteCart" href="cart/delete-cart?rowid={{product.rowid}}"><i class="fa fa-trash-o fa-lg"></i> </a>
-            </div>
-        
-        
-        
-    </div>
-    
-    <div class="col-xs-12 col-sm-12 col-md-12 coupon-outer-cart xstop10">
-         <input class="userCouponCode form-control  custom-search cartinput pull-left inline" required="required" style="width:190px;margin: 0px 10px 0px 0px; height:28px;" placeholder="Enter Coupon Code" name="user_coupon_code" type="text"> 
 
-         <button class="btn-xs btn-info nav-btn-submit inline" style=" height:28px;" id="couponApply" type="button">Apply</button> 
-         <span class="col-xs-12 cMsg"  style="display:none;color:red;font-size:13px;margin-top:15px;">  </span>
-  </div>
-    
-    <div class="col-xs-12 col-sm-12 col-md-12 subttl-outer-cart row">
-        <div class="col-xs-9 col-sm-9 col-md-9 cmn-cart">
-            <li class="subtotal">Subtotal:</li>
-            <li class="shiping">Shipping Charges:</li>
-            <li class="saving">Saving:</li>
-            <li class="total">Total:</li>
-		</div>
-          <div class="col-xs-3 col-sm-3 col-md-3 cmn-cart">
-            <li class="subtotal"><i class="fa fa-inr"></i><span class="fwb grandTotal">{{cart.Total}}</span></li>
-            <li class="shiping"><i class="fa fa-inr"></i><span class="fwb shippingValue">{{ cart.Total < 250 ? '30' : 0 }}</span></li>
-			<li class="saving"><i class="fa fa-inr"></i>0</li>
-            <li class="total"><i class="fa fa-inr "></i><span class="TotalCartAmt fwb">{{ cart.Total < 250 ? (cart.Total + 30) : cart.Total}}</span></li>
-        </div>
-         
-                                
-    </div>
-    <div class="col-xs-12 col-sm-12 col-md-12 infoline-outer-cart alert alert-success">
-        Shop for <i class="fa fa-inr"></i>250 or more for free Shipping <i class="fa fa-smile-o"></i> 
-    </div>
-    
+                        <h2 class="cat-name custom-cart-name" >Cart </h2>
+                        <div class="col-xs-12 col-sm-12 col-md-12 options-outer-cart xstop10">
 
-    
-      
-</div>
+                            <div class="col-xs-6 col-sm-3 col-md-3">
+                                <a href="index.html" class="btn-sm btn-warning pull-left full-width text-center">Continue Shop<span class="xshide">ping</span></a>  
+                            </div>
+
+                            <div class="col-xs-6 col-sm-3 col-md-3">
+                                <form id="chkoutForm" action="" method="post">
+                                    <input class="refDisc" name="referal_disc" type="hidden" value="0">
+                                    <input type="hidden" name="pay_amt" class="orderAmt" value="{{ cart.Total}}" />
+                                    <input type="hidden" name="shipping_amount_session" value="{{ cart.Total < free_shipping_amt ? shipping : 0 }}" />
+                                    <a href="javascript:void()" onclick="get_checkout();" class="btn-sm btn-success custom-checkout pull-right full-width" >Checkout</a>
+                                </form> 
+                            </div>
+                        </div>
+
+                        <div class="col-xs-12 col-sm-12 col-md-12 wrapper-product-cart" id="cartable"  >
+                            <div class="col-xs-12 col-sm-12 col-md-12 product-outer-cart" ng-repeat="product in cart" ng-if="product.name">
+                                <div class="col-xs-12 col-sm-12 col-md-12 product-name-text"  style="vertical-align:middle;">
+                                    {{ product.name}} 
+                                    <span ng-repeat="(key, val) in product.options.options">
+                                        ({{ val}})
+                                    </span>
+                                </div>
+
+                                <div class="col-xs-3 col-sm-2 col-md-2 product-price-text">
+                                    <i class="fa fa-inr"></i>{{product.price}} 
+
+                                    <span style="float:right">x</span>
+                                </div>    
+
+
+                                <div class="col-xs-5 col-sm-6 col-md-6 product-qty-text input-group" style="float:left;  vertical-align:middle; margin: -5px 0px 0px 0px;" > 
+                                    <div class="input-group-addon mQty input-sm">-</div>
+                                    <input type="number"  style="background-color:#FFF;" class="qty text-center editquantity quantity  center-block form-control qtyinput custom-qty input-sm" min="1" value="{{ product.qty}}" prod-id="{{ product.rowid}}" product-id="{{ product.id}}" name="quantity{{ product.rowid}}">
+                                    <div class="input-group-addon pQty input-sm">+</div> 
+                                </div>
+
+                                <div class="col-xs-3 col-sm-3 col-md-3 product-subttl-text" style="vertical-align:middle;">
+                                    <span style="float:left">=</span>
+                                    <span style="float:right" ng-init="cart.Total = cart.Total + product.subtotal"> <i class="fa fa-inr"></i><span class="{{product.rowid}}">{{product.subtotal}}</span></span>
+                                </div>
+
+                                <div class="col-xs-1 col-sm-1 col-md-1 product-del-text pull-right" style="vertical-align:middle;">
+                                    <a class="deleteCart" href="cart/delete-cart?rowid={{product.rowid}}"><i class="fa fa-trash-o fa-lg"></i> </a>
+                                </div>
 
 
 
-                     
+                            </div>
+
+                            <div class="col-xs-12 col-sm-12 col-md-12 coupon-outer-cart xstop10">
+                                <input class="userCouponCode form-control  custom-search cartinput pull-left inline" required="required" style="width:190px;margin: 0px 10px 0px 0px; height:28px;" placeholder="Enter Coupon Code" name="user_coupon_code" type="text"> 
+
+                                <button class="btn-xs btn-info nav-btn-submit inline" style=" height:28px;" id="couponApply" type="button">Apply</button> 
+                                <span class="col-xs-12 cMsg"  style="display:none;color:red;font-size:13px;margin-top:15px;">  </span>
+                            </div>
+
+                            <div class="col-xs-12 col-sm-12 col-md-12 subttl-outer-cart row">
+                             
+                                <div class="col-xs-9 col-sm-9 col-md-9 cmn-cart">
+                                    <li class="subtotal">Subtotal:</li>
+                                    <li class="shiping">Shipping Charges:</li>
+                                    <li class="saving">Coupons:</li>
+                                    <li class="total">Total:</li>
+                                </div>
+                                <div class="col-xs-3 col-sm-3 col-md-3 cmn-cart">
+                                    <li class="subtotal"><i class="fa fa-inr"></i><span class="fwb grandTotal">{{cart.Total}}</span></li>
+                                    <li class="shiping"><i class="fa fa-inr"></i><span class="fwb shippingValue">{{ cart.Total < free_shipping_amt ? shipping : 0 }}</span></li>
+                                    <li class="saving"><i class="fa fa-inr"></i><span class="fwb couponUsedAmount">0</span></li>
+                                    <li class="total"><i class="fa fa-inr "></i><span class="TotalCartAmt fwb">{{ cart.Total < free_shipping_amt ? (cart.Total + (shipping)) : cart.Total}}</span></li>
+                                </div>
+
+
+                            </div>
+                            <div ng-if="cart.Total < free_shipping_amt" class="col-xs-12 col-sm-12 col-md-12 infoline-outer-cart alert alert-success">
+                                Shop for <i class="fa fa-inr"></i>{{ free_shipping_amt }} or more for free Shipping <i class="fa fa-smile-o"></i> 
+                            </div>
+
+								   <div class="col-xs-12 col-sm-12 col-md-12 infoline-outer-cart alert alert-success custom-offer">
+                                    <li><strong>Current Offers</strong></li>
+                                    <li ng-repeat="coupon in coupons">{{ coupon.code}} : {{ coupon.desc}}</li>
+ 								 </div>
+
+
+                        </div>
+<div class="col-xs-12 col-sm-12 col-md-12 options-outer-cart xstop10">
+
+                            <div class="col-xs-6 col-sm-3 col-md-3">
+                                <a href="index.html" class="btn-sm btn-warning pull-left full-width text-center">Continue Shop<span class="xshide">ping</span></a>  
+                            </div>
+
+                            <div class="col-xs-6 col-sm-3 col-md-3">
+                                <form id="chkoutForm" action="" method="post">
+                                    <input type="hidden" name="pay_amt" class="orderAmt" value="{{ cart.Total}}" />
+                                    <input type="hidden" name="shipping_amount_session" value="{{ cart.Total < free_shipping_amt ? shipping : 0 }}" />
+                                    <a href="javascript:void()" onclick="get_checkout();" class="btn-sm btn-success custom-checkout pull-right full-width" >Checkout</a>
+                                </form> 
+                            </div>
+                        </div>
+
+
+
                     </div>
 
 
@@ -169,26 +192,26 @@ padding: 9px !important;}
         <script src="js/myscripts.js"></script>
         <script src="dist/js/sidebar.js"></script>
         <script>
-                                                $(document).ready(function () {
-                                                    $("body").on("click", ".pQty", function () {
-                                                        $(this).siblings(".quantity").change();
-                                                    });
+                                $(document).ready(function () {
+                                    $("body").on("click", ".pQty", function () {
+                                        $(this).siblings(".quantity").change();
+                                    });
 
-                                                    $("body").on("click", ".mQty", function () {
-                                                        $(this).siblings(".quantity").change();
-                                                    });
-                            
-                                                });
+                                    $("body").on("click", ".mQty", function () {
+                                        $(this).siblings(".quantity").change();
+                                    });
+
+                                });
         </script>
-         <script type="text/javascript">
-                             $(document).ready(function () {
-                                $("body").on("click", "#accordion li.parent", function () {
-                                     if (false == $(this).children("ul").is(':visible')) {
-                                         $('#accordion ul').slideUp(300);
-                                     }
-                                     $(this).children("ul").slideToggle(300);
-                                 });
-                             });
+        <script type="text/javascript">
+            $(document).ready(function () {
+                $("body").on("click", "#accordion li.parent", function () {
+                    if (false == $(this).children("ul").is(':visible')) {
+                        $('#accordion ul').slideUp(300);
+                    }
+                    $(this).children("ul").slideToggle(300);
+                });
+            });
         </script>
     </body>
 </html>
