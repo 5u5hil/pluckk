@@ -429,7 +429,11 @@ margin-top: 6px;
 .mtop1{margin-top:1px !important;}
 
 #offerimg img{max-width:100%; height:auto;}
+<<<<<<< HEAD
 .pagination{padding:5px 8px; margin:0 0;}
+=======
+.pagination{padding:10px 8px; margin}
+>>>>>>> origin/master
 .custom-cart-name{position:relative;}
 .ctotal{position: absolute;
   right: 4px;
@@ -441,7 +445,11 @@ margin-top: 6px;
 .hiconcontainer{float:right;}
 .container-fluid>.navbar-header{width:100%;}
 .hiconcontainer a i{ font-size:16px;}
+<<<<<<< HEAD
 .hiconcontainer a i.f20px{font-size:20px;}
+=======
+
+>>>>>>> origin/master
 
 
 @media (max-width: 767px)
@@ -457,10 +465,15 @@ margin-top: 6px;
 
 @media (min-width: 767px)
 {
+<<<<<<< HEAD
  #pList .custom-listing-warpper, #sm-listing  .custom-listing-warpper, #sList .custom-listing-warpper{ width: 48.5% !important; margin-left: 1% !important; border:1px solid #eee !important;}
  .cat-name{margin: 10px 5px 10px 10px;}
  
  .navbar>.container-fluid .navbar-brand{margin-left: 0px;}
+=======
+ #pList .custom-listing-warpper, #sm-listing  .custom-listing-warpper{ width: 48.5% !important; margin-left: 1% !important; border:1px solid #eee !important;}
+ .cat-name{margin: 10px 5px 10px 10px;}
+>>>>>>> origin/master
 }
 
 
