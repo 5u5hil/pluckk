@@ -95,7 +95,7 @@ button#menu-toggle {
 
 #page-content-wrapper {
     width: 100%;
-    position: absolute;   margin-top: 51px; padding-bottom:20px;
+    position: absolute;   margin-top: 0px; padding-bottom:20px;
 }
 
 #wrapper.toggled #page-content-wrapper {
@@ -469,3 +469,7 @@ margin-top: 6px;
 	 .btn-sm{padding: 5px 5px;}
 	 .mleft10{margin-left:5px;}
 	}
+@media only screen and (min-width: 768px) {
+#wrapper{ padding-left:0px;}
+
+}
