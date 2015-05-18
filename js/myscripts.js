@@ -21,6 +21,21 @@ app.controller('homeList', function ($scope, $http) {
         scriptCharset: "utf-8", //maybe "ISO-8859-1"
         contentType: "application/json; charset=utf-8"
     });
+    
+    $.ajax({
+        url: domain + 'm/dynamic',
+        type: 'GET',
+        success: function (data) {
+
+
+            $.each(data[0], function (i, v) {
+
+                window.localStorage.setItem(i, v);
+            });
+
+        }
+    });
+    
     $.getJSON(url, function (data) {
         $scope.$apply(function () {
             $scope.categories = data;
@@ -227,11 +242,28 @@ app.controller('cartList', function ($scope, $http) {
         scriptCharset: "utf-8", //maybe "ISO-8859-1"
         contentType: "application/json; charset=utf-8"
     });
+
+    $.ajax({
+        url: domain + 'm/dynamic',
+        type: 'GET',
+        success: function (data) {
+
+
+            $.each(data[0], function (i, v) {
+
+                window.localStorage.setItem(i, v);
+            });
+
+        }
+    });
+
     $.get(url,
             function (data) {
                 $scope.$apply(function () {
                     $scope.cart = data.cart;
                     $scope.coupons = data.coupons;
+                    $scope.free_shipping_amt = parseInt(window.localStorage.getItem('amt_after_shipping_free'));
+                    $scope.shipping = parseInt(window.localStorage.getItem('shipping_charges'));
                 });
                 $('#dvLoading').fadeOut(200);
             });
@@ -251,6 +283,14 @@ app.controller('reg', function ($scope, $http) {
 });
 app.controller('finall', function ($scope, $http) {
     console.log(getUrlParameter('slot'));
+    $.ajax({
+        url: domain + 'm/get-mini',
+        type: 'get',
+        success: function (data) {
+            $("[name='amount']").val(data[0]);
+
+        }
+    });
     $scope.options = decodeURIComponent(getUrlParameter('slot'));
     $('#dvLoading').fadeOut(200);
 });
@@ -274,17 +314,29 @@ function getUrlParameter(sParam) {
 }
 
 function get_checkout() {
-    var MinAmt = 100;
+    var MinAmt = window.localStorage.getItem('min_order_value');
     if ($(".grandTotal").text() < MinAmt) {
-        alert("Please place order of at least Rs. 100 (excluding Shipping Charges)");
+        alert("Please place order of at least Rs. " + window.localStorage.getItem('min_order_value') + " (excluding Shipping Charges)");
     } else {
-        if (window.localStorage.getItem('id') && window.localStorage.getItem('email') && window.localStorage.getItem('via')) {
-            fbLogin(window.localStorage.getItem('email'), window.localStorage.getItem('id'), window.localStorage.getItem('firstname'), window.localStorage.getItem('lastname'), 'update-details.html');
-        } else if (window.localStorage.getItem('id') && window.localStorage.getItem('email') && window.localStorage.getItem('password')) {
-            login(window.localStorage.getItem('email'), window.localStorage.getItem('password'), 'update-details.html');
-        } else {
-            top.location.href = "login.html?route=confirm-details";
-        }
+
+        $.ajax({
+            url: domain + '/checkout',
+            data: $("form#chkoutForm").serialize(),
+            type: 'GET',
+            success: function (data) {
+                // console.log(data);
+                if (window.localStorage.getItem('id') && window.localStorage.getItem('email') && window.localStorage.getItem('via')) {
+                    fbLogin(window.localStorage.getItem('email'), window.localStorage.getItem('id'), window.localStorage.getItem('firstname'), window.localStorage.getItem('lastname'), 'update-details.html');
+                } else if (window.localStorage.getItem('id') && window.localStorage.getItem('email') && window.localStorage.getItem('password')) {
+                    login(window.localStorage.getItem('email'), window.localStorage.getItem('password'), 'update-details.html');
+                } else {
+                    top.location.href = "login.html?route=confirm-details";
+                }
+            }
+
+        })
+
+
     }
 
 }
@@ -323,7 +375,6 @@ function fbLogin(user_email, user_id, firstname, lastname, rurl) {
         type: "GET",
         url: domain + "/fb_details",
         data: {email: user_email, user_id: user_id, firstname: firstname, lastname: lastname},
-        cache: false,
         success: function (data)
         {
             $.ajax({
@@ -498,9 +549,9 @@ $(document).ready(function () {
     $.get(url, function (data) {
         $("a.navcart span.badge").html(data);
     });
-    if (ordertlt < 250)
+    if (ordertlt < window.localStorage.getItem('amt_after_shipping_free'))
     {
-        var total_pay_ship = parseInt(ordertlt) + 30;
+        var total_pay_ship = parseInt(ordertlt) + window.localStorage.getItem('shipping_charges');
         $(".orderAmt").val(total_pay_ship);
     }
 
@@ -523,19 +574,19 @@ $(document).ready(function () {
                         $(".grandTotal").html(totals[1]);
                         $(".TotalCartAmt").text(totals[1]);
                         $(".orderAmt").val(totals[1]);
-                        var REQamt = parseInt(250);
+                        var REQamt = parseInt(window.localStorage.getItem('amt_after_shipping_free'));
                         if (totals[1] < REQamt) {
                             if ($(".shippingValue").text() == 0) {
-                                $(".shippingValue").text(30);
-                                var ship = '30';
+                                $(".shippingValue").text(window.localStorage.getItem('shipping_charges'));
+                                var ship = window.localStorage.getItem('shipping_charges');
                                 $(".TotalCartAmt").text(parseInt(totals[1]) + parseInt(ship));
                                 $(".orderAmt").val(parseInt(totals[1]) + parseInt(ship));
                             } else {
-                                var ship = '30';
+                                var ship = window.localStorage.getItem('shipping_charges');
                                 $(".TotalCartAmt").text(parseInt(totals[1]) + parseInt(ship));
                                 $(".orderAmt").val(parseInt(totals[1]) + parseInt(ship));
                             }
-                        } else if (totals[1] >= REQamt && $(".shippingValue").text() == 30) {
+                        } else if (totals[1] >= REQamt && $(".shippingValue").text() == window.localStorage.getItem('shipping_charges')) {
                             $(".shippingValue").text(0);
                         }
                         if ($(".userCouponCode").val() !== "") {
@@ -555,16 +606,15 @@ $(document).ready(function () {
         $.ajax({
             url: domain + "check_coupon",
             type: 'get', data: {couponCode: couponCode, orderAmount: $(".orderAmt").val()},
-            cache: false,
             success: function (msg) {
                 $(".cMsg").css("display", "block");
                 var Cmsg = msg.split(":-")[0];
                 if (msg.split(":-")[1].length > 0) {
 
                     var newCartAmt = parseInt(CartAmt) + parseInt(Math.round(msg.split(":-")[1]));
-                    if (newCartAmt < '250')
+                    if (newCartAmt < window.localStorage.getItem('amt_after_shipping_free'))
                     {
-                        var aa = parseInt(newCartAmt) + 30;
+                        var aa = parseInt(newCartAmt) + window.localStorage.getItem('shipping_charges');
                     } else
                     {
                         var aa = parseInt(newCartAmt);
@@ -587,7 +637,7 @@ $(document).ready(function () {
                 url: domain + "check_coupon",
                 type: 'get',
                 data: {couponCode: couponCode, orderAmount: CartAmt},
-                cache: false, success: function (msg) {
+                success: function (msg) {
                     $(".cMsg").css("display", "block");
                     $(".emptyCouponError").css("display", "none");
                     var Cmsg = msg.split(":-")[0];
@@ -595,7 +645,7 @@ $(document).ready(function () {
                         $("#couponApply").attr("disabled", "disabled");
                         $(".userCouponCode").attr("disabled", "disabled");
                         Cmsg = "<span style='color:green;'>Coupon Applied!</span> <a href='javascript:void();' style='border-bottom: 1px dashed;' class='clearCoup'>Remove!</a>";
-                        if ($(".shippingValue").text() == '30') {
+                        if ($(".shippingValue").text() == window.localStorage.getItem('shipping_charges')) {
                             var CouponVal = parseInt(Math.round(msg.split(":-")[1])) + parseInt($(".shippingValue").text());
                         } else {
                             var CouponVal = parseInt(Math.round(msg.split(":-")[1]));
@@ -645,7 +695,7 @@ $(document).ready(function () {
                 top.location.href = 'cart.html';
 
             },
-            error: function (data){
+            error: function (data) {
                 top.location.href = 'cart.html';
             }
         });
@@ -685,7 +735,7 @@ $(document).ready(function () {
                 }
             });
         }
-        
+
     });
     $(".regBtn").click(function (e) {
         e.preventDefault();
