@@ -417,7 +417,7 @@ margin-top: 6px;
   }
 
 .ssprice,p.scheme_color s{color:#6a6a6a;}
-.custom-wrapper-details  select.input-sm{height: 30px;}
+.custom-wrapper-details  select.input-sm{/* height: 30px !important; */}
 .searchpull{position: absolute;
   left: 2%;
   width: 70%;
