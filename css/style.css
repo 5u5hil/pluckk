@@ -445,6 +445,7 @@ margin-top: 6px;
 
 #accordion{display:none;}
 .sidebar-open #accordion{display:block !important;}
+.input-group-addon{line-height:0px;}
 
 @media (max-width: 767px)
 {
