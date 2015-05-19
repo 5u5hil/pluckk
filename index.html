@@ -63,7 +63,7 @@
                                                 <h4 class="success custom-product-name">{{ product.product }}</h4>
 												<h4 class="f12">{{product.alias }} &nbsp;</h4>
 												
-                                              <p ng-bind-html="product.options | unsafe"></p>
+                                              <div ng-bind-html="product.options | unsafe" style="height:30px;"></div>
 
                                                 <div class="text-center">
                                                     <p class="info sfont scheme_color inline"  ng-bind-html="product.spl_price | unsafe">  </p>  
@@ -109,7 +109,7 @@
             <script src="js/angular-resource.min.js"></script>
             <script src='js/angular-sanitize.min.js'></script>
             <script src="dist/js/sidebar.js"></script>
-		<!-- <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/jquery-ui.min.js"></script>-->
+			 <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/jquery-ui.min.js"></script>
 			 <script src="js/myscripts.js"></script>
             <script type="text/javascript">
                                                         $(document).ready(function () {

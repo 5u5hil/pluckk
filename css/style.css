@@ -446,8 +446,8 @@ margin-top: 6px;
 #accordion{display:none;}
 .sidebar-open #accordion{display:block !important;}
 .input-group-addon{line-height:0px !important; } 
-.input-group-addon, .input-group-btn{height: 30px !important; overflow:hidden; width:auto !important;}
-.input-group .form-control{  width: 103% !important;}
+.input-group-addon, .input-group-btn{height: 29px !important; overflow:hidden; width:auto !important;}
+.input-group .form-control{  width: 106% !important;}
 
 
 
