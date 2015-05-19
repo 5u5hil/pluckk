@@ -182,7 +182,7 @@ button#menu-toggle {
 .row{  margin-right: -5px;
        margin-left: -5px;
 }
-select.input-sm{height:30px; line-height: 25px;}
+select.input-sm{height:30px; line-height: 30px;}
 .h4, .h5, .h6, h4, h5, h6{margin-top:5px; margin-bottom: 8px;}
 .container-fluid{padding-left: 7px; padding-right: 7px;}
 h2{font-size:18px; margin: 7px 0px;}
