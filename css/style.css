@@ -472,7 +472,7 @@ margin-top: 6px;
 .cart-text{ display: inline !important;}
 }
 @media(min-width: 401px){ 
-    .input-group[class*="col-"] {padding-left: 5px !important; height:30px !important; overflow:hidden; } 
+    .input-group[class*="col-"] {padding-left: 5px !important; } 
 }
 @media(max-width: 380px){ 
    /* .custom-heading-order{ height: 53px;} */
