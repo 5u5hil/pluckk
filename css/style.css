@@ -184,7 +184,7 @@ button#menu-toggle {
 }
 select.input-sm{height:30px; line-height: 30px;}
 .h4, .h5, .h6, h4, h5, h6{margin-top:5px; margin-bottom: 8px;}
-.container-fluid{padding-left: 7px; padding-right: 7px;}
+.container-fluid{padding-left: 7px; padding-right: 7px; }
 h2{font-size:18px; margin: 7px 0px;}
 p {
     margin: 0 0 5px;
@@ -310,7 +310,7 @@ width: 100%;
 .custom-product-wrapper{padding-right: 0px !important; padding-left: 0px !important;}
 .custom-qty{ padding: 2px 0px !important;}
 .custom-checkout{ width:100%; text-align: center;}
-
+.custom-checkout:hover, .custom-checkout:active, .custom-checkout:focus{ text-decoration: none;}
 .custon-search-input{ 
 display: inline;
 vertical-align: middle;

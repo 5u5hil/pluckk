@@ -134,13 +134,13 @@
                                     <li class="subtotal">Subtotal:</li>
                                     <li class="shiping">Shipping Charges:</li>
                                     <li class="saving">Coupons:</li>
-                                    <li class="total">Total:</li>
+                                    <li class="total"><strong>Total:</strong></li>
                                 </div>
                                 <div class="col-xs-3 col-sm-3 col-md-3 cmn-cart">
                                     <li class="subtotal"><i class="fa fa-inr"></i><span class="fwb grandTotal">{{cart.Total}}</span></li>
                                     <li class="shiping"><i class="fa fa-inr"></i><span class="fwb shippingValue">{{ cart.Total < free_shipping_amt ? shipping : 0 }}</span></li>
                                     <li class="saving"><i class="fa fa-inr"></i><span class="fwb couponUsedAmount">0</span></li>
-                                    <li class="total"><i class="fa fa-inr "></i><span class="TotalCartAmt fwb">{{ cart.Total < free_shipping_amt ? (cart.Total + (shipping)) : cart.Total}}</span></li>
+                                    <li class="total"><i class="fa fa-inr "></i><strong><span class="TotalCartAmt fwb">{{ cart.Total < free_shipping_amt ? (cart.Total + (shipping)) : cart.Total}}</span></strong></li>
                                 </div>
 
 

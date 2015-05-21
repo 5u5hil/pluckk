@@ -1,153 +1,223 @@
 <!DOCTYPE html>
 <html ng-app="pluckk">
-  
-  <head>
-    
-    <meta charset="utf-8">
-    
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    
-    <title>
-      Pluckk
-    </title>
-    
-    <link href="css/bootstrap.min.css" rel="stylesheet">
-    
-    <link href="css/font-awesome.min.css" rel="stylesheet" />
-    
-    <link href="css/style.css" rel="stylesheet">
-    
-    <link rel="stylesheet" href="dist/style.css" />
-    
-    <link rel="stylesheet" href="dist/css/sidebar.css"/>
-    <style>.final-continue{height: 28px;
-width: 100%;
-text-align: center;}
-    .final-continue:hover, .final-continue:active{ text-decoration: none !important; }
-    .form-grup{ font-family: inherit;}</style>
-    
- 
-  </head>
-  
-  <body>
-    
-    <div id="dvLoading">
-    </div>
-    
-    <div id="wrapper" ng-cloak>
-      
-      <div class="col-xs-7 col-sm-3 col-md-3 sidebar sidebar-left sidebar-animate">
-        
-        <ul class="sidebar-nav list collapsibleList" ng-controller="getMenu" id="accordion" ng-bind-html="menu | unsafe">
-          
-        </ul>
-        
-      </div>
-      
-      <!-- /#sidebar-wrapper -->
-      
-      <div id="page-content-wrapper" ng-controller="login"> 
-        
-           <!-- /#header inlcude -->
-                <div ng-include="'header.html'"></div>
-        
-        <div class="container-fluid ">
-          
-          <div class="row">
-                
-            <form id="slotForm"  method="post" class="cDetails" novalidate="novalidate" ng-controller="finall">
-              
-              <div class="col-md-6 col-xs-6 col-sm-6 form-group">
-                
-              <h2 class="cat-name custom-cart-name"> Select Delivery Slot</h2>
-                 
-                
-              <input type="hidden" name="amount" value="" />
-              </div>
-              <div class="clearfix"></div>
-              <div class="col-md-6 col-xs-6 col-sm-6 form-group">
-                
-                <select class="form-control optAvlSlot" required="" name="delSlot" ng-bind-html="options | unsafe">
-                  
-                </select>
-                
-              </div>
-                
-              
-              
-              <div class="col-md-12 col-xs-12 form-goup">
-                <br />
-                <h2 class="cat-name custom-cart-name">Payment Method</h2>
-                  
-              
-                
-              </div>
-              
-              <div class="col-md-12 col-xs-12 form-group">
-                
-                <input class="" checked="checked" name="paymentMethod" type="radio" value="paymentMethod">
-                Cash On Delivery                            
-              </div>
-               
-              <div class="col-md-12 col-xs-12 form-group row">
-                    <div class="col-sm-3 col-md-3 col-xs-6 form-group">
-                     <a href="index.html" class="btn-sm btn-warning pull-left final-continue">Continue Shopping</a>    
-                </div>
-                  
-                <div class="col-sm-3 col-md-3 col-xs-6 form-group">
-                <input type="submit" class="btn btn-success clearfix form-control finalStep" style="height: 28px;" value="Place Order">
-                </div>
-              </div>
-              
-            </form>
-            
-          </div>
-          
+
+    <head>
+
+        <meta charset="utf-8">
+
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <title>
+            Pluckk
+        </title>
+
+        <link href="css/bootstrap.min.css" rel="stylesheet">
+
+        <link href="css/font-awesome.min.css" rel="stylesheet" />
+
+        <link href="css/style.css" rel="stylesheet">
+
+        <link rel="stylesheet" href="dist/style.css" />
+
+        <link rel="stylesheet" href="dist/css/sidebar.css"/>
+        <style>.final-continue{height: 28px;
+                        width: 100%;
+                        text-align: center;}
+            .final-continue:hover, .final-continue:active{ text-decoration: none !important; }
+            .form-grup{ font-family: inherit;}</style>
+
+
+    </head>
+
+    <body>
+
+        <div id="dvLoading">
         </div>
-        
-      </div>
-      
-    </div>
-    
-    <script src="phonegap.js">
-    </script>
-    
-    <script src="js/jquery.min.js">
-    </script>
-    
-    <script src="js/bootstrap.min.js">
-    </script>
-    
-    <script src="js/angular.min.js">
-    </script>
-    
-    <script src="js/angular-resource.min.js">
-    </script>
-    
-    <script src='js/angular-sanitize.min.js'>
-    </script>
-    
-    <script src="js/myscripts.js">
-    </script>
-    
-    <script src="dist/js/sidebar.js">
-    </script>
-    
-    <script type="text/javascript">
-      $(document).ready(function () {
-        $("body").on("click", "#accordion li.parent", function () {
-          if (false == $(this).children("ul").is(':visible')) {
-            $('#accordion ul').slideUp(300);
-          }
-          $(this).children("ul").slideToggle(300);
-        }
-                    );
-      }
-                       );
-      
-    </script>
-    
-  </body>
+
+        <div id="wrapper" ng-cloak>
+
+            <div class="col-xs-7 col-sm-3 col-md-3 sidebar sidebar-left sidebar-animate">
+
+                <ul class="sidebar-nav list collapsibleList" ng-controller="getMenu" id="accordion" ng-bind-html="menu | unsafe">
+
+                </ul>
+
+            </div>
+
+            <!-- /#sidebar-wrapper -->
+
+            <div id="page-content-wrapper" > 
+
+                <!-- /#header inlcude -->
+                <div ng-include="'header.html'"></div>
+
+                <div class="container-fluid ">
+
+                    <div class="row">
+
+                        <form id="slotForm"  method="post" class="cDetails" novalidate="novalidate" ng-controller="finall">
+                                    <div class="clearfix"></div>
+                             <div class="col-md-12 col-xs-12 col-sm-12 form-group">       
+                            <section ng-if="is_active_ref == 1 && user_order_count <= 0">
+                                <h2 class="cat-name custom-cart-name">Apply Referral Code</h2>
+                                <div class="col-md-6 col-sm-6 col-xs-6 form-group" >
+                                    <input type="text" name="require_referal" value="" placeholder="Enter Referal Code" class="requireReferal form-control" />
+                                </div>
+                                <div class="col-md-6 col-sm-6 col-xs-6 form-group" >
+                                    <button class="referalCodeClass btn btn-success btn-sm">Apply</button>
+                                </div>
+                                <p class="referalMsg" style="display:none;color:red;font-size:13px;margin-top:15px" ></p>
+                            </section>
+
+                            <div class="clearfix"></div>
+                            <section ng-if="is_active_ref == 1 && referal_used_count >= no_ppl_used && cashback > 0">
+                                <h2 class="cat-name custom-cart-name">Current Reward Points - <span class="text-danger">{{ cashback}}</span></h2>
+                                <div class="col-md-12 col-sm-12 col-xs-12 form-group" >
+                                    <label for="requireCashback">
+                                        <input type="checkbox" name="requireCashback" value="{{ cashback}}" id="requireCashback" class="requireCashback " />
+                                        Apply Cashback
+                                    </label>
+                                    <p class="cashbackMsg" style="display:none;" ></p>
+                                </div>
+                            </section>
+                             </div>
+                                    <div class="col-md-12 col-xs-12 col-sm-12 form-group">
+                            <div class="table-responsive">
+                                <table class="table table-striped table-bordered">
+                                    <thead>
+                                        <tr>
+                                            <th colspan="2" class="success">
+                                                Bill
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>Subtotal</td>
+                                            <td><i class="fa fa-rupee"></i>{{ subtotal}}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Coupons</td>
+                                            <td><i class="fa fa-rupee"></i>{{ coupon }}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Shipping Charges</td>
+                                            <td><i class="fa fa-rupee"></i>{{ shipping_amt}}</td>
+                                        </tr>
+                                        <tr ng-if="is_active_ref == 1 && user_order_count <= 0">
+                                            <td>Referral Discount</td>
+                                            <td><i class="fa fa-rupee"></i><span class="referalDiscount">0</span></td>
+                                        </tr>
+                                        <tr ng-if="is_active_ref == 1 && referal_used_count >= no_ppl_used && cashback > 0">
+                                            <td>Reward Points</td>
+                                            <td><i class="fa fa-rupee"></i><span class="cashbackUsedAmount">0</span></td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>Total</strong></td>
+                                            <td><i class="fa fa-rupee"></i><strong><span class="TotalCartAmt">{{ pay_amt}}</span></strong></td>
+                                        </tr>
+                                    </tbody>
+
+                                </table>
+                            </div>
+                           </div>
+
+
+                    
+
+
+                            
+                             <div class="col-md-12 col-xs-12 col-sm-12 form-group">
+
+                                <h2 class="cat-name custom-cart-name"> Select Delivery Slot</h2>
+
+
+                                <input type="hidden" name="amount" class="orderAmt" value="{{ pay_amt}}" />
+                            </div>
+                            <div class="clearfix"></div>
+                            <div class="col-md-12 col-xs-12 col-sm-12 form-group">
+
+                                <select class="form-control optAvlSlot" required="" name="delSlot" ng-bind-html="options | unsafe">
+
+                                </select>
+
+                            </div>
+
+
+                            <div class="col-md-12 col-xs-12 form-goup">
+                                <br />
+                                <h2 class="cat-name custom-cart-name">Payment Method</h2>
+
+
+
+                            </div>
+
+                            <div class="col-md-12 col-xs-12 form-group">
+
+                                <input class="" checked="checked" name="paymentMethod" type="radio" value="paymentMethod">
+                                Cash On Delivery                            
+                            </div>
+
+                            <div class="col-md-12 col-xs-12 form-group row">
+                                <div class="col-sm-3 col-md-3 col-xs-6 form-group">
+                                    <a href="index.html" class="btn-sm btn-warning pull-left final-continue">Continue Shopping</a>    
+                                </div>
+
+                                <div class="col-sm-3 col-md-3 col-xs-6 form-group">
+                                    <input type="submit" class="btn btn-success clearfix form-control finalStep" style="height: 28px;" value="Place Order">
+                                </div>
+                            </div>
+
+                        </form>
+
+
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <script src="phonegap.js">
+        </script>
+
+        <script src="js/jquery.min.js">
+        </script>
+
+        <script src="js/bootstrap.min.js">
+        </script>
+
+        <script src="js/angular.min.js">
+        </script>
+
+        <script src="js/angular-resource.min.js">
+        </script>
+
+        <script src='js/angular-sanitize.min.js'>
+        </script>
+
+        <script src="js/myscripts.js">
+        </script>
+
+        <script src="dist/js/sidebar.js">
+        </script>
+
+        <script type="text/javascript">
+            $(document).ready(function () {
+                //referal code
+                $("body").on("click", "#accordion li.parent", function () {
+                    if (false == $(this).children("ul").is(':visible')) {
+                        $('#accordion ul').slideUp(300);
+                    }
+                    $(this).children("ul").slideToggle(300);
+                });
+            });
+
+        </script>
+
+    </body>
 </html>
