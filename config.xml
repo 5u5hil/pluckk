@@ -13,7 +13,7 @@
     <preference name="fullscreen" value="true" />
     <preference name="SplashScreenDelay" value="10000" />
     <preference name="permissions" value="none"/>
-	<preference name="android-windowSoftInputMode" value="adjustResize|stateHidden" />
+    <preference name="android-windowSoftInputMode" value="adjustPan" />
 
     <description>
         Want it? Pluckk it! Your one stop shop for all your groceries need! 

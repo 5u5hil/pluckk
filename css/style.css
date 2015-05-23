@@ -450,6 +450,10 @@ margin-top: 6px;
 .input-group .form-control{  width: 107% !important;}
 .select-opt{height:30px; display:block;}
 .input-group-addon:last-child{padding-left: 8% !important; }
+table.rank-property{}
+table.rank-property  tr td{border-top:0 !important; border-color:#fff;}
+
+
 
 @media (max-width: 767px)
 {
