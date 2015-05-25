@@ -35,7 +35,7 @@
                     <div class="row mb10"  ng-repeat="cat in categories">
                         <div class="" id="sm-listing" >
                             <h2 class="cat-name">{{ cat.name}}</h2>
-
+							
                             
                                 <div class="col-xs-12 col-sm-12 col-md-12 custom-listing-warpper" ng-repeat="product in cat.products"> 
 
@@ -121,9 +121,6 @@
 					}
 					$(this).children("ul").slideToggle(300);
 				});
-				if($('.sidebar').hasClass('sidebar-open')){
-					$('.container-fluid').addClass('fixed')
-					}else{$('.container-fluid').removeClass(fixed);}
 				
 			});
 			

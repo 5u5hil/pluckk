@@ -4,6 +4,20 @@ var app = angular.module('pluckk', ['ngResource', 'ngSanitize']);
 
 app.controller('getMenu', function ($scope, $http) {
 
+    $.ajaxSetup({
+        scriptCharset: "utf-8", //maybe "ISO-8859-1"
+
+        contentType: "application/json; charset=utf-8"
+
+    });
+
+    var url = domain + "m/get-cart-count";
+    $.get(url, function (data) {
+
+        $("a.navcart span.badge").html(data);
+
+    });
+
     var url = domain + "m/get-menu";
 
     $.ajaxSetup({
@@ -42,46 +56,25 @@ app.controller('homeList', function ($scope, $http) {
 
     });
 
-
-
-
-
-
-
     $.ajax({
         url: domain + 'm/dynamic',
         type: 'GET',
         success: function (data) {
-
-
-
-
-
             $.each(data[0], function (i, v) {
-
-
-
                 window.localStorage.setItem(i, v);
-
             });
-
-
-
         }
-
     });
-
-
 
     $.getJSON(url, function (data) {
 
         $scope.$apply(function () {
 
             $scope.categories = data;
-
+            navigator.splashscreen.hide();
         });
 
-        $('#dvLoading').fadeOut(200);
+
 
         $(".ySave").each(function () {
 
@@ -103,11 +96,10 @@ app.controller('homeList', function ($scope, $http) {
 
         });
 
-        navigator.splashscreen.hide();
+
+
 
     });
-
-
 
     if (window.localStorage.getItem('id') && window.localStorage.getItem('email') && window.localStorage.getItem('via')) {
 
@@ -119,6 +111,7 @@ app.controller('homeList', function ($scope, $http) {
 
     }
 
+    $('#dvLoading').fadeOut(200);
 
 
 });
@@ -619,6 +612,12 @@ app.controller('fpassword', function ($scope, $http) {
 
 app.controller('updt', function ($scope, $http) {
 
+    if (getUrlParameter('route') == 'home') {
+        $scope.title = 'Update Detials';
+    } else {
+        $scope.title = 'Shipping Detials';
+    }
+    
     updDetails();
 
     $('#dvLoading').fadeOut(200);
@@ -1042,11 +1041,17 @@ function validatephonenumber(inputtxt) {
 
 }
 
-
 $(document).ready(function () {
 
     var ordertlt = $(".grandTotal").text();
-    var url = domain + "m/get-cart-count";
+
+    if (ordertlt < window.localStorage.getItem('amt_after_shipping_free')) {
+
+        var total_pay_ship = parseInt(ordertlt) + window.localStorage.getItem('shipping_charges');
+
+        $(".orderAmt").val(total_pay_ship);
+
+    }
 
     $("#sListt").on('click', 'a', function (e) {
 
@@ -1171,27 +1176,6 @@ $(document).ready(function () {
         }
 
     });
-
-    $.ajaxSetup({
-        scriptCharset: "utf-8", //maybe "ISO-8859-1"
-
-        contentType: "application/json; charset=utf-8"
-
-    });
-
-    $.get(url, function (data) {
-
-        $("a.navcart span.badge").html(data);
-
-    });
-
-    if (ordertlt < window.localStorage.getItem('amt_after_shipping_free')) {
-
-        var total_pay_ship = parseInt(ordertlt) + window.localStorage.getItem('shipping_charges');
-
-        $(".orderAmt").val(total_pay_ship);
-
-    }
 
     $("body").on('change', ".qty", function () {
 
@@ -2108,14 +2092,21 @@ $(document).ready(function () {
         }
 
 
-
-
-
-
-
     });
+	
+		$("body").on("click", function(){
+		if($('.sidebar-left').hasClass('sidebar-open')){
+				$('#page-content-wrapper').addClass('dfixed');
+					}else{
+					$('#page-content-wrapper').removeClass('dfixed');
+				}
+					});
+	
 
     $("body").on("submit", "form", function (e) {
         e.preventDefault();
     });
+	
+
+	
 });
