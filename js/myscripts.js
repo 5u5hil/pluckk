@@ -2107,6 +2107,20 @@ $(document).ready(function () {
         e.preventDefault();
     }); 
 	 
+	 $.getScript("js/jquery.touchSwipe.min.js", function(){
+	 $("body").swipe({
+        //Generic swipe handler for all directions
+        swipe:function(event, direction, distance, duration, fingerCount, fingerData) {
+         if(direction == "left"){
+			$(".sidebar").removeClass('sidebar-open');
+			 }  
+			 
+			 if(direction == "right"){
+			$(".sidebar").addClass('sidebar-open');
+			 }
+        }
+      });
+	 });
 
 	
 });
