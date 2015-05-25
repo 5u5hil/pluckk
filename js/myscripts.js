@@ -4,10 +4,23 @@ var app = angular.module('pluckk', ['ngResource', 'ngSanitize']);
 
 app.controller('getMenu', function ($scope, $http) {
 
+    $.ajaxSetup({
+        scriptCharset: "utf-8", //maybe "ISO-8859-1"
+
+        contentType: "application/json; charset=utf-8"
+
+    });
+
+    var url = domain + "m/get-cart-count";
+    $.get(url, function (data) {
+
+        $("a.navcart span.badge").html(data);
+
+    });
+
     var url = domain + "m/get-menu";
 
     $.ajaxSetup({
-
         scriptCharset: "utf-8", //maybe "ISO-8859-1"
 
         contentType: "application/json; charset=utf-8"
@@ -37,56 +50,31 @@ app.controller('homeList', function ($scope, $http) {
     url = domain + 'm/get-home-prods';
 
     $.ajaxSetup({
-
         scriptCharset: "utf-8", //maybe "ISO-8859-1"
 
         contentType: "application/json; charset=utf-8"
 
     });
 
-
-
-
-
-
-
     $.ajax({
-
         url: domain + 'm/dynamic',
-
         type: 'GET',
-
         success: function (data) {
-
-
-
-
-
             $.each(data[0], function (i, v) {
-
-
-
                 window.localStorage.setItem(i, v);
-
             });
-
-
-
         }
-
     });
-
-
 
     $.getJSON(url, function (data) {
 
         $scope.$apply(function () {
 
             $scope.categories = data;
-
+            navigator.splashscreen.hide();
         });
 
-        $('#dvLoading').fadeOut(200);
+
 
         $(".ySave").each(function () {
 
@@ -108,23 +96,23 @@ app.controller('homeList', function ($scope, $http) {
 
         });
 
-        navigator.splashscreen.hide();
+
+
 
     });
 
-    
+    if (window.localStorage.getItem('id') && window.localStorage.getItem('email') && window.localStorage.getItem('via')) {
 
-     if (window.localStorage.getItem('id') && window.localStorage.getItem('email') && window.localStorage.getItem('via')) {
-
-    fbLogin(window.localStorage.getItem('email'), window.localStorage.getItem('id'), window.localStorage.getItem('firstname'), window.localStorage.getItem('lastname'), '');
+        fbLogin(window.localStorage.getItem('email'), window.localStorage.getItem('id'), window.localStorage.getItem('firstname'), window.localStorage.getItem('lastname'), '');
 
     } else if (window.localStorage.getItem('id') && window.localStorage.getItem('email') && window.localStorage.getItem('password')) {
 
         login(window.localStorage.getItem('email'), window.localStorage.getItem('password'), '');
 
-      } 
+    }
 
-    
+    $('#dvLoading').fadeOut(200);
+
 
 });
 
@@ -135,7 +123,6 @@ app.controller('productList', function ($scope, $http) {
     url = domain + 'm/get-category-products/' + getUrlParameter('slug') + '?sort=' + (getUrlParameter('sort') ? getUrlParameter('sort') : 0);
 
     $.ajaxSetup({
-
         scriptCharset: "utf-8", //maybe "ISO-8859-1"
 
         contentType: "application/json; charset=utf-8"
@@ -187,7 +174,6 @@ app.controller('productList', function ($scope, $http) {
 
 
         $.ajaxSetup({
-
             scriptCharset: "utf-8", //maybe "ISO-8859-1"
 
             contentType: "application/json; charset=utf-8"
@@ -195,7 +181,6 @@ app.controller('productList', function ($scope, $http) {
         });
 
         $.get(url,
-
                 function (data) {
 
                     $scope.$apply(function () {
@@ -243,7 +228,6 @@ app.controller('sList', function ($scope, $http) {
     url = domain + 'm/search/' + getUrlParameter('s') + '?sort=' + (getUrlParameter('sort') ? getUrlParameter('sort') : 0);
 
     $.ajaxSetup({
-
         scriptCharset: "utf-8", //maybe "ISO-8859-1"
 
         contentType: "application/json; charset=utf-8"
@@ -295,7 +279,6 @@ app.controller('sList', function ($scope, $http) {
 
 
         $.ajaxSetup({
-
             scriptCharset: "utf-8", //maybe "ISO-8859-1"
 
             contentType: "application/json; charset=utf-8"
@@ -303,7 +286,6 @@ app.controller('sList', function ($scope, $http) {
         });
 
         $.get(url,
-
                 function (data) {
 
                     $scope.$apply(function () {
@@ -351,7 +333,6 @@ app.controller('productDetails', function ($scope, $http, $location) {
     url = domain + 'm/get-product-details/' + getUrlParameter('id');
 
     $.ajaxSetup({
-
         scriptCharset: "utf-8", //maybe "ISO-8859-1"
 
         contentType: "application/json; charset=utf-8"
@@ -399,7 +380,6 @@ app.controller('orderList', function ($scope, $http, $location) {
     url = domain + 'm/get-orders/' + getUrlParameter('id');
 
     $.ajaxSetup({
-
         scriptCharset: "utf-8", //maybe "ISO-8859-1"
 
         contentType: "application/json; charset=utf-8"
@@ -427,7 +407,6 @@ app.controller('odetails', function ($scope, $http, $location) {
     url = domain + 'm/order-details?id=' + getUrlParameter('id');
 
     $.ajaxSetup({
-
         scriptCharset: "utf-8", //maybe "ISO-8859-1"
 
         contentType: "application/json; charset=utf-8"
@@ -456,31 +435,23 @@ app.controller('odetails', function ($scope, $http, $location) {
 
 });
 
-
-
-
-
 app.controller('referral', function ($scope, $http, $location) {
 
 
 
     if (window.localStorage.getItem('id') && window.localStorage.getItem('email') && window.localStorage.getItem('via')) {
 
-    $scope.loggedin = 1;
+        $scope.loggedin = 1;
 
     } else if (window.localStorage.getItem('id') && window.localStorage.getItem('email') && window.localStorage.getItem('password')) {
 
-      $scope.loggedin = 1;
+        $scope.loggedin = 1;
 
-    } 
+    }
 
-  $('#dvLoading').fadeOut(200);
+    $('#dvLoading').fadeOut(200);
 
 });
-
-
-
-
 
 app.controller('wallet', function ($scope, $http, $location) {
 
@@ -505,7 +476,6 @@ app.controller('wallet', function ($scope, $http, $location) {
     url = domain + 'm/referral';
 
     $.ajaxSetup({
-
         scriptCharset: "utf-8", //maybe "ISO-8859-1"
 
         contentType: "application/json; charset=utf-8"
@@ -534,12 +504,6 @@ app.controller('wallet', function ($scope, $http, $location) {
 
 });
 
-
-
-
-
-
-
 app.controller('offers', function ($scope, $http, $location) {
 
 
@@ -547,7 +511,6 @@ app.controller('offers', function ($scope, $http, $location) {
     url = domain + '/offers';
 
     $.ajaxSetup({
-
         scriptCharset: "utf-8", //maybe "ISO-8859-1"
 
         contentType: "application/json; charset=utf-8"
@@ -581,7 +544,6 @@ app.controller('cartList', function ($scope, $http) {
     url = domain + 'm/cart';
 
     $.ajaxSetup({
-
         scriptCharset: "utf-8", //maybe "ISO-8859-1"
 
         contentType: "application/json; charset=utf-8"
@@ -591,11 +553,8 @@ app.controller('cartList', function ($scope, $http) {
 
 
     $.ajax({
-
         url: domain + 'm/dynamic',
-
         type: 'GET',
-
         success: function (data) {
 
 
@@ -619,7 +578,6 @@ app.controller('cartList', function ($scope, $http) {
 
 
     $.get(url,
-
             function (data) {
 
                 $scope.$apply(function () {
@@ -654,6 +612,12 @@ app.controller('fpassword', function ($scope, $http) {
 
 app.controller('updt', function ($scope, $http) {
 
+    if (getUrlParameter('route') == 'home') {
+        $scope.title = 'Update Detials';
+    } else {
+        $scope.title = 'Shipping Detials';
+    }
+    
     updDetails();
 
     $('#dvLoading').fadeOut(200);
@@ -671,11 +635,8 @@ app.controller('finall', function ($scope, $http) {
     console.log(getUrlParameter('slot'));
 
     $.ajax({
-
         url: domain + 'm/get-mini',
-
         type: 'get',
-
         success: function (data) {
 
 
@@ -730,8 +691,6 @@ app.filter('unsafe', function ($sce) {
 
 });
 
-
-
 function getUrlParameter(sParam) {
 
     var sPageURL = window.location.search.substring(1);
@@ -756,8 +715,6 @@ function getUrlParameter(sParam) {
 
 }
 
-
-
 function get_checkout() {
 
     var MinAmt = window.localStorage.getItem('min_order_value');
@@ -771,13 +728,9 @@ function get_checkout() {
 
 
         $.ajax({
-
             url: domain + '/checkout',
-
             data: $("form#chkoutForm").serialize(),
-
             type: 'GET',
-
             success: function (data) {
 
                 // console.log(data);
@@ -812,8 +765,6 @@ function get_checkout() {
 
 }
 
-
-
 function fb_login() {
 
     var fbLoginSuccess = function (userData) {
@@ -825,7 +776,6 @@ function fb_login() {
         if (userData.authResponse) {
 
             facebookConnectPlugin.api('/me', null,
-
                     function (response) {
 
                         user_email = response.email; //get user email
@@ -859,7 +809,6 @@ function fb_login() {
 
 
     facebookConnectPlugin.login(["public_profile", "email"], fbLoginSuccess,
-
             function (error) {
 
                 alert("Error " + JSON.stringify(error))
@@ -870,28 +819,19 @@ function fb_login() {
 
 }
 
-
-
 function fbLogin(user_email, user_id, firstname, lastname, rurl) {
 
     $.ajax({
-
         type: "GET",
-
         url: domain + "/fb_details",
-
         data: {email: user_email, user_id: user_id, firstname: firstname, lastname: lastname},
-
         success: function (data)
 
         {
 
             $.ajax({
-
                 url: domain + 'm/get-session',
-
                 type: 'get',
-
                 success: function (data) {
 
                     window.localStorage.setItem("id", data.id);
@@ -940,8 +880,6 @@ function fbLogin(user_email, user_id, firstname, lastname, rurl) {
 
 }
 
-
-
 function updDetails() {
 
     $("[ng-model]").each(function () {
@@ -951,11 +889,8 @@ function updDetails() {
     });
 
     $.ajax({
-
         url: domain + 'm/get-mini',
-
         type: 'get',
-
         success: function (data) {
 
             $("[name='pay_amt']").val(data[0]);
@@ -970,28 +905,19 @@ function updDetails() {
 
 }
 
-
-
 function login(uname, pass, rurl) {
 
     $.ajax({
-
         url: domain + 'check_user_login',
-
         type: 'get',
-
         data: {username: uname, password: pass},
-
         success: function (data) {
 
             if (data.match(/My Account/g)) {
 
                 $.ajax({
-
                     url: domain + 'm/get-session',
-
                     type: 'get',
-
                     success: function (data) {
 
                         window.localStorage.setItem("id", data.id);
@@ -1048,15 +974,11 @@ function login(uname, pass, rurl) {
 
 }
 
-
-
 function capitalizeFirstLetter(string) {
 
     return string.charAt(0).toUpperCase() + string.slice(1);
 
 }
-
-
 
 function chkLogin() {
 
@@ -1075,7 +997,7 @@ function chkLogin() {
         $("ul.sidebar-nav").append("<li class='parent'><a href='myorders.html?id=" + window.localStorage.getItem('id') + "' ><i class='fa fa-caret-right fa-1x'></i> My Orders</a></li>")
 
         $("ul.sidebar-nav").append("<li class='parent'><a href='wallet.html?id=" + window.localStorage.getItem('id') + "' ><i class='fa fa-caret-right fa-1x'></i> My Wallet</a></li>")
-		
+
 
         $("ul.sidebar-nav").append("<li class='parent'><a  href='#'  id='logoutMenueButton'><i class='fa fa-caret-right fa-1x'></i> Logout</a></li>")
 
@@ -1085,11 +1007,51 @@ function chkLogin() {
 
 }
 
+function validateEmail(sEmail) {
 
+    var filter = /^([\w-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/;
+
+    if (filter.test(sEmail)) {
+
+        return true;
+
+    }
+
+    else {
+
+        return false;
+
+    }
+
+}
+
+function validatephonenumber(inputtxt) {
+
+    var phoneno = /^[\s()+-]*([0-9][\s()+-]*){6,20}$/;
+
+    if ((phoneno.test(inputtxt))) {
+
+        return true;
+
+    } else {
+
+        return false;
+
+    }
+
+}
 
 $(document).ready(function () {
 
+    var ordertlt = $(".grandTotal").text();
 
+    if (ordertlt < window.localStorage.getItem('amt_after_shipping_free')) {
+
+        var total_pay_ship = parseInt(ordertlt) + window.localStorage.getItem('shipping_charges');
+
+        $(".orderAmt").val(total_pay_ship);
+
+    }
 
     $("#sListt").on('click', 'a', function (e) {
 
@@ -1168,7 +1130,6 @@ $(document).ready(function () {
         url = $(this).attr('form-action') + "?" + $("#" + formId).serialize();
 
         $.ajaxSetup({
-
             scriptCharset: "utf-8", //maybe "ISO-8859-1"
 
             contentType: "application/json; charset=utf-8"
@@ -1176,7 +1137,6 @@ $(document).ready(function () {
         });
 
         $.get((url),
-
                 function (result) {
 
                     var cart_cont = result.split("||||||");
@@ -1217,38 +1177,6 @@ $(document).ready(function () {
 
     });
 
-    var ordertlt = $(".grandTotal").text();
-
-    var url = domain + "m/get-cart-count";
-
-    $.ajaxSetup({
-
-        scriptCharset: "utf-8", //maybe "ISO-8859-1"
-
-        contentType: "application/json; charset=utf-8"
-
-    });
-
-    $.get(url, function (data) {
-
-        $("a.navcart span.badge").html(data);
-
-    });
-
-    if (ordertlt < window.localStorage.getItem('amt_after_shipping_free'))
-
-    {
-
-        var total_pay_ship = parseInt(ordertlt) + window.localStorage.getItem('shipping_charges');
-
-        $(".orderAmt").val(total_pay_ship);
-
-    }
-
-
-
-
-
     $("body").on('change', ".qty", function () {
 
         var qty = $(this).val();
@@ -1262,13 +1190,9 @@ $(document).ready(function () {
             $(".savQty").text(qty);
 
             $.ajax({
-
                 url: domain + "cart/edit-cart",
-
                 type: 'get',
-
                 data: {rowid: rowid, qty: qty, productId: productId},
-
                 success: function (data) {
 
                     if (data != "Specified quantity is not available") {
@@ -1344,11 +1268,8 @@ $(document).ready(function () {
         var CartAmt = $(".TotalCartAmt").text();
 
         $.ajax({
-
             url: domain + "check_coupon",
-
             type: 'get', data: {couponCode: couponCode, orderAmount: $(".orderAmt").val()},
-
             success: function (msg) {
 
                 $(".cMsg").css("display", "block");
@@ -1404,13 +1325,9 @@ $(document).ready(function () {
         if ($(".userCouponCode").val() != "") {
 
             $.ajax({
-
                 url: domain + "check_coupon",
-
                 type: 'get',
-
                 data: {couponCode: couponCode, orderAmount: CartAmt},
-
                 success: function (msg) {
 
                     $(".cMsg").css("display", "block");
@@ -1514,11 +1431,8 @@ $(document).ready(function () {
         var productId = $(this).attr("product-id");
 
         $.ajax({
-
             url: url,
-
             type: 'get',
-
             success: function (data) {
 
                 top.location.href = 'cart.html';
@@ -1526,7 +1440,6 @@ $(document).ready(function () {
 
 
             },
-
             error: function (data) {
 
                 top.location.href = 'cart.html';
@@ -1570,13 +1483,9 @@ $(document).ready(function () {
             $('#dvLoading').show();
 
             $.ajax({
-
                 url: domain + 'secure',
-
                 type: 'get',
-
                 data: $(this).parent().parent().serialize(),
-
                 success: function (data) {
 
                     if (getUrlParameter('route') == "home") {
@@ -1634,11 +1543,8 @@ $(document).ready(function () {
             $('#dvLoading').show();
 
             $.ajax({
-
                 url: domain + 'm/m-save-user',
-
                 type: 'get',
-
                 data: $("#regForm").serialize(), success: function (data) {
 
                     if (data != "The email address you have entered is already registered.") {
@@ -1690,15 +1596,12 @@ $(document).ready(function () {
             $('#dvLoading').show();
 
             $.ajax({
-
                 url: domain + 'order_cash_on_delivery', type: 'get',
-
                 //data: $(this).parent().parent().serialize(),
 
 
 
                 data: $("#slotForm").serialize(),
-
                 success: function (data) {
 
 
@@ -1768,9 +1671,7 @@ $(document).ready(function () {
         $('#dvLoading').show();
 
         $.ajax({
-
             url: domain + $(this).attr('href'), type: 'get',
-
             success: function (data) {
 
                 top.location.href = 'cart.html';
@@ -1805,10 +1706,14 @@ $(document).ready(function () {
 
     $("body").on("click", "#logoutMenueButton", function () {
 
-        localStorage.clear();
-
-        top.location.href = "index.html";
-
+        $.ajax({
+            url: domain + 'user_logout',
+            type: 'get',
+            success: function (data) {
+                localStorage.clear();
+                top.location.href = "index.html";
+            }
+        });
     });
 
     $('body').on('click', '.addToCart', function () {
@@ -1822,23 +1727,16 @@ $(document).ready(function () {
             var imgclone = imgtodrag.clone()
 
                     .offset({
-
                         top: imgtodrag.offset().top,
-
                         left: imgtodrag.offset().left
 
                     })
 
                     .css({
-
                         'opacity': '0.5',
-
                         'position': 'absolute',
-
                         'height': '150px',
-
                         'width': '150px',
-
                         'z-index': '100'
 
                     })
@@ -1846,13 +1744,9 @@ $(document).ready(function () {
                     .appendTo($('body'))
 
                     .animate({
-
                         'top': cart.offset().top + 10,
-
                         'left': cart.offset().left + 10,
-
                         'width': 75,
-
                         'height': 75
 
                     }, 1000, 'easeInOutExpo');
@@ -1860,7 +1754,6 @@ $(document).ready(function () {
             setTimeout(function () {
 
                 cart.effect("shake", {
-
                     times: 2
 
                 }, 200);
@@ -1868,9 +1761,7 @@ $(document).ready(function () {
             }, 1500);
 
             imgclone.animate({
-
                 'width': 0,
-
                 'height': 0
 
             }, function () {
@@ -1897,10 +1788,6 @@ $(document).ready(function () {
 
     }
 
-
-
-
-
     $(".fpasswdBtn").click(function (e) {
 
         e.preventDefault();
@@ -1916,13 +1803,9 @@ $(document).ready(function () {
         } else {
 
             $.ajax({
-
                 url: domain + "m/check-mail-password",
-
                 type: 'get',
-
                 data: {email: $("[name='username']").val()},
-
                 success: function (data) {
 
                     $('#dvLoading').hide();
@@ -1947,12 +1830,6 @@ $(document).ready(function () {
 
     });
 
-
-
-
-
-
-
     $("body").on("click", ".referalCodeClass", function () {
 
         var RefCode = $(".requireReferal").val();
@@ -1970,13 +1847,9 @@ $(document).ready(function () {
         if (RefCode != "") {
 
             $.ajax({
-
                 url: domain + "check_referal_code",
-
                 type: 'GET',
-
                 data: {RefCode: RefCode, CartAmt: CartAmt},
-
                 success: function (msg) {
 
                     $(".referalMsg").show();
@@ -2065,8 +1938,6 @@ $(document).ready(function () {
 
     });
 
-
-
     $("body").on("click", ".clearRef", function () {
 
         $(".rflabel").show();
@@ -2080,13 +1951,9 @@ $(document).ready(function () {
         var CartAmt = $(".TotalCartAmt").text();
 
         $.ajax({
-
             url: domain + "check_referal_code",
-
             type: 'GET',
-
             data: {RefCode: couponCode, CartAmt: CartAmt},
-
             success: function (msg) {
 
                 $(".referalMsg").css("display", "block");
@@ -2127,10 +1994,6 @@ $(document).ready(function () {
 
     });
 
-
-
-
-
     $("body").on("click", "#requireCashback", function () {
 
         var CartAmt = $(".TotalCartAmt").text();
@@ -2146,15 +2009,10 @@ $(document).ready(function () {
 
 
             $.ajax({
-
                 url: domain + "require_cashback",
-
                 type: 'GET',
-
                 data: {CartAmt: CartAmt},
-
                 cache: false,
-
                 success: function (msg) {
 
                     $(".cashbackMsg").css("display", "block");
@@ -2200,13 +2058,9 @@ $(document).ready(function () {
 
 
             $.ajax({
-
                 url: domain + "revert_cashback",
-
                 type: 'GET',
-
                 data: '',
-
                 success: function (msg) {
 
 
@@ -2238,51 +2092,21 @@ $(document).ready(function () {
         }
 
 
-
-
-
-
-
     });
+	
+		$("body").on("click", function(){
+		if($('.sidebar-left').hasClass('sidebar-open')){
+				$('#page-content-wrapper').addClass('dfixed');
+					}else{
+					$('#page-content-wrapper').removeClass('dfixed');
+				}
+					});
+	
 
+    $("body").on("submit", "form", function (e) {
+        e.preventDefault();
+    });
+	
 
-
-
-
+	
 });
-
-function validateEmail(sEmail) {
-
-    var filter = /^([\w-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/;
-
-    if (filter.test(sEmail)) {
-
-        return true;
-
-    }
-
-    else {
-
-        return false;
-
-    }
-
-}
-
-
-
-function validatephonenumber(inputtxt) {
-
-    var phoneno = /^[\s()+-]*([0-9][\s()+-]*){6,20}$/;
-
-    if ((phoneno.test(inputtxt))) {
-
-        return true;
-
-    } else {
-
-        return false;
-
-    }
-
-}

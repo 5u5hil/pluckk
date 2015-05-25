@@ -36,10 +36,10 @@
 .sidebar {
     position: fixed;
     display: block;
-    top: 45px;
+    top: 50px;
     bottom: 0;
     z-index: 1000;
-    min-height: 96%;
+    min-height: 80%;
     max-height: none;
     overflow: auto;
 }
