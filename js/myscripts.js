@@ -2113,10 +2113,12 @@ $(document).ready(function () {
         swipe:function(event, direction, distance, duration, fingerCount, fingerData) {
          if(direction == "left"){
 			$(".sidebar").removeClass('sidebar-open');
+			$('#page-content-wrapper').removeClass('dfixed');
 			 }  
 			 
 			 if(direction == "right"){
 			$(".sidebar").addClass('sidebar-open');
+			$('#page-content-wrapper').addClass('dfixed');
 			 }
         }
       });
