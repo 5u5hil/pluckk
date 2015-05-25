@@ -32,11 +32,14 @@
 					<!-- <h2 class="cat-name custom-cart-name">Product Information</h2>-->
 
                         <form id="prdForm-{{ product.id}}" class="atcForm" method="POST"  >
+						<div class="citem">
                             <input type="hidden" name="prod_id" value="{{ product.id}}" />
                             <input type="hidden" name="prod_type" value="{{ product.prod_type}}" />
 
                             <div class="col-md-12 col-xs-12 col-sm-12">
+							<div class="pimg">
                                 <img ng-src="{{ product.image}}" class="img-responsive img-thumbnail" />
+							</div>
                             </div>
                             <div class=" col-md-12 col-xs-12 col-sm-12 ">
                                 <h2 class="text-center">{{ product.product}}</h2>
@@ -60,6 +63,7 @@
                                     <button form-id="prdForm-{{ product.id}}" form-action="{{ product.add | unsafe }}" class="h30 addToCart btn btn-success btn-block btn-sm custom-btn-add mtop1"><i class="glyphicon glyphicon-shopping-cart"></i> Add to Cart</button>
                                 </div> 
                             </div>
+						</div>
                         </form>
                         <div style="margin-top: 19px;" class=" col-md-12 col-xs-12 col-sm-12 mb50">
                             <ul class="nav nav-tabs" role="tablist">
@@ -94,8 +98,10 @@
         <script src="js/angular.min.js"></script>
         <script src="js/angular-resource.min.js"></script>
         <script src='js/angular-sanitize.min.js'></script>
+		 <script src="dist/js/sidebar.js"></script>
+		<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/jquery-ui.min.js"></script>
         <script src="js/myscripts.js"></script>
-        <script src="dist/js/sidebar.js"></script>
+       
 
         <script type="text/javascript">
                                     $(document).ready(function () {
