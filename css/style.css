@@ -469,6 +469,7 @@ table.rank-property  tr td{border-top:0 !important; border-color:#fff;}
 	 .hiconcontainer{ margin-right: -20px;}
 
 }
+.btn-sm{ font-size:14px !important; padding: 8px 10px ;}
 
 @media (min-width: 767px)
 {
@@ -497,13 +498,13 @@ table.rank-property  tr td{border-top:0 !important; border-color:#fff;}
    .logo{width:88px;}
    .form-control{  padding: 2px 5px;}
    .custom-navbar-brand{  padding: 15px 0px 15px 0px !important;}
-   .btn-sm{padding: 5px 10px;}
+   .btn-sm{padding: 8px 10px;}
  
   
 }
 @media(max-width: 320px){
 	.xshide{display:none;}
-	 .btn-sm{padding: 5px 5px;}
+	 .btn-sm{padding: 7px 5px;}
 	 .mleft10{margin-left:5px;}
 	}
 @media only screen and (min-width: 768px) {
