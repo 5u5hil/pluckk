@@ -424,7 +424,7 @@ app.controller('odetails', function ($scope, $http, $location) {
         $scope.$apply(function () {
 
 
-
+			$scope.id =getUrlParameter('id');
             $scope.details = data;
 
         });

@@ -457,6 +457,16 @@ table.rank-property  tr td{border-top:0 !important; border-color:#fff;}
   background-color: #dff0d8;
   border-color: #d6e9c6; margin-top:-30px;}
   .alert_box p{ text-align:justify; padding:10px; border-radius:10px;  }
+.newbtn{  display:block; color: #fff;
+  background-color: #5cb85c;
+  border-color: #4cae4c; text-align:center; padding:6px 0;}
+  .empty-cart,#offerimg h1.color_dark{border: 1px solid rgb(238, 238, 238);
+                                background-color: rgb(255, 255, 255);
+                                padding: 13px 5px 13px 5px !important; 
+							text-align:center;  margin:10px; font-size:16px;}
+							
+							#offerimg section.container{  padding-right: 0 !important;
+  padding-left: 0 !important;}	
 
 @media (max-width: 767px)
 {
