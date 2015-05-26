@@ -774,7 +774,7 @@ function fb_login() {
 
 
         if (userData.authResponse) {
-
+            $('#dvLoading').show();
             facebookConnectPlugin.api('/me', null,
                     function (response) {
 
@@ -913,7 +913,7 @@ function cancelOrder() {
     var person = prompt("Please enter the reason", "");
 
     if (person != null) {
-
+        $('#dvLoading').show();
         var CancelOrderMsg = person;
         var orderId = getUrlParameter('id');
         var userId = window.localStorage.getItem('id');
@@ -924,6 +924,7 @@ function cancelOrder() {
             cache: "",
             data: {CancelOrderMsg: CancelOrderMsg, orderId: orderId, userId: userId},
             success: function (data) {
+                $('#dvLoading').hide();
                 alert(data);
                 window.location.href = 'myorders.html?id=' + window.localStorage.getItem('id');
             }
