@@ -2111,7 +2111,7 @@ $(document).ready(function () {
         e.preventDefault();
     });
 
-    $.getScript("js/jquery.touchSwipe.min.js", function () {
+    /* $.getScript("js/jquery.touchSwipe.min.js", function () {
         $("body").swipe({
             //Generic swipe handler for all directions
             swipe: function (event, direction, distance, duration, fingerCount, fingerData) {
@@ -2126,7 +2126,7 @@ $(document).ready(function () {
                 }
             }
         });
-    });
+    }); */
 
 
 });
