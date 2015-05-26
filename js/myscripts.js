@@ -2111,7 +2111,7 @@ $(document).ready(function () {
         e.preventDefault();
     });
 });
-$(document).on("swipeleft", "body", function() {
+		$(document).on("swipeleft", "body", function() {
                $(".sidebar").removeClass('sidebar-open');
 			   $('#page-content-wrapper').removeClass('dfixed');
             });
