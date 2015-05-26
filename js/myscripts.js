@@ -617,7 +617,7 @@ app.controller('updt', function ($scope, $http) {
     } else {
         $scope.title = 'Shipping Detials';
     }
-    
+
     updDetails();
 
     $('#dvLoading').fadeOut(200);
@@ -864,7 +864,11 @@ function fbLogin(user_email, user_id, firstname, lastname, rurl) {
 
 
 
-                    top.location.href = rurl;
+                    if (rurl != "") {
+
+                        top.location.href = rurl;
+
+                    }
 
                 }
 
@@ -2093,36 +2097,36 @@ $(document).ready(function () {
 
 
     });
-	
-		$("body").on("click", function(){
-		if($('.sidebar-left').hasClass('sidebar-open')){
-				$('#page-content-wrapper').addClass('dfixed');
-					}else{
-					$('#page-content-wrapper').removeClass('dfixed');
-				}
-					});
-	
+
+    $("body").on("click", function () {
+        if ($('.sidebar-left').hasClass('sidebar-open')) {
+            $('#page-content-wrapper').addClass('dfixed');
+        } else {
+            $('#page-content-wrapper').removeClass('dfixed');
+        }
+    });
+
 
     $("body").on("submit", "form:not('.frm-search')", function (e) {
         e.preventDefault();
-    }); 
-	 
-	 $.getScript("js/jquery.touchSwipe.min.js", function(){
-	 $("body").swipe({
-        //Generic swipe handler for all directions
-        swipe:function(event, direction, distance, duration, fingerCount, fingerData) {
-         if(direction == "left"){
-			$(".sidebar").removeClass('sidebar-open');
-			$('#page-content-wrapper').removeClass('dfixed');
-			 }  
-			 
-			 if(direction == "right"){
-			$(".sidebar").addClass('sidebar-open');
-			$('#page-content-wrapper').addClass('dfixed');
-			 }
-        }
-      });
-	 });
+    });
 
-	
+    $.getScript("js/jquery.touchSwipe.min.js", function () {
+        $("body").swipe({
+            //Generic swipe handler for all directions
+            swipe: function (event, direction, distance, duration, fingerCount, fingerData) {
+                if (direction == "left") {
+                    $(".sidebar").removeClass('sidebar-open');
+                    $('#page-content-wrapper').removeClass('dfixed');
+                }
+
+                if (direction == "right") {
+                    $(".sidebar").addClass('sidebar-open');
+                    $('#page-content-wrapper').addClass('dfixed');
+                }
+            }
+        });
+    });
+
+
 });

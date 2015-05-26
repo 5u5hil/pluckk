@@ -15,8 +15,8 @@
         <link rel="stylesheet" href="dist/css/sidebar.css"/>
         <style>#cart-cart{ display: none;}</style>
         <style>
-			.custom-offer li{ list-style:none !important;}
-             .product-outer-cart{border: 1px solid rgb(238, 238, 238);
+            .custom-offer li{ list-style:none !important;}
+            .product-outer-cart{border: 1px solid rgb(238, 238, 238);
                                 background-color: rgb(255, 255, 255);
                                 padding: 7px 5px 13px 5px !important;}
             .product-name-text{vertical-align: middle;
@@ -70,7 +70,10 @@
                     <div class="row" id="pList" ng-controller="cartList">
 
                         <h2 class="cat-name custom-cart-name" >Cart </h2>
-                        <div class="col-xs-12 col-sm-12 col-md-12 options-outer-cart xstop10">
+
+                        <div ng-if=" cart.length == 0"> The Cart is Empty right now! </div>
+
+                        <div class="col-xs-12 col-sm-12 col-md-12 options-outer-cart xstop10"  ng-if=" cart.length != 0">
 
                             <div class="col-xs-6 col-sm-3 col-md-3">
                                 <a href="index.html" class="btn-sm btn-warning pull-left full-width text-center">Continue Shop<span class="xshide">ping</span></a>  
@@ -86,7 +89,7 @@
                             </div>
                         </div>
 
-                        <div class="col-xs-12 col-sm-12 col-md-12 wrapper-product-cart" id="cartable"  >
+                        <div class="col-xs-12 col-sm-12 col-md-12 wrapper-product-cart" id="cartable"   ng-if=" cart.length != 0">
                             <div class="col-xs-12 col-sm-12 col-md-12 product-outer-cart" ng-repeat="product in cart" ng-if="product.name">
                                 <div class="col-xs-12 col-sm-12 col-md-12 product-name-text"  style="vertical-align:middle;">
                                     {{ product.name}} 
@@ -129,7 +132,7 @@
                             </div>
 
                             <div class="col-xs-12 col-sm-12 col-md-12 subttl-outer-cart row">
-                             
+
                                 <div class="col-xs-9 col-sm-9 col-md-9 cmn-cart">
                                     <li class="subtotal">Subtotal:</li>
                                     <li class="shiping">Shipping Charges:</li>
@@ -146,17 +149,18 @@
 
                             </div>
                             <div ng-if="cart.Total < free_shipping_amt" class="col-xs-12 col-sm-12 col-md-12 infoline-outer-cart alert alert-success">
-                                Shop for <i class="fa fa-inr"></i>{{ free_shipping_amt }} or more for free Shipping <i class="fa fa-smile-o"></i> 
+                                Shop for <i class="fa fa-inr"></i>{{ free_shipping_amt}} or more for free Shipping <i class="fa fa-smile-o"></i> 
                             </div>
 
-								   <div class="col-xs-12 col-sm-12 col-md-12 infoline-outer-cart alert alert-success custom-offer">
-                                    <li><strong>Current Offers</strong></li>
-                                    <li ng-repeat="coupon in coupons">{{ coupon.code}} : {{ coupon.desc}}</li>
- 								 </div>
+                            <div ng-if="coupons.length != 0"  class="col-xs-12 col-sm-12 col-md-12 infoline-outer-cart alert alert-success custom-offer">
+                                <li><strong>Current Offers</strong></li>
+                                <li ng-repeat="coupon in coupons">{{ coupon.code}} : {{ coupon.desc}}</li>
+                            </div>
 
 
                         </div>
-<div class="col-xs-12 col-sm-12 col-md-12 options-outer-cart xstop10">
+
+                        <div class="col-xs-12 col-sm-12 col-md-12 options-outer-cart xstop10"  ng-if=" cart.length != 0">
 
                             <div class="col-xs-6 col-sm-3 col-md-3">
                                 <a href="index.html" class="btn-sm btn-warning pull-left full-width text-center">Continue Shop<span class="xshide">ping</span></a>  
@@ -192,16 +196,16 @@
         <script src="js/myscripts.js"></script>
         <script src="dist/js/sidebar.js"></script>
         <script>
-                                $(document).ready(function () {
-                                    $("body").on("click", ".pQty", function () {
-                                        $(this).siblings(".quantity").change();
-                                    });
+                                        $(document).ready(function () {
+                                            $("body").on("click", ".pQty", function () {
+                                                $(this).siblings(".quantity").change();
+                                            });
 
-                                    $("body").on("click", ".mQty", function () {
-                                        $(this).siblings(".quantity").change();
-                                    });
+                                            $("body").on("click", ".mQty", function () {
+                                                $(this).siblings(".quantity").change();
+                                            });
 
-                                });
+                                        });
         </script>
         <script type="text/javascript">
             $(document).ready(function () {
