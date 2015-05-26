@@ -4,19 +4,8 @@ var app = angular.module('pluckk', ['ngResource', 'ngSanitize']);
 
 app.controller('getMenu', function ($scope, $http) {
 
-    $.ajaxSetup({
-        scriptCharset: "utf-8", //maybe "ISO-8859-1"
+   
 
-        contentType: "application/json; charset=utf-8"
-
-    });
-
-    var url = domain + "m/get-cart-count";
-    $.get(url, function (data) {
-
-        $("a.navcart span.badge").html(data);
-
-    });
 
     var url = domain + "m/get-menu";
 
@@ -38,6 +27,14 @@ app.controller('getMenu', function ($scope, $http) {
         });
 
         chkLogin();
+
+    });
+    
+    
+    var url = domain + "m/get-cart-count";
+    $.get(url, function (data) {
+
+        $("a.navcart span.badge").html(data);
 
     });
 
