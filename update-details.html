@@ -2,7 +2,7 @@
     <head>      
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">  
-      <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
         <title>Pluckk</title>
         <link href="css/bootstrap.min.css" rel="stylesheet">  
         <link href="css/font-awesome.min.css" rel="stylesheet" />  
@@ -14,62 +14,62 @@
     <body>   
         <div id="dvLoading"></div>  
         <div id="wrapper" ng-cloak>  
-           <div class="col-xs-10 col-sm-5 col-md-3 sidebar sidebar-left sidebar-animate">
+            <div class="col-xs-10 col-sm-5 col-md-3 sidebar sidebar-left sidebar-animate">
                 <ul class="sidebar-nav list collapsibleList" ng-controller="getMenu" id="accordion" ng-bind-html="menu | unsafe">
 
                 </ul>
             </div>        
             <!-- /#sidebar-wrapper -->      
             <div id="page-content-wrapper">           
-                 <!-- /#header inlcude -->
+                <!-- /#header inlcude -->
                 <div ng-include="'header.html'"></div>
-                
-                
+
+
                 <div class="container-fluid ">       
                     <div class="row">  
-					<div class="col-md-6 col-sm-6 col-xs-12">
-					<div class="row">
-                            <form  method="post" class="cDetails" novalidate="novalidate" ng-controller="updt"> 
-						
-			   <h2 class="cat-name custom-cart-name">{{ title }}</h2>
-                    			
-                            <input name="address_id" type="hidden">            
-                            <input name="pay_amt" type="hidden" >               
-                            <input name="shippingAmount" type="hidden">              
-                            <input name="cart_content" type="hidden">              
-                            <div class="col-md-12 col-xs-12 form-group">           
-                                <input placeholder="First Name*" type="text" name="firstname"  required="" ng-model="firstname" class="form-control custom-search custom-search-reg" />   
-                            </div>                
-                            <div class="col-md-12 col-xs-12 form-group">      
-                                <input placeholder="Last Name*" type="text" name="lastname" required="" ng-model="lastname" class="form-control custom-search custom-search-reg" />  
-                            </div>               
-                            <div class="col-md-12 col-xs-12 form-group">      
-                                <input placeholder="Address Line 1*" type="text" name="address1" required="" ng-model="address1" class="form-control custom-search custom-search-reg" />  
-                            </div>                      
-                            <div class="col-md-12 col-xs-12 form-group">     
-                                <input placeholder="Address Line 2" type="text" name="address2" required="" ng-model="address2" class="form-control custom-search custom-search-reg" />     
-                            </div>                     
-                            <div class="col-md-12 col-xs-12 form-group">       
-                                <input placeholder="Address Line 3" type="text" name="address3" required="" ng-model="address3" class="form-control custom-search custom-search-reg" />      
-                            </div>                    
-                            <div class="col-md-12 col-xs-12 form-group">        
-                                <input placeholder="Landmark" type="text" name="landmark" required="" ng-model="landmark" class="form-control custom-search custom-search-reg" />    
-                            </div>                        
-                            <div class="col-md-12 col-xs-12 form-group">        
-                                <input placeholder="Pincode*" type="text" name="postal_code" required="" ng-model="postcode" class="form-control custom-search custom-search-reg" />   
-                            </div>                            
-							<div class="col-md-12 col-xs-12 form-group">                          
-                                <input placeholder="Contact No.*" type="text" name="telephone" required="" ng-model="telephone" class="form-control custom-search custom-search-reg" />     
-                            </div>               
-                            <div class="col-md-12 col-xs-12 form-group">        
-                                <input placeholder="City" type="text" name="city" value="Mumbai" readonly="" class="form-control custom-search custom-search-reg" />  
-                            </div>             
-                            <div class="col-sm-12 col-md-12 col-xs-12 form-group">            
-                                <input type="submit" class="btn btn-success clearfix form-control updtBtn custom-search custom-reg-btn" value="Submit">       
-                            </div>               
-                        </form>  
-					</div>
-					</div>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                            <div class="row">
+                                <form  method="post" class="cDetails" novalidate="novalidate" ng-controller="updt"> 
+
+                                    <h2 class="cat-name custom-cart-name">{{ title}}</h2>
+
+                                    <input name="address_id" type="hidden">            
+                                    <input name="pay_amt" type="hidden" >               
+                                    <input name="shippingAmount" type="hidden">              
+                                    <input name="cart_content" type="hidden">              
+                                    <div class="col-md-12 col-xs-12 form-group">           
+                                        <input placeholder="First Name*" type="text" name="firstname"  required="" ng-model="firstname" class="form-control custom-search custom-search-reg" />   
+                                    </div>                
+                                    <div class="col-md-12 col-xs-12 form-group">      
+                                        <input placeholder="Last Name*" type="text" name="lastname" required="" ng-model="lastname" class="form-control custom-search custom-search-reg" />  
+                                    </div>               
+                                    <div class="col-md-12 col-xs-12 form-group">      
+                                        <input placeholder="Address Line 1*" type="text" name="address1" required="" ng-model="address1" class="form-control custom-search custom-search-reg" />  
+                                    </div>                      
+                                    <div class="col-md-12 col-xs-12 form-group">     
+                                        <input placeholder="Address Line 2" type="text" name="address2" required="" ng-model="address2" class="form-control custom-search custom-search-reg" />     
+                                    </div>                     
+                                    <div class="col-md-12 col-xs-12 form-group">       
+                                        <input placeholder="Address Line 3" type="text" name="address3" required="" ng-model="address3" class="form-control custom-search custom-search-reg" />      
+                                    </div>                    
+                                    <div class="col-md-12 col-xs-12 form-group">        
+                                        <input placeholder="Landmark" type="text" name="landmark" required="" ng-model="landmark" class="form-control custom-search custom-search-reg" />    
+                                    </div>                        
+                                    <div class="col-md-12 col-xs-12 form-group">        
+                                        <input placeholder="Pincode*" type="text" name="postal_code" required="" ng-model="postcode" class="form-control custom-search custom-search-reg" />   
+                                    </div>                            
+                                    <div class="col-md-12 col-xs-12 form-group">                          
+                                        <input placeholder="Contact No.*" type="text" name="telephone" required="" ng-model="telephone" class="form-control custom-search custom-search-reg" />     
+                                    </div>               
+                                    <div class="col-md-12 col-xs-12 form-group">        
+                                        <input placeholder="City" type="text" name="city" value="Mumbai" readonly="" class="form-control custom-search custom-search-reg" />  
+                                    </div>             
+                                    <div class="col-sm-12 col-md-12 col-xs-12 form-group">            
+                                        <input type="submit" class="btn btn-success clearfix form-control updtBtn custom-search custom-reg-btn" value="Submit">       
+                                    </div>               
+                                </form>  
+                            </div>
+                        </div>
                     </div>             
                 </div>          
             </div>       
@@ -82,15 +82,15 @@
         <script src='js/angular-sanitize.min.js'></script>    
         <script src="js/myscripts.js"></script>      
         <script src="dist/js/sidebar.js"></script>   
-        <script type="text/javascript">       
-            
-    $(document).ready(function () {
-        $("body").on("click", "#accordion li.parent", function () {
-            if (false == $(this).children("ul").is(':visible')) {
-                $('#accordion ul').slideUp(300);
-            }
-            $(this).children("ul").slideToggle(300);
-        });
-    });</script>        <script>            $(document).ready(function () {
-            updDetails();
-        });</script>    </body></html>
+        <script type="text/javascript">
+
+                                    $(document).ready(function () {
+                                        $("body").on("click", "#accordion li.parent", function () {
+                                            if (false == $(this).children("ul").is(':visible')) {
+                                                $('#accordion ul').slideUp(300);
+                                            }
+                                            $(this).children("ul").slideToggle(300);
+                                        });
+                                    });</script>        <script>            $(document).ready(function () {
+                                            updDetails();
+                                        });</script>    </body></html>
