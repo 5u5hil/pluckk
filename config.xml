@@ -13,8 +13,8 @@
     <preference name="fullscreen" value="false" />
     <preference name="SplashScreenDelay" value="10000" />
     <preference name="permissions" value="none"/>
-    <preference name="android-windowSoftInputMode" value="adjustPan" />
-
+    <preference name="webviewbounce" value="true" />
+    
     <description>
         Want it? Pluckk it! Your one stop shop for all your groceries need! 
     </description>
