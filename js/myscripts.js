@@ -424,7 +424,7 @@ app.controller('odetails', function ($scope, $http, $location) {
         $scope.$apply(function () {
 
 
-			$scope.id =getUrlParameter('id');
+            $scope.id = getUrlParameter('id');
             $scope.details = data;
 
         });
@@ -907,6 +907,30 @@ function updDetails() {
 
     });
 
+}
+
+function cancelOrder() {
+    var person = prompt("Please enter the reason", "");
+
+    if (person != null) {
+
+        var CancelOrderMsg = person;
+        var orderId = getUrlParameter('id');
+        var userId = window.localStorage.getItem('id');
+        $('.gif').css('visibility', 'visible');
+        $.ajax({
+            type: "GET",
+            url: domain + "myaccount/cancel-order-mail",
+            cache: "",
+            data: {CancelOrderMsg: CancelOrderMsg, orderId: orderId, userId: userId},
+            success: function (data) {
+                alert(data);
+                window.location.href = 'myorders.html?id=' + window.localStorage.getItem('id');
+            }
+
+        });
+
+    }
 }
 
 function login(uname, pass, rurl) {
@@ -2110,12 +2134,21 @@ $(document).ready(function () {
     $("body").on("submit", "form:not('.frm-search')", function (e) {
         e.preventDefault();
     });
+
+    $("body").on('click', '.cancelOrder', function (e) {
+
+        e.preventDefault();
+
+        cancelOrder()
+
+    });
+
 });
-		$(document).on("swipeleft", "body", function() {
-               $(".sidebar").removeClass('sidebar-open');
-			   $('#page-content-wrapper').removeClass('dfixed');
-            });
-		$(document).on("swiperight", "body", function() {
-              $(".sidebar").addClass('sidebar-open');
-			  $('#page-content-wrapper').addClass('dfixed');
-            });	
+$(document).on("swipeleft", "body", function () {
+    $(".sidebar").removeClass('sidebar-open');
+    $('#page-content-wrapper').removeClass('dfixed');
+});
+$(document).on("swiperight", "body", function () {
+    $(".sidebar").addClass('sidebar-open');
+    $('#page-content-wrapper').addClass('dfixed');
+});	
