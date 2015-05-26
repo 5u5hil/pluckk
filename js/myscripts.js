@@ -2110,6 +2110,12 @@ $(document).ready(function () {
     $("body").on("submit", "form:not('.frm-search')", function (e) {
         e.preventDefault();
     });
-
-
 });
+$(document).on("swipeleft", "body", function() {
+               $(".sidebar").removeClass('sidebar-open');
+			   $('#page-content-wrapper').removeClass('dfixed');
+            });
+		$(document).on("swiperight", "body", function() {
+              $(".sidebar").addClass('sidebar-open');
+			  $('#page-content-wrapper').addClass('dfixed');
+            });	
