@@ -4,7 +4,7 @@ var app = angular.module('pluckk', ['ngResource', 'ngSanitize']);
 
 app.controller('getMenu', function ($scope, $http) {
 
-   
+
 
 
     var url = domain + "m/get-menu";
@@ -29,15 +29,6 @@ app.controller('getMenu', function ($scope, $http) {
         chkLogin();
 
     });
-    
-    
-    var url = domain + "m/get-cart-count";
-    $.get(url, function (data) {
-
-        $("a.navcart span.badge").html(data);
-
-    });
-
 });
 
 app.controller('homeList', function ($scope, $http) {
@@ -2142,10 +2133,29 @@ $(document).ready(function () {
     });
 
 });
+
+$(window).load(function () {
+
+    $.ajaxSetup({
+        scriptCharset: "utf-8", //maybe "ISO-8859-1"
+
+        contentType: "application/json; charset=utf-8"
+
+    });
+    var url = domain + "m/get-cart-count";
+    $.get(url, function (data) {
+
+        $("a.navcart span.badge").html(data);
+
+    });
+
+});
+
 $(document).on("swipeleft", "body", function () {
     $(".sidebar").removeClass('sidebar-open');
     $('#page-content-wrapper').removeClass('dfixed');
 });
+
 $(document).on("swiperight", "body", function () {
     $(".sidebar").addClass('sidebar-open');
     $('#page-content-wrapper').addClass('dfixed');
