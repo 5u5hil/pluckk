@@ -475,16 +475,16 @@ app.controller('wallet', function ($scope, $http, $location) {
         a = $.parseHTML(data);
 
         data = $(a).find(".col-md-9.col-sm-8.col-xs-12").html();
-
+        var referralC = $(a).find(".fbold.fred").eq(1).text();
 
 
         $scope.$apply(function () {
-
-
-
             $scope.details = data;
-
+            $scope.msg = "Use my Referral Code '" + referralC.trim() + "' to get additional discount on your First Order!";
         });
+
+
+        
 
         $('#dvLoading').fadeOut(200);
 

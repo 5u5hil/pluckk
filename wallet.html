@@ -24,8 +24,8 @@
                     <div class="container-fluid  ">               
                         <div class="row" id="pList" ng-controller="wallet">                   
                             <h2 class="cat-name custom-cart-name">My Wallet</h2>                 
-                            <div class="col-sm-12 col-md-12 col-xs-12" ng-bind-html="details | unsafe"> </div>  
-                            <button onclick="window.plugins.socialsharing.share('Use my Referral Code \'FSDFSDFD\' to get additional discount on your First Order!', 'Pluckk', 'icon.png', 'http://www.pluckk.com/')">Share Your Code</button>
+                            <div class="col-sm-12 col-md-12 col-xs-12" ng-bind-html="details | unsafe"> </div> 
+                            <button class="btn btn-success btn-sm" ng-click="window.plugins.socialsharing.share( msg , 'Pluckk Referral Discount', 'http://www.pluckk.com/public/frontend/images/logo.png', 'http://www.pluckk.com/')">Share Your Code</button>
                         </div>         
                     </div>      
                 </div>  
