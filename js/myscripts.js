@@ -484,7 +484,7 @@ app.controller('wallet', function ($scope, $http, $location) {
         });
 
 
-        
+
 
         $('#dvLoading').fadeOut(200);
 
