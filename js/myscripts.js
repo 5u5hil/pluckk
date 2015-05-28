@@ -679,7 +679,7 @@ app.filter('unsafe', function ($sce) {
 
 });
 
-function msg(){
+function share(){
     var msg = $(".shareref").attr("data-msg");
     window.plugins.socialsharing.share( msg , 'Pluckk Referral Discount', 'http://www.pluckk.com/public/frontend/images/logo.png', 'http://www.pluckk.com/')
 }
