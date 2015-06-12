@@ -679,9 +679,9 @@ app.filter('unsafe', function ($sce) {
 
 });
 
-function share(){
+function share() {
     var msg = $(".shareref").attr("data-msg");
-    window.plugins.socialsharing.share( msg , 'Pluckk Referral Discount', 'http://www.pluckk.com/public/frontend/images/logo.png', 'http://www.pluckk.com/')
+    window.plugins.socialsharing.share(msg, 'Pluckk Referral Discount', 'http://www.pluckk.com/public/frontend/images/logo.png', 'http://www.pluckk.com/')
 }
 
 function getUrlParameter(sParam) {
@@ -919,12 +919,38 @@ function cancelOrder() {
             success: function (data) {
                 $('#dvLoading').hide();
                 alert(data);
-                window.location.href = 'myorders.html?id=' + window.localStorage.getItem('id');
+                window.location.href = 'odetails.html?id=' + window.localStorage.getItem('id');
             }
 
         });
 
     }
+}
+
+function returnOrder() {
+   var person = prompt("Please enter the reason", "");
+
+    if (person != null) {
+        $('#dvLoading').show();
+        var ReturnOrderMsg = person;
+        var orderId = getUrlParameter('id');
+        var userId = window.localStorage.getItem('id');
+        $('.gif').css('visibility', 'visible');
+        $.ajax({
+            type: "GET",
+            url: domain + "myaccount/return-order-mail",
+            cache: "",
+            data: {ReturnOrderMsg: ReturnOrderMsg, orderId: orderId, userId: userId},
+            success: function (data) {
+                $('#dvLoading').hide();
+                alert(data);
+                window.location.href = 'odetails.html?id=' + window.localStorage.getItem('id');
+            }
+
+        });
+
+    }
+
 }
 
 function login(uname, pass, rurl) {
@@ -2135,6 +2161,45 @@ $(document).ready(function () {
 
         cancelOrder()
 
+    });
+
+    $("body").on('click', '.returnOrder', function (e) {
+
+        e.preventDefault();
+
+        returnOrder()
+
+    });
+
+    $("body").on('click', '.changeSlot', function (e) {
+        e.preventDefault();
+        $(".modal .cavlslot").html($("[name='selAvlSlot']").clone());
+        $(".modal .cavlslot select").addClass('form-control');
+        $('.modal').modal('show')
+    });
+
+    $("body").on('click', '.cslotsubmit', function (e) {
+        e.preventDefault();
+        if ($(".modal .cavlslot select").val() != "") {
+            $('.modal').modal('hide');
+            $('#dvLoading').show();
+            var orderId = getUrlParameter('id');
+            var userId = window.localStorage.getItem('id');
+            $.ajax({
+                type: "GET",
+                url: domain + "myaccount/updateAvlSlot",
+                data: {selAvlSlot: $(".modal .cavlslot select").val(), orderid: orderId, userId: userId},
+                success: function (data) {
+
+                    $('#dvLoading').hide();
+                    alert("Slot Changed Successfully");
+                    window.location.href = window.location.href;
+                }
+
+            });
+        } else {
+            alert("Please Select a slot First");
+        }
     });
 
 });
