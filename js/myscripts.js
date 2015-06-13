@@ -905,7 +905,7 @@ function updDetails() {
 function cancelOrder() {
     var person = prompt("Please enter the reason", "");
 
-    if (person != null) {
+    if (person !== "") {
         $('#dvLoading').show();
         var CancelOrderMsg = person;
         var orderId = getUrlParameter('id');
@@ -930,7 +930,7 @@ function cancelOrder() {
 function returnOrder() {
    var person = prompt("Please enter the reason", "");
 
-    if (person != null) {
+    if (person !== "") {
         $('#dvLoading').show();
         var ReturnOrderMsg = person;
         var orderId = getUrlParameter('id');
