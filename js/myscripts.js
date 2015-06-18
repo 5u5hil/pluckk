@@ -178,7 +178,7 @@ app.controller('productList', function ($scope, $http) {
                         var decoded = $('<div/>').html(data.links).text();
 
                         $scope.pagination = decoded;
-
+                        $('body').scrollTop(0);
                     });
 
                     $(".ySave").each(function () {
@@ -905,7 +905,7 @@ function updDetails() {
 function cancelOrder() {
     var person = prompt("Please enter the reason", "");
 
-    if (person !== "") {
+    if (person != null) {
         $('#dvLoading').show();
         var CancelOrderMsg = person;
         var orderId = getUrlParameter('id');
@@ -928,9 +928,9 @@ function cancelOrder() {
 }
 
 function returnOrder() {
-   var person = prompt("Please enter the reason", "");
+    var person = prompt("Please enter the reason", "");
 
-    if (person !== "") {
+    if (person != null) {
         $('#dvLoading').show();
         var ReturnOrderMsg = person;
         var orderId = getUrlParameter('id');
@@ -1150,12 +1150,6 @@ $(document).ready(function () {
             $(".ssprice[data-id='" + id + "']").parent().hide();
 
         }
-
-
-
-
-
-
 
 
 
@@ -1535,7 +1529,11 @@ $(document).ready(function () {
                 type: 'get',
                 data: $(this).parent().parent().serialize(),
                 success: function (data) {
+ $("[ng-model]").each(function () {
 
+        $(this).val(window.localStorage.getItem($(this).attr('name')));
+
+    });
                     if (getUrlParameter('route') == "home") {
 
                         top.location.href = "index.html";
@@ -1551,6 +1549,8 @@ $(document).ready(function () {
                         } else {
 
                             a = $.parseHTML(data);
+                           // console.log(data);
+                        
 
                             top.location.href = "final.html?slot=" + encodeURIComponent($(a).find("select.optAvlSlot").html());
 
