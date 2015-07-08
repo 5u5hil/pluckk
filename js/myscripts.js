@@ -9,12 +9,12 @@ app.controller('getMenu', function ($scope, $http) {
 
     var url = domain + "m/get-menu";
 
-    $.ajaxSetup({
-        scriptCharset: "utf-8", //maybe "ISO-8859-1"
-
-        contentType: "application/json; charset=utf-8"
-
-    });
+//    $.ajaxSetup({
+//        scriptCharset: "utf-8", //maybe "ISO-8859-1"
+//
+//        contentType: "application/json; charset=utf-8"
+//
+//    });
 
     $.get(url, function (data) {
 
@@ -29,6 +29,14 @@ app.controller('getMenu', function ($scope, $http) {
         chkLogin();
 
     });
+
+
+    setTimeout(function () {
+
+        $("a.navcart span.badge").html(window.localStorage.getItem('cartcount') ? window.localStorage.getItem('cartcount') : 0);
+
+    }, 1000);
+
 });
 
 app.controller('homeList', function ($scope, $http) {
@@ -37,12 +45,12 @@ app.controller('homeList', function ($scope, $http) {
 
     url = domain + 'm/get-home-prods';
 
-    $.ajaxSetup({
-        scriptCharset: "utf-8", //maybe "ISO-8859-1"
-
-        contentType: "application/json; charset=utf-8"
-
-    });
+//    $.ajaxSetup({
+//        scriptCharset: "utf-8", //maybe "ISO-8859-1"
+//
+//        contentType: "application/json; charset=utf-8"
+//
+//    });
 
     $.ajax({
         url: domain + 'm/dynamic',
@@ -110,12 +118,12 @@ app.controller('productList', function ($scope, $http) {
 
     url = domain + 'm/get-category-products/' + getUrlParameter('slug') + '?sort=' + (getUrlParameter('sort') ? getUrlParameter('sort') : 0);
 
-    $.ajaxSetup({
-        scriptCharset: "utf-8", //maybe "ISO-8859-1"
-
-        contentType: "application/json; charset=utf-8"
-
-    });
+//    $.ajaxSetup({
+//        scriptCharset: "utf-8", //maybe "ISO-8859-1"
+//
+//        contentType: "application/json; charset=utf-8"
+//
+//    });
 
     $.getJSON(url, function (data) {
 
@@ -161,12 +169,12 @@ app.controller('productList', function ($scope, $http) {
 
 
 
-        $.ajaxSetup({
-            scriptCharset: "utf-8", //maybe "ISO-8859-1"
-
-            contentType: "application/json; charset=utf-8"
-
-        });
+//        $.ajaxSetup({
+//            scriptCharset: "utf-8", //maybe "ISO-8859-1"
+//
+//            contentType: "application/json; charset=utf-8"
+//
+//        });
 
         $.get(url,
                 function (data) {
@@ -215,12 +223,12 @@ app.controller('sList', function ($scope, $http) {
 
     url = domain + 'm/search/' + getUrlParameter('s') + '?sort=' + (getUrlParameter('sort') ? getUrlParameter('sort') : 0);
 
-    $.ajaxSetup({
-        scriptCharset: "utf-8", //maybe "ISO-8859-1"
-
-        contentType: "application/json; charset=utf-8"
-
-    });
+//    $.ajaxSetup({
+//        scriptCharset: "utf-8", //maybe "ISO-8859-1"
+//
+//        contentType: "application/json; charset=utf-8"
+//
+//    });
 
     $.getJSON(url, function (data) {
 
@@ -266,12 +274,12 @@ app.controller('sList', function ($scope, $http) {
 
 
 
-        $.ajaxSetup({
-            scriptCharset: "utf-8", //maybe "ISO-8859-1"
-
-            contentType: "application/json; charset=utf-8"
-
-        });
+//        $.ajaxSetup({
+//            scriptCharset: "utf-8", //maybe "ISO-8859-1"
+//
+//            contentType: "application/json; charset=utf-8"
+//
+//        });
 
         $.get(url,
                 function (data) {
@@ -320,12 +328,12 @@ app.controller('productDetails', function ($scope, $http, $location) {
 
     url = domain + 'm/get-product-details/' + getUrlParameter('id');
 
-    $.ajaxSetup({
-        scriptCharset: "utf-8", //maybe "ISO-8859-1"
-
-        contentType: "application/json; charset=utf-8"
-
-    });
+//    $.ajaxSetup({
+//        scriptCharset: "utf-8", //maybe "ISO-8859-1"
+//
+//        contentType: "application/json; charset=utf-8"
+//
+//    });
 
     $.getJSON(url, function (data) {
 
@@ -367,12 +375,12 @@ app.controller('orderList', function ($scope, $http, $location) {
 
     url = domain + 'm/get-orders/' + getUrlParameter('id');
 
-    $.ajaxSetup({
-        scriptCharset: "utf-8", //maybe "ISO-8859-1"
-
-        contentType: "application/json; charset=utf-8"
-
-    });
+//    $.ajaxSetup({
+//        scriptCharset: "utf-8", //maybe "ISO-8859-1"
+//
+//        contentType: "application/json; charset=utf-8"
+//
+//    });
 
     $.getJSON(url, function (data) {
 
@@ -394,12 +402,12 @@ app.controller('odetails', function ($scope, $http, $location) {
 
     url = domain + 'm/order-details?id=' + getUrlParameter('id');
 
-    $.ajaxSetup({
-        scriptCharset: "utf-8", //maybe "ISO-8859-1"
-
-        contentType: "application/json; charset=utf-8"
-
-    });
+//    $.ajaxSetup({
+//        scriptCharset: "utf-8", //maybe "ISO-8859-1"
+//
+//        contentType: "application/json; charset=utf-8"
+//
+//    });
 
     $.get(url, function (data) {
 
@@ -463,12 +471,12 @@ app.controller('wallet', function ($scope, $http, $location) {
 
     url = domain + 'm/referral';
 
-    $.ajaxSetup({
-        scriptCharset: "utf-8", //maybe "ISO-8859-1"
-
-        contentType: "application/json; charset=utf-8"
-
-    });
+//    $.ajaxSetup({
+//        scriptCharset: "utf-8", //maybe "ISO-8859-1"
+//
+//        contentType: "application/json; charset=utf-8"
+//
+//    });
 
     $.get(url, function (data) {
 
@@ -498,12 +506,12 @@ app.controller('offers', function ($scope, $http, $location) {
 
     url = domain + '/offers';
 
-    $.ajaxSetup({
-        scriptCharset: "utf-8", //maybe "ISO-8859-1"
-
-        contentType: "application/json; charset=utf-8"
-
-    });
+//    $.ajaxSetup({
+//        scriptCharset: "utf-8", //maybe "ISO-8859-1"
+//
+//        contentType: "application/json; charset=utf-8"
+//
+//    });
 
     $.get(url, function (data) {
 
@@ -531,12 +539,12 @@ app.controller('cartList', function ($scope, $http) {
 
     url = domain + 'm/cart';
 
-    $.ajaxSetup({
-        scriptCharset: "utf-8", //maybe "ISO-8859-1"
-
-        contentType: "application/json; charset=utf-8"
-
-    });
+//    $.ajaxSetup({
+//        scriptCharset: "utf-8", //maybe "ISO-8859-1"
+//
+//        contentType: "application/json; charset=utf-8"
+//
+//    });
 
 
 
@@ -1171,27 +1179,77 @@ $(document).ready(function () {
 
         url = $(this).attr('form-action') + "?" + $("#" + formId).serialize();
 
-        $.ajaxSetup({
-            scriptCharset: "utf-8", //maybe "ISO-8859-1"
-
-            contentType: "application/json; charset=utf-8"
-
-        });
-
+//        $.ajaxSetup({
+//            scriptCharset: "utf-8", //maybe "ISO-8859-1"
+//
+//            contentType: "application/json; charset=utf-8"
+//
+//        });
+        var addToCart = $(this);
         $.get((url),
                 function (result) {
 
                     var cart_cont = result.split("||||||");
+                    $(".navcart .badge").text(cart_cont[1]);
+                    window.localStorage.setItem('cartcount', cart_cont[1]);
 
-                    setTimeout(function () {
+                    var cart = $('.shopping-cart');
 
-                        $(".navcart .badge").text(cart_cont[1]);
+                    var imgtodrag = addToCart.closest('.citem').find("div.pimg");
 
-                    }, 1200)
+                    if (imgtodrag) {
 
-                    //  alert("Product Added Successfully");
+                        var imgclone = imgtodrag.clone()
+
+                                .offset({
+                                    top: imgtodrag.offset().top,
+                                    left: imgtodrag.offset().left
+
+                                })
+
+                                .css({
+                                    'opacity': '0.5',
+                                    'position': 'absolute',
+                                    'height': '150px',
+                                    'width': '150px',
+                                    'z-index': '100'
+
+                                })
+
+                                .appendTo($('body'))
+
+                                .animate({
+                                    'top': cart.offset().top + 10,
+                                    'left': cart.offset().left + 10,
+                                    'width': 75,
+                                    'height': 75
+
+                                }, 1000, 'easeInOutExpo');
+
+                        setTimeout(function () {
+
+                            cart.effect("shake", {
+                                times: 2
+
+                            }, 200);
+
+                        }, 1500);
+
+                        imgclone.animate({
+                            'width': 0,
+                            'height': 0
+
+                        }, function () {
+
+                            $(this).detach()
+
+                        });
+
+                    }
+
 
                 });
+
 
     });
 
@@ -1529,11 +1587,11 @@ $(document).ready(function () {
                 type: 'get',
                 data: $(this).parent().parent().serialize(),
                 success: function (data) {
- $("[ng-model]").each(function () {
+                    $("[ng-model]").each(function () {
 
-        $(this).val(window.localStorage.getItem($(this).attr('name')));
+                        $(this).val(window.localStorage.getItem($(this).attr('name')));
 
-    });
+                    });
                     if (getUrlParameter('route') == "home") {
 
                         top.location.href = "index.html";
@@ -1549,8 +1607,8 @@ $(document).ready(function () {
                         } else {
 
                             a = $.parseHTML(data);
-                           // console.log(data);
-                        
+                            // console.log(data);
+
 
                             top.location.href = "final.html?slot=" + encodeURIComponent($(a).find("select.optAvlSlot").html());
 
@@ -1762,64 +1820,6 @@ $(document).ready(function () {
                 top.location.href = "index.html";
             }
         });
-    });
-
-    $('body').on('click', '.addToCart', function () {
-
-        var cart = $('.shopping-cart');
-
-        var imgtodrag = $(this).closest('.citem').find("div.pimg");
-
-        if (imgtodrag) {
-
-            var imgclone = imgtodrag.clone()
-
-                    .offset({
-                        top: imgtodrag.offset().top,
-                        left: imgtodrag.offset().left
-
-                    })
-
-                    .css({
-                        'opacity': '0.5',
-                        'position': 'absolute',
-                        'height': '150px',
-                        'width': '150px',
-                        'z-index': '100'
-
-                    })
-
-                    .appendTo($('body'))
-
-                    .animate({
-                        'top': cart.offset().top + 10,
-                        'left': cart.offset().left + 10,
-                        'width': 75,
-                        'height': 75
-
-                    }, 1000, 'easeInOutExpo');
-
-            setTimeout(function () {
-
-                cart.effect("shake", {
-                    times: 2
-
-                }, 200);
-
-            }, 1500);
-
-            imgclone.animate({
-                'width': 0,
-                'height': 0
-
-            }, function () {
-
-                $(this).detach()
-
-            });
-
-        }
-
     });
 
     $('body').on('click', '#searchicon', function (e) {
@@ -2150,7 +2150,6 @@ $(document).ready(function () {
         }
     });
 
-
     $("body").on("submit", "form:not('.frm-search')", function (e) {
         e.preventDefault();
     });
@@ -2202,24 +2201,23 @@ $(document).ready(function () {
         }
     });
 
-});
 
-$(window).load(function () {
-
-    $.ajaxSetup({
-        scriptCharset: "utf-8", //maybe "ISO-8859-1"
-
-        contentType: "application/json; charset=utf-8"
-
-    });
-    var url = domain + "m/get-cart-count";
-    $.get(url, function (data) {
-
-        $("a.navcart span.badge").html(data);
-
-    });
 
 });
+
+var timeout;
+$(document).ajaxStart(function () {
+
+    timeout = setTimeout(function () {
+        alert("Seems like the Internet Connection is too Slow! You may either continue shopping or switch to better internet.");
+    }, 5000);
+});
+
+$(document).ajaxSuccess(function () {
+    console.log("here");
+    clearTimeout(timeout);
+});
+
 
 $(document).on("swipeleft", "body", function () {
     $(".sidebar").removeClass('sidebar-open');
