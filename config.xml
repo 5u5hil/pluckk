@@ -31,8 +31,7 @@
         <param name="APP_ID" value="937502589613535" />
         <param name="APP_NAME" value="Pluckk" />
     </gap:plugin>
-    <gap:plugin name="org.apache.cordova.statusbar" version="0.1.4" />
-    <preference name="StatusBarOverlaysWebView" value="false" />
+    <gap:plugin name="de.appplant.cordova.plugin.hidden-statusbar-overlay" />
 
     <gap:plugin name="org.apache.cordova.inappbrowser" version="0.5.2" />
 

@@ -1098,8 +1098,6 @@ function validatephonenumber(inputtxt) {
 }
 
 $(document).ready(function () {
-    
-    StatusBar.show();
 
     var ordertlt = $(".grandTotal").text();
 
