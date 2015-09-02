@@ -31,11 +31,13 @@ app.controller('getMenu', function ($scope, $http) {
     });
 
 
-    setTimeout(function () {
+//    setTimeout(function () {
+//
+//        $("a.navcart span.badge").html(window.localStorage.getItem('cartcount') ? window.localStorage.getItem('cartcount') : 0);
+//
+//    }, 1000);
 
-        $("a.navcart span.badge").html(window.localStorage.getItem('cartcount') ? window.localStorage.getItem('cartcount') : 0);
 
-    }, 1000);
 
 });
 
@@ -1098,6 +1100,13 @@ function validatephonenumber(inputtxt) {
 }
 
 $(document).ready(function () {
+
+    var url = domain + "m/get-cart-count";
+    $.get(url, function (data) {
+
+        $("a.navcart span.badge").html(data);
+
+    });
 
     var ordertlt = $(".grandTotal").text();
 
@@ -2210,7 +2219,7 @@ $(document).ajaxStart(function () {
 
     timeout = setTimeout(function () {
         alert("Seems like the Internet Connection is too Slow! You may either continue shopping or switch to better internet.");
-    }, 5000);
+    }, 10000);
 });
 
 $(document).ajaxSuccess(function () {
